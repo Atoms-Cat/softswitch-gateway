@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+link.thingscloud.spring.boot.common.config.SpringBootCommonAutoConfiguration

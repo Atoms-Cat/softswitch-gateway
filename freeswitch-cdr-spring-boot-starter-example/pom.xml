@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>softswitch-gateway</artifactId>
+        <groupId>link.thingscloud</groupId>
+        <version>1.6.2.RELEASE</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>freeswitch-cdr-spring-boot-starter-example</artifactId>
+    <name>freeswitch-cdr-spring-boot-starter-example-${project.version}</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>freeswitch-cdr-spring-boot-starter</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

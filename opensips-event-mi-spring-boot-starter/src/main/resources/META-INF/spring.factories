@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+link.thingscloud.opensips.spring.boot.starter.config.OpensipsAutoConfiguration
