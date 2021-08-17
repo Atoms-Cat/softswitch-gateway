@@ -55,7 +55,8 @@
 
         <netty.version>4.1.60.Final</netty.version>
         <spring-boot.version>2.3.12.RELEASE</spring-boot.version>
-
+        <redisson.version>3.13.6</redisson.version>
+        <orika.version>1.5.4</orika.version>
         <java.version>1.8</java.version>
 
         <!-- Compiler settings properties -->
@@ -113,7 +114,16 @@
                 <artifactId>spring-boot-common-aop</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ma.glasnost.orika</groupId>
+                <artifactId>orika-core</artifactId>
+                <version>${orika.version}</version>
+            </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>freeswitch-example</artifactId>

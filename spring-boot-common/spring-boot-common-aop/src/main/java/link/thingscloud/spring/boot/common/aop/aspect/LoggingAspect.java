@@ -1,6 +1,7 @@
-package link.thingscloud.spring.boot.common.aop;
+package link.thingscloud.spring.boot.common.aop.aspect;
 
 
+import link.thingscloud.spring.boot.common.aop.annotation.Logging;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
@@ -27,7 +28,7 @@ public class LoggingAspect {
         this.isTraceEnabled = log.isTraceEnabled();
     }
 
-    @Pointcut("@annotation(link.thingscloud.spring.boot.common.aop.Logging)")
+    @Pointcut("@annotation(link.thingscloud.spring.boot.common.aop.annotation.Logging)")
     public void logging() {
     }
 

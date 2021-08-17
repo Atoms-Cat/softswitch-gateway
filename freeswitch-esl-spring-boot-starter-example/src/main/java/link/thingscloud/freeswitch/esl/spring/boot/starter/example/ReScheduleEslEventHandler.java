@@ -24,7 +24,7 @@ import link.thingscloud.freeswitch.esl.spring.boot.starter.annotation.EslEventNa
 import link.thingscloud.freeswitch.esl.spring.boot.starter.handler.AbstractEslEventHandler;
 import link.thingscloud.freeswitch.esl.transport.event.EslEvent;
 import link.thingscloud.freeswitch.esl.transport.message.EslMessage;
-import link.thingscloud.spring.boot.common.aop.Logging;
+import link.thingscloud.spring.boot.common.aop.annotation.Logging;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

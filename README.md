@@ -9,7 +9,7 @@
 ## 目标
 
     1、支持连接Opensips MI、 Event
-    2、支持连接FreeSWITCH ESL、cdr、xml_curl(configuration | directory | dialplan | phrases)
+    2、支持连接FreeSWITCH ESL(inbound、outbound)、cdr、xml_curl(configuration | directory | dialplan | phrases)
     3、更易于分布式集成方案使用
     4、与spring boot 2.3.x 整合，nacos 配置中心、服务发现
     5、可动态配置

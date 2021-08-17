@@ -1,4 +1,6 @@
-package link.thingscloud.spring.boot.common.aop;
+package link.thingscloud.spring.boot.common.aop.annotation;
+
+import link.thingscloud.spring.boot.common.aop.enums.LoggingLevel;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

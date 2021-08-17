@@ -1,4 +1,4 @@
-package link.thingscloud.spring.boot.common.aop;
+package link.thingscloud.spring.boot.common.aop.enums;
 
 public enum LoggingLevel {
     TRACE,

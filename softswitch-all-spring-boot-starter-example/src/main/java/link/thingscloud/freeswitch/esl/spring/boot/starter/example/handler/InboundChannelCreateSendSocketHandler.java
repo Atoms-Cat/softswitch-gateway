@@ -13,6 +13,7 @@ import link.thingscloud.freeswitch.esl.spring.boot.starter.propeties.OutboundCli
 import link.thingscloud.freeswitch.esl.transport.SendMsg;
 import link.thingscloud.freeswitch.esl.transport.event.EslEvent;
 import link.thingscloud.freeswitch.esl.util.EslEventUtil;
+import link.thingscloud.spring.boot.common.aop.annotation.RedisLock;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -42,6 +43,7 @@ public class InboundChannelCreateSendSocketHandler implements EslEventHandler {
      * {@inheritDoc}
      */
     @Override
+    @RedisLock(lockName = EventNames.CHANNEL_CREATE)
     public void handle(String address, EslEvent event) {
         SendMsg sendMsg = new SendMsg(EslEventUtil.getCallerUniqueId(event));
 
@@ -49,7 +51,7 @@ public class InboundChannelCreateSendSocketHandler implements EslEventHandler {
             // 判断 是否 是 inbound 处理
             if ("inbound".equals(EslEventUtil.getCallerDirection(event))) {
                 // 根据服务名从注册中心获取一个健康的服务实例
-                Instance instance = namingService.selectOneHealthyInstance("fs-esl");
+                Instance instance = namingService.selectOneHealthyInstance("softswitch-gateway");
                 // 向fs 发送 socket 信息
                 sendMsg.addCallCommand("execute");
                 sendMsg.addExecuteAppName("socket");
