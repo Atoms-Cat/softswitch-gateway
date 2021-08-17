@@ -42,10 +42,18 @@ public class SpelUtil {
         ExpressionParser parser = new SpelExpressionParser();
         //SPEL上下文
         StandardEvaluationContext context = new MethodBasedEvaluationContext(rootObject,method,args,u);
+        String resp = null;
         //把方法参数放入SPEL上下文中
         for (int i = 0; i < paraNameArr.length; i++) {
             context.setVariable(paraNameArr[i], args[i]);
+            if (spel.equals(paraNameArr[i])) {
+                resp = (String) args[i];
+            }
         }
-        return parser.parseExpression(spel).getValue(context, String.class);
+        if (resp != null) {
+            return resp;
+        } else {
+            return parser.parseExpression(spel).getValue(context, String.class);
+        }
     }
 }

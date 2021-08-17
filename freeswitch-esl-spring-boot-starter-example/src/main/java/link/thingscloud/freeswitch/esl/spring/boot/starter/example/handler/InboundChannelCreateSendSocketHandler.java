@@ -42,7 +42,7 @@ public class InboundChannelCreateSendSocketHandler implements EslEventHandler {
      * {@inheritDoc}
      */
     @Override
-    public void handle(String address, EslEvent event) {
+    public void handle(String address, EslEvent event, String callerUniqueID) {
         SendMsg sendMsg = new SendMsg(EslEventUtil.getCallerUniqueId(event));
 
         try {

@@ -43,8 +43,9 @@ public class InboundChannelCreateSendSocketHandler implements EslEventHandler {
      * {@inheritDoc}
      */
     @Override
-    @RedisLock(lockName = EventNames.CHANNEL_CREATE)
-    public void handle(String address, EslEvent event) {
+    // 分布式锁
+    @RedisLock(lockName = EventNames.CHANNEL_CREATE , key = "callerUniqueID")
+    public void handle(String address, EslEvent event, String callerUniqueID) {
         SendMsg sendMsg = new SendMsg(EslEventUtil.getCallerUniqueId(event));
 
         try {

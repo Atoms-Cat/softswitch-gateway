@@ -5,6 +5,7 @@ import cn.hutool.core.util.StrUtil;
 
 import link.thingscloud.spring.boot.common.aop.annotation.RedisLock;
 import link.thingscloud.spring.boot.common.util.SpelUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
@@ -21,6 +22,7 @@ import java.lang.reflect.Method;
  * 使用redis进行分布式锁
  * @author th158
  */
+@Slf4j
 @Aspect
 @Component
 public class RedisLockAspect {
@@ -39,6 +41,7 @@ public class RedisLockAspect {
         Object result = null;
 
         try {
+            log.info("lock key: {}", key);
             rLock.lock(redisLock.expire(), redisLock.timeUnit());
             //执行方法
             result = joinPoint.proceed();
