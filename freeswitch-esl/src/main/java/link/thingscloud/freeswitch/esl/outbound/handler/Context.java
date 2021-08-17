@@ -7,21 +7,26 @@ import link.thingscloud.freeswitch.esl.transport.event.EslEvent;
 import link.thingscloud.freeswitch.esl.transport.message.EslMessage;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 
 import static com.google.common.base.Preconditions.*;
 import static com.google.common.base.Strings.isNullOrEmpty;
 import static com.google.common.base.Throwables.propagate;
-import static com.google.common.util.concurrent.Futures.getUnchecked;
+import static com.google.common.util.concurrent.Uninterruptibles.getUninterruptibly;
 
 
 public class Context implements IModEslApi {
 
     private final OutboundChannelHandler handler;
+    // 通道
     private final Channel channel;
+    // 请求超时时间
+    private final long timeout;
 
-    public Context(Channel channel, OutboundChannelHandler clientHandler) {
+    public Context(Channel channel, OutboundChannelHandler clientHandler, long timeout) {
         this.handler = clientHandler;
         this.channel = channel;
+        this.timeout = timeout;
     }
 
     @Override
@@ -52,7 +57,7 @@ public class Context implements IModEslApi {
 
         try {
 
-            return getUnchecked(handler.sendApiSingleLineCommand(channel, command.toLowerCase().trim()));
+            return getUninterruptibly(handler.sendApiSingleLineCommand(channel, command.toLowerCase().trim()), timeout, TimeUnit.SECONDS);
 
         } catch (Throwable t) {
             throw propagate(t);
@@ -82,7 +87,7 @@ public class Context implements IModEslApi {
                 sb.append(' ').append(arg);
             }
 
-            return getUnchecked(handler.sendApiSingleLineCommand(channel, sb.toString()));
+            return getUninterruptibly(handler.sendApiSingleLineCommand(channel, sb.toString()), timeout, TimeUnit.SECONDS);
 
         } catch (Throwable t) {
             throw propagate(t);
@@ -144,7 +149,7 @@ public class Context implements IModEslApi {
                 sb.append(' ').append(events);
             }
 
-            final EslMessage response = getUnchecked(handler.sendApiSingleLineCommand(channel, sb.toString()));
+            final EslMessage response = getUninterruptibly(handler.sendApiSingleLineCommand(channel, sb.toString()), timeout, TimeUnit.SECONDS);
             return new CommandResponse(sb.toString(), response);
 
         } catch (Throwable t) {
@@ -162,7 +167,7 @@ public class Context implements IModEslApi {
     public CommandResponse cancelEventSubscriptions() {
 
         try {
-            final EslMessage response = getUnchecked(handler.sendApiSingleLineCommand(channel, "noevents"));
+            final EslMessage response = getUninterruptibly(handler.sendApiSingleLineCommand(channel, "noevents"), timeout, TimeUnit.SECONDS);
             return new CommandResponse("noevents", response);
         } catch (Throwable t) {
             throw propagate(t);
@@ -201,7 +206,7 @@ public class Context implements IModEslApi {
                 sb.append(' ').append(valueToFilter);
             }
 
-            final EslMessage response = getUnchecked(handler.sendApiSingleLineCommand(channel, sb.toString()));
+            final EslMessage response = getUninterruptibly(handler.sendApiSingleLineCommand(channel, sb.toString()), timeout, TimeUnit.SECONDS);
             return new CommandResponse(sb.toString(), response);
 
         } catch (Throwable t) {
@@ -229,7 +234,7 @@ public class Context implements IModEslApi {
                 sb.append(' ').append(valueToFilter);
             }
 
-            final EslMessage response = getUnchecked(handler.sendApiSingleLineCommand(channel, sb.toString()));
+            final EslMessage response = getUninterruptibly(handler.sendApiSingleLineCommand(channel, sb.toString()), timeout, TimeUnit.SECONDS);
             return new CommandResponse(sb.toString(), response);
 
         } catch (Throwable t) {
@@ -250,7 +255,7 @@ public class Context implements IModEslApi {
         checkNotNull(sendMsg, "sendMsg cannot be null");
 
         try {
-            final EslMessage response = getUnchecked(handler.sendApiMultiLineCommand(channel, sendMsg.getMsgLines()));
+            final EslMessage response = getUninterruptibly(handler.sendApiMultiLineCommand(channel, sendMsg.getMsgLines()), timeout, TimeUnit.SECONDS);
             return new CommandResponse(sendMsg.toString(), response);
         } catch (Throwable t) {
             throw propagate(t);
@@ -271,7 +276,7 @@ public class Context implements IModEslApi {
             final StringBuilder sb = new StringBuilder();
             sb.append("log ").append(level.toString());
 
-            final EslMessage response = getUnchecked(handler.sendApiSingleLineCommand(channel, sb.toString()));
+            final EslMessage response = getUninterruptibly(handler.sendApiSingleLineCommand(channel, sb.toString()), timeout, TimeUnit.SECONDS);
             return new CommandResponse(sb.toString(), response);
         } catch (Throwable t) {
             throw propagate(t);
@@ -288,7 +293,7 @@ public class Context implements IModEslApi {
     public CommandResponse cancelLogging() {
 
         try {
-            final EslMessage response = getUnchecked(handler.sendApiSingleLineCommand(channel, "nolog"));
+            final EslMessage response = getUninterruptibly(handler.sendApiSingleLineCommand(channel, "nolog"), timeout, TimeUnit.SECONDS);
             return new CommandResponse("nolog", response);
         } catch (Throwable t) {
             throw propagate(t);

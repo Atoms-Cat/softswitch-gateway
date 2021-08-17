@@ -37,6 +37,7 @@ import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -272,7 +273,8 @@ public class InboundChannelHandler extends SimpleChannelInboundHandler<EslMessag
         EslMessage get() {
             try {
                 log.trace("awaiting latch ... ");
-                latch.await();
+                // 超时时间
+                latch.await(60, TimeUnit.SECONDS);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
