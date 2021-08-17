@@ -1,5 +1,6 @@
 package link.thingscloud.freeswitch.xml.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import link.thingscloud.freeswitch.xml.service.XmlCurlService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,9 +34,36 @@ public class XmlCurlController {
     public String curl(HttpServletRequest request) {
         String section = request.getParameter("section");
         String keyValue = request.getParameter("key_value");
+
         log.info("section : {} , keyValue : {}", section, keyValue);
+        log.info(JSONObject.toJSONString(request.getParameterMap()));;
+
         // todo
         cdrService.handle(keyValue);
-        return ERROR_RESULT;
+        //if ("dialplan".equals(section)) {
+            return "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n" +
+                    "<document type=\"freeswitch/xml\">\n" +
+                    "  <section name=\"dialplan\" description=\"RE Dial Plan For FreeSwitch\">\n" +
+                    "    <context name=\"default\">\n" +
+                    "      <extension name=\"call\">\n" +
+                    "        <condition field=\"destination_number\" expression=\"^([0-9]\\d+)$\">\n" +
+                    "            <action application=\"answer\"/>\n" +
+                    "            <action application=\"sleep\" data=\"2000\"/>\n" +
+                    "        </condition>\n" +
+                    "      </extension>\n" +
+                    "    </context>\n" +
+                    "    <context name=\"public\">\n" +
+                    "      <extension name=\"call\">\n" +
+                    "        <condition field=\"destination_number\" expression=\"^([0-9]\\d+)$\">\n" +
+                    "            <action application=\"answer\"/>\n" +
+                    "            <action application=\"sleep\" data=\"2000\"/>\n" +
+                    "        </condition>\n" +
+                    "      </extension>\n" +
+                    "    </context>\n" +
+                    "  </section>\n" +
+                    "</document>";
+        //}
+
+       // return ERROR_RESULT;
     }
 }
