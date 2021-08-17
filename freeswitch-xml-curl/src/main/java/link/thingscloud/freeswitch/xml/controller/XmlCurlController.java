@@ -38,7 +38,7 @@ public class XmlCurlController {
         log.info("section : {} , keyValue : {}", section, keyValue);
         log.info(JSONObject.toJSONString(request.getParameterMap()));;
 
-        // todo
+        // todo dialplan|configuration|directory|phrases
         cdrService.handle(keyValue);
         //if ("dialplan".equals(section)) {
             return "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n" +
