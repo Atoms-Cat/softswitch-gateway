@@ -91,7 +91,7 @@ public class OutboundChannelHandler extends SimpleChannelInboundHandler<EslMessa
                 .thenAcceptAsync(response -> {
                     log.info("{}", listener);
                     listener.onConnect(
-                            new Context(ctx.channel(), OutboundChannelHandler.this, 60),
+                            new Context(ctx.channel(), OutboundChannelHandler.this, 120),
                             new EslEvent(response, true));
                 }, publicExecutor)
                 .exceptionally(throwable -> {
@@ -167,7 +167,7 @@ public class OutboundChannelHandler extends SimpleChannelInboundHandler<EslMessa
                     future.complete(eslEvent);
                 }
             } else {
-                listener.handleEslEvent(new Context(ctx.channel(), OutboundChannelHandler.this, 60), eslEvent);
+                listener.handleEslEvent(new Context(ctx.channel(), OutboundChannelHandler.this, 120), eslEvent);
             }
         } else {
             handleEslMessage(ctx, message);

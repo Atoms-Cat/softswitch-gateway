@@ -33,10 +33,10 @@ public class OutboundConnectPreprocessEslEventHandler implements OutBoundEventHa
         log.info("bridge to {}", EslEventUtil.getSipToUri(eslEvent));
 
         // 异步发送bridge命令接通
-        // context.handler().sendSyncMultiLineCommand(context.channel(), bridgeMsg.getMsgLines());
-
-        CommandResponse commandResponse = context.sendMessage(bridgeMsg);
-        log.info("response : {}", commandResponse);
+        context.handler().sendAsyncMultiLineCommand(context.channel(), bridgeMsg.getMsgLines());
+        // 同步
+        // CommandResponse commandResponse = context.sendMessage(bridgeMsg);
+        // log.info("response : {}", commandResponse);
 
         //同步发送bridge命令接通
 //        EslMessage response = context.handler().sendSyncMultiLineCommand(context.channel(), bridgeMsg.getMsgLines());

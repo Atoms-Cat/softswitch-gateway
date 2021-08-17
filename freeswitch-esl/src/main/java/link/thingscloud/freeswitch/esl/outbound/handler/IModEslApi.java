@@ -26,6 +26,8 @@ public interface IModEslApi {
 
     CommandResponse sendMessage(SendMsg sendMsg);
 
+    CommandResponse sendMessage(SendMsg sendMsg, long timeout);
+
     CommandResponse setLoggingLevel(LoggingLevel level);
 
     CommandResponse cancelLogging();

@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 import static com.google.common.base.Preconditions.*;
 import static com.google.common.base.Strings.isNullOrEmpty;
 import static com.google.common.base.Throwables.propagate;
+import static com.google.common.util.concurrent.Futures.getUnchecked;
 import static com.google.common.util.concurrent.Uninterruptibles.getUninterruptibly;
 
 
@@ -250,12 +251,24 @@ public class Context implements IModEslApi {
      * @return a {@link CommandResponse} with the server's response.
      */
     @Override
-    public CommandResponse sendMessage(SendMsg sendMsg) {
+    public CommandResponse sendMessage(SendMsg sendMsg, long timeout) {
 
         checkNotNull(sendMsg, "sendMsg cannot be null");
 
         try {
             final EslMessage response = getUninterruptibly(handler.sendApiMultiLineCommand(channel, sendMsg.getMsgLines()), timeout, TimeUnit.SECONDS);
+            return new CommandResponse(sendMsg.toString(), response);
+        } catch (Throwable t) {
+            throw propagate(t);
+        }
+
+    }
+
+    @Override
+    public CommandResponse sendMessage(SendMsg sendMsg) {
+        checkNotNull(sendMsg, "sendMsg cannot be null");
+        try {
+            final EslMessage response = getUnchecked(handler.sendApiMultiLineCommand(channel, sendMsg.getMsgLines()));
             return new CommandResponse(sendMsg.toString(), response);
         } catch (Throwable t) {
             throw propagate(t);
