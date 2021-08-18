@@ -244,11 +244,10 @@ public class Context implements IModEslApi {
     }
 
     /**
-     * Send a {@link SendMsg} command to FreeSWITCH.  This client requires that the {@link SendMsg}
-     * has a call UUID parameter.
      *
-     * @param sendMsg a {@link SendMsg} with call UUID
-     * @return a {@link CommandResponse} with the server's response.
+     * @param sendMsg
+     * @param timeout 秒
+     * @return
      */
     @Override
     public CommandResponse sendMessage(SendMsg sendMsg, long timeout) {

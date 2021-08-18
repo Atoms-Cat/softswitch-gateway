@@ -1,29 +1,29 @@
-link:
-  thingscloud:
-    freeswitch:
-      esl:
-        inbound:
-          defaultPassword: ClueCon
-          performance: false
-          performanceCostTime: 200
-          servers:
-            - host: 192.168.10.112
-              port: 8021
-              timeoutSeconds: 5
-            - host: 192.168.10.114
-              port: 8021
-              timeoutSeconds: 5
-          events:
-            - all
-        outbound:
-          server:
-            host: 192.168.10.116
-            port: 8082
-    opensips:
-      event:
-        server:
-          host: 192.168.10.116
-          port: 8081
+#link:
+#  thingscloud:
+#    freeswitch:
+#      esl:
+#        inbound:
+#          defaultPassword: ClueCon
+#          performance: false
+#          performanceCostTime: 200
+#          servers:
+#            - host: 192.168.10.112
+#              port: 8021
+#              timeoutSeconds: 5
+#            - host: 192.168.10.114
+#              port: 8021
+#              timeoutSeconds: 5
+#          events:
+#            - all
+#        outbound:
+#          server:
+#            host: 192.168.10.116
+#            port: 8082
+#    opensips:
+#      event:
+#        server:
+#          host: 192.168.10.116
+#          port: 8081
 
 logging:
   level:

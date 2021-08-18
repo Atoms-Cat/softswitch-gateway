@@ -1,26 +1,22 @@
 package link.thingscloud.freeswitch.xml.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import link.thingscloud.freeswitch.xml.annotation.XmlCurlSectionName;
 import link.thingscloud.freeswitch.xml.domain.XmlCurl;
 import link.thingscloud.freeswitch.xml.exception.ParserException;
 import link.thingscloud.freeswitch.xml.handler.XmlCurlHandler;
 import link.thingscloud.freeswitch.xml.parser.XmlCurlParser;
 import link.thingscloud.freeswitch.xml.service.XmlCurlService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.concurrent.BasicThreadFactory;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.*;
 
 /**
  * <p> XmlCurlServiceImpl class.</p>
@@ -30,45 +26,59 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
  */
 @Slf4j
 @Service
-public class XmlCurlServiceImpl implements XmlCurlService, ApplicationContextAware, InitializingBean {
+public class XmlCurlServiceImpl implements XmlCurlService, InitializingBean {
 
-    @Value("${xml curl.pool.size:8}")
-    private int poolSize;
 
-    private ApplicationContext applicationContext;
-
-    private List<XmlCurlHandler> xmlCurlHandlers = new ArrayList<>(4);
-
-    private final ExecutorService poolExecutor = new ScheduledThreadPoolExecutor(poolSize,
-            new BasicThreadFactory.Builder().namingPattern("pool-executor-%d").daemon(true).build());
+    @Autowired
+    private final List<XmlCurlHandler> xmlCurlHandlers = Collections.emptyList();
+    private final Map<String, List<XmlCurlHandler>> handlerTable = new HashMap<>(16);
 
     /**
      * {@inheritDoc}
      */
     @Override
     public String handle(HttpServletRequest request) {
-        poolExecutor.execute(() -> {
-            try {
-                handleXmlCurl(request);
-            } catch (ParserException e) {
-                log.error("handle xml curl failure, cause : ", e);
-                log.error("handle curl xml : [{}]", request);
-            }
-        });
-        return "";
+        try {
+            return handleXmlCurl(request);
+        } catch (ParserException e) {
+            log.error("handle xml curl failure, cause : ", e);
+            log.error("handle curl xml : [{}]", request);
+        }
+        // todo
+        return "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n" +
+                "<document type=\"freeswitch/xml\">\n" +
+                "  <section name=\"result\">\n" +
+                "    <result status=\"not found\" />\n" +
+                "  </section>\n" +
+                "</document>";
     }
 
 
-    private void handleXmlCurl(HttpServletRequest request) throws ParserException {
+    private String handleXmlCurl(HttpServletRequest request) throws ParserException {
         XmlCurl xmlCurl = XmlCurlParser.decodeThenParse(request);
         log.info("handle xml curl : [{}]", JSONObject.toJSONString(xmlCurl));
-        xmlCurlHandlers.forEach(xmlCurlHandler -> {
-            try {
-                xmlCurlHandler.handleXmlCurl(xmlCurl);
-            } catch (Throwable e) {
-                log.error("freeswitch xml curl handler[{}] handle exception : ", xmlCurlHandler.getClass(), e);
-            }
-        });
+        // 获取事件名称
+        String section = xmlCurl.getSection();
+        if (StringUtils.isBlank(section)) {
+            return "";
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+        List<XmlCurlHandler> handlers = handlerTable.get(section.toUpperCase(Locale.ROOT));
+        if (!CollectionUtils.isEmpty(handlers)) {
+            stringBuilder.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n" +
+                    "<document type=\"freeswitch/xml\">");
+            stringBuilder.append("<section name=\"" + section + "\">");
+            handlers.forEach(xmlCurlHandler -> {
+                try {
+                    stringBuilder.append(xmlCurlHandler.handleXmlCurl(xmlCurl));
+                } catch (Throwable e) {
+                    log.error("freeswitch xml curl handler[{}] handle exception : ", xmlCurlHandler.getClass(), e);
+                }
+            });
+            stringBuilder.append("</section>\n" +
+                    "</document>");
+        }
+        return stringBuilder.toString();
     }
 
     /**
@@ -76,21 +86,28 @@ public class XmlCurlServiceImpl implements XmlCurlService, ApplicationContextAwa
      */
     @Override
     public void afterPropertiesSet() {
-        log.info("freeswitch xml curl[{}] start ...", poolSize);
-        Map<String, XmlCurlHandler> beansOfType =
-                this.applicationContext.getBeansOfType(XmlCurlHandler.class);
-        for (XmlCurlHandler handler : beansOfType.values()) {
-            log.info("freeswitch xml curl add Handler : [{}].", handler.getClass());
-            xmlCurlHandlers.add(handler);
+        log.info("freeswitch xml curl add Handler ...");
+        for (XmlCurlHandler eventHandler : xmlCurlHandlers) {
+            XmlCurlSectionName eventName = eventHandler.getClass().getAnnotation(XmlCurlSectionName.class);
+            if (eventName == null) {
+                // FIXED : AOP
+                eventName = eventHandler.getClass().getSuperclass().getAnnotation(XmlCurlSectionName.class);
+            }
+            if (eventName == null || ArrayUtils.isEmpty(eventName.value())) {
+                continue;
+            }
+            for (String value : eventName.value()) {
+                if (StringUtils.isBlank(value)) {
+                    continue;
+                }
+                log.info("freeswitch xml curl add Handler : [{}].", eventHandler.getClass());
+                handlerTable.computeIfAbsent(value, k -> new ArrayList<>(4)).add(eventHandler);
+            }
         }
+
         if (CollectionUtils.isEmpty(xmlCurlHandlers)) {
             log.warn("freeswitch xml curl Handlers is empty, you can implements Handler to handle xml curl.");
         }
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) {
-        this.applicationContext = applicationContext;
-    }
 }
