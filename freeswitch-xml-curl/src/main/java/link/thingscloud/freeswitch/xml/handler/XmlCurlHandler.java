@@ -4,7 +4,7 @@ package link.thingscloud.freeswitch.xml.handler;
 import link.thingscloud.freeswitch.xml.domain.XmlCurl;
 
 /**
- * <p>CdrHandler interface.</p>
+ * <p>XmlCurlHandler interface.</p>
  *
  * @author : <a href="mailto:ant.zhou@aliyun.com">zhouhailin</a>
  * @version $Id: $Id
@@ -12,10 +12,10 @@ import link.thingscloud.freeswitch.xml.domain.XmlCurl;
 public interface XmlCurlHandler {
 
     /**
-     * <p>handleCdr.</p>
+     * <p>xmlCurl.</p>
      *
-     * @param cdr a {@link XmlCurl} object.
+     * @param xmlCurl a {@link XmlCurl} object.
      */
-    String handleXmlCurl(XmlCurl cdr);
+    String handleXmlCurl(XmlCurl xmlCurl);
 
 }

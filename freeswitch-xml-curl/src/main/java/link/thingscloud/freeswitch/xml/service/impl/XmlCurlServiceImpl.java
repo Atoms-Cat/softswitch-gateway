@@ -1,5 +1,6 @@
 package link.thingscloud.freeswitch.xml.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import link.thingscloud.freeswitch.xml.domain.XmlCurl;
 import link.thingscloud.freeswitch.xml.exception.ParserException;
 import link.thingscloud.freeswitch.xml.handler.XmlCurlHandler;
@@ -14,6 +15,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +23,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 /**
- * <p>CdrServiceImpl class.</p>
+ * <p> XmlCurlServiceImpl class.</p>
  *
  * @author : <a href="mailto:ant.zhou@aliyun.com">zhouhailin</a>
  * @version $Id: $Id
@@ -35,7 +37,7 @@ public class XmlCurlServiceImpl implements XmlCurlService, ApplicationContextAwa
 
     private ApplicationContext applicationContext;
 
-    private List<XmlCurlHandler> cdrHandlers = new ArrayList<>(4);
+    private List<XmlCurlHandler> xmlCurlHandlers = new ArrayList<>(4);
 
     private final ExecutorService poolExecutor = new ScheduledThreadPoolExecutor(poolSize,
             new BasicThreadFactory.Builder().namingPattern("pool-executor-%d").daemon(true).build());
@@ -44,27 +46,27 @@ public class XmlCurlServiceImpl implements XmlCurlService, ApplicationContextAwa
      * {@inheritDoc}
      */
     @Override
-    public String handle(String reqText) {
+    public String handle(HttpServletRequest request) {
         poolExecutor.execute(() -> {
             try {
-                handleCdr(reqText);
+                handleXmlCurl(request);
             } catch (ParserException e) {
-                log.error("handleCdr failure, cause : ", e);
-                log.error("handleCdr xml : [{}]", reqText);
+                log.error("handle xml curl failure, cause : ", e);
+                log.error("handle curl xml : [{}]", request);
             }
         });
         return "";
     }
 
 
-    private void handleCdr(String xml) throws ParserException {
-        XmlCurl xmlCurl = XmlCurlParser.decodeThenParse(xml);
-        log.debug("handleCdr xml curl : [{}]", xmlCurl);
-        cdrHandlers.forEach(cdrHandler -> {
+    private void handleXmlCurl(HttpServletRequest request) throws ParserException {
+        XmlCurl xmlCurl = XmlCurlParser.decodeThenParse(request);
+        log.info("handle xml curl : [{}]", JSONObject.toJSONString(xmlCurl));
+        xmlCurlHandlers.forEach(xmlCurlHandler -> {
             try {
-                cdrHandler.handleXmlCurl(xmlCurl);
+                xmlCurlHandler.handleXmlCurl(xmlCurl);
             } catch (Throwable e) {
-                log.error("freeswitch xml curl handler[{}] handle exception : ", cdrHandler.getClass(), e);
+                log.error("freeswitch xml curl handler[{}] handle exception : ", xmlCurlHandler.getClass(), e);
             }
         });
     }
@@ -78,11 +80,11 @@ public class XmlCurlServiceImpl implements XmlCurlService, ApplicationContextAwa
         Map<String, XmlCurlHandler> beansOfType =
                 this.applicationContext.getBeansOfType(XmlCurlHandler.class);
         for (XmlCurlHandler handler : beansOfType.values()) {
-            log.info("freeswitch xml curl add cdrHandler : [{}].", handler.getClass());
-            cdrHandlers.add(handler);
+            log.info("freeswitch xml curl add Handler : [{}].", handler.getClass());
+            xmlCurlHandlers.add(handler);
         }
-        if (CollectionUtils.isEmpty(cdrHandlers)) {
-            log.warn("freeswitch xml curl cdrHandlers is empty, you can implements CdrHandler to handle xml curl.");
+        if (CollectionUtils.isEmpty(xmlCurlHandlers)) {
+            log.warn("freeswitch xml curl Handlers is empty, you can implements Handler to handle xml curl.");
         }
     }
 

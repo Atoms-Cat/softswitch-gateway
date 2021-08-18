@@ -1,7 +1,9 @@
 package link.thingscloud.freeswitch.xml.service;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
- * <p>CdrService interface.</p>
+ * <p>XmlCurlService interface.</p>
  *
  * @author : <a href="mailto:ant.zhou@aliyun.com">zhouhailin</a>
  * @version $Id: $Id
@@ -11,8 +13,8 @@ public interface XmlCurlService {
     /**
      * <p>handle.</p>
      *
-     * @param reqText a {@link String} object.
+     * @param request a {@link HttpServletRequest} object.
      */
-    String handle(String reqText);
+    String handle(HttpServletRequest request);
 
 }

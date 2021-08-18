@@ -1,6 +1,7 @@
 package link.thingscloud.freeswitch.xml.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import link.thingscloud.freeswitch.xml.domain.XmlCurl;
 import link.thingscloud.freeswitch.xml.service.XmlCurlService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -36,10 +37,12 @@ public class XmlCurlController {
         String keyValue = request.getParameter("key_value");
 
         log.info("section : {} , keyValue : {}", section, keyValue);
-        log.info(JSONObject.toJSONString(request.getParameterMap()));;
+
+        log.info(JSONObject.toJSONString(request.getParameterMap()));
 
         // todo dialplan|configuration|directory|phrases
-        cdrService.handle(keyValue);
+        cdrService.handle(request);
+
         //if ("dialplan".equals(section)) {
             return "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n" +
                     "<document type=\"freeswitch/xml\">\n" +
