@@ -4,9 +4,11 @@ import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
+
 @Data
 @Accessors(chain = true)
-public class XmlCurl {
+public class XmlCurl implements Serializable {
 
     String hostname;
 

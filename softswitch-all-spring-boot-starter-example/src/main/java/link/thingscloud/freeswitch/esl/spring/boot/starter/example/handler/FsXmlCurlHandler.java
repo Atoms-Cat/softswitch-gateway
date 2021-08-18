@@ -1,11 +1,13 @@
 package link.thingscloud.freeswitch.esl.spring.boot.starter.example.handler;
 
 import com.alibaba.fastjson.JSON;
+import com.thoughtworks.xstream.XStream;
 import link.thingscloud.freeswitch.cdr.domain.Cdr;
 import link.thingscloud.freeswitch.cdr.handler.CdrHandler;
 import link.thingscloud.freeswitch.xml.annotation.XmlCurlSectionName;
 import link.thingscloud.freeswitch.xml.constant.SectionNames;
 import link.thingscloud.freeswitch.xml.domain.XmlCurl;
+import link.thingscloud.freeswitch.xml.domain.dialplan.Context;
 import link.thingscloud.freeswitch.xml.handler.XmlCurlHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -25,7 +27,13 @@ public class FsXmlCurlHandler implements XmlCurlHandler {
      */
     @Override
     public String handleXmlCurl(XmlCurl cdr) {
+        Context context = new Context();
+        XStream xstream = new XStream();
+        context.setName("default");
+
+        log.info(xstream.toXML(context));
         log.info("exampel handle xml curl : [{}]", JSON.toJSONString(cdr, true));
+        // todo
         return "<context name=\"default\">\n" +
                         "      <extension name=\"call\">\n" +
                         "        <condition field=\"destination_number\" expression=\"^([0-9]\\d+)$\">\n" +
