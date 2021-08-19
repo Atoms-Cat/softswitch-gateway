@@ -1,0 +1,13 @@
+language: java
+
+# Cobertura is not supported in JDK11 so you must downgrade the JDK that Travis uses if you want to use Cobertura with Travis.
+# See https://github.com/cobertura/cobertura/issues/381
+jdk:
+  - openjdk8
+
+script: "mvn cobertura:cobertura"
+
+sudo: false # faster builds
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash) -t dc4f5d8f-072a-4dfb-a180-f61f6a00bed6
