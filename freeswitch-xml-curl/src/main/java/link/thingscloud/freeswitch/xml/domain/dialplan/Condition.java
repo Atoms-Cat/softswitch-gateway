@@ -1,26 +1,21 @@
 package link.thingscloud.freeswitch.xml.domain.dialplan;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
-import com.thoughtworks.xstream.annotations.XStreamImplicit;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.List;
 
 @Data
-@XStreamAlias("condition")
 public class Condition implements Serializable {
 
-    @XStreamAsAttribute
-    @XStreamAlias("field")
+    @JacksonXmlProperty(localName = "field", isAttribute = true)
     private String field;
 
-    @XStreamAsAttribute
-    @XStreamAlias("expression")
+    @JacksonXmlProperty(localName = "expression", isAttribute = true)
     private String expression;
 
-    @XStreamImplicit(itemFieldName = "action")
-    @XStreamAlias("action")
+    @JacksonXmlElementWrapper(localName = "action", useWrapping = false)
     private List<Action> action;
 }

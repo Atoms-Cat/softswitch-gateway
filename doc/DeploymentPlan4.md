@@ -436,7 +436,8 @@ route{
                 if (lb_is_destination("$si","$sp","3") ) {
                     xlog("FS TO OPENSIPS，再到终端");
                     if (!lookup("location", "m")) {
-             
+                        t_reply("404", "Not Found");
+                        exit;
                     }
                 } else {
                     xlog(“终端 TO OPENSIPS，再到 FS”);

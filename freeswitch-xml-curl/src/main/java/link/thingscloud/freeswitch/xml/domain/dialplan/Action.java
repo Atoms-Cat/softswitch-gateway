@@ -1,20 +1,20 @@
 package link.thingscloud.freeswitch.xml.domain.dialplan;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
 @Data
-@XStreamAlias("action")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Action implements Serializable {
 
-    @XStreamAsAttribute
-    @XStreamAlias("application")
+    @JacksonXmlProperty(localName = "application", isAttribute = true)
     private String application;
 
-    @XStreamAsAttribute
-    @XStreamAlias("data")
+    @JacksonXmlProperty(localName = "data", isAttribute = true)
     private String data;
 }

@@ -185,12 +185,7 @@
                 <version>5.4.4</version>
                 <scope>compile</scope>
             </dependency>
-            <!-- xstream ： xml 格式处理 -->
-            <dependency>
-                <groupId>com.thoughtworks.xstream</groupId>
-                <artifactId>xstream</artifactId>
-                <version>1.4.17</version>
-            </dependency>
+            <!--  xml 格式处理 -->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>

@@ -1,8 +1,8 @@
 package link.thingscloud.freeswitch.xml.domain.dialplan;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
-import com.thoughtworks.xstream.annotations.XStreamImplicit;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,16 +14,12 @@ import java.util.List;
  * @author th158
  */
 @Data
-@XStreamAlias("context")
-@NoArgsConstructor
-@AllArgsConstructor
+@JacksonXmlRootElement(localName = "context")
 public class Context implements Serializable {
 
-    @XStreamAsAttribute
-    @XStreamAlias("name")
+    @JacksonXmlProperty(localName = "name", isAttribute = true)
     private String name;
 
-    @XStreamAlias("extension")
-    @XStreamImplicit(itemFieldName = "extension")
+    @JacksonXmlElementWrapper(localName = "extension", useWrapping = false)
     private List<Extension> extension;
 }
