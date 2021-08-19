@@ -10,7 +10,6 @@ import link.thingscloud.freeswitch.esl.spring.boot.starter.handler.OutBoundConne
 import link.thingscloud.freeswitch.esl.spring.boot.starter.handler.OutBoundEventHandler;
 import link.thingscloud.freeswitch.esl.transport.event.EslEvent;
 import link.thingscloud.freeswitch.esl.util.ArrayUtils;
-import link.thingscloud.freeswitch.esl.util.EslEventUtil;
 import link.thingscloud.freeswitch.esl.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;

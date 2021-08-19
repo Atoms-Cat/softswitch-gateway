@@ -5,13 +5,7 @@ import link.thingscloud.spring.boot.common.aop.annotation.Logging;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,9 +14,9 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class LoggingAspect {
-    private final boolean isTraceEnabled;
     private static final String LOGGING_PREFIX = "[logging] [{}ms] {}, {}";
     private static final Logger log = LoggerFactory.getLogger(LoggingAspect.class);
+    private final boolean isTraceEnabled;
 
     public LoggingAspect() {
         this.isTraceEnabled = log.isTraceEnabled();
@@ -38,10 +32,10 @@ public class LoggingAspect {
 
         try {
             Object proceed = joinPoint.proceed();
-            this.doLogging(joinPoint, proceed, (Throwable)null, System.currentTimeMillis() - start);
+            this.doLogging(joinPoint, proceed, (Throwable) null, System.currentTimeMillis() - start);
             return proceed;
         } catch (Throwable var5) {
-            this.doLogging(joinPoint, (Object)null, var5, System.currentTimeMillis() - start);
+            this.doLogging(joinPoint, (Object) null, var5, System.currentTimeMillis() - start);
             throw var5;
         }
     }
@@ -86,17 +80,17 @@ public class LoggingAspect {
 
     private void doLogging(JoinPoint joinPoint, Object proceed, Throwable cause, long costTimeMillis) {
         Signature signature = joinPoint.getSignature();
-        MethodSignature methodSignature = (MethodSignature)signature;
+        MethodSignature methodSignature = (MethodSignature) signature;
         StringBuilder sb = new StringBuilder();
         String[] parameterNames = methodSignature.getParameterNames();
         Object[] args = joinPoint.getArgs();
         Class<?> returnType = methodSignature.getReturnType();
 
-        for(int i = 0; i < parameterNames.length; ++i) {
+        for (int i = 0; i < parameterNames.length; ++i) {
             sb.append(parameterNames[i]).append(" : ").append(args[i]).append(", ");
         }
 
-        Logging logging = (Logging)methodSignature.getMethod().getAnnotation(Logging.class);
+        Logging logging = (Logging) methodSignature.getMethod().getAnnotation(Logging.class);
         if (logging.result() && returnType != Void.TYPE) {
             sb.append("return").append(" : ").append(proceed);
         } else if (sb.length() > 0) {
@@ -104,7 +98,7 @@ public class LoggingAspect {
         }
 
         if (cause == null) {
-            switch(logging.level()) {
+            switch (logging.level()) {
                 case TRACE:
                     this.getLogger(joinPoint).trace("[logging] [{}ms] {}, {}", new Object[]{costTimeMillis, joinPoint.getSignature().getName(), sb});
                     break;

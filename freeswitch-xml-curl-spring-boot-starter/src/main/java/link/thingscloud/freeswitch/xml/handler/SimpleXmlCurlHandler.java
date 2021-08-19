@@ -1,7 +1,6 @@
 package link.thingscloud.freeswitch.xml.handler;
 
 import com.alibaba.fastjson.JSON;
-
 import link.thingscloud.freeswitch.xml.domain.XmlCurl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;

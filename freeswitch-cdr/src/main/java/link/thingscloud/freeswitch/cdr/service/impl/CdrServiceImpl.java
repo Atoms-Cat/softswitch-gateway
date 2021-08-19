@@ -32,13 +32,10 @@ public class CdrServiceImpl implements CdrService, ApplicationContextAware, Init
 
     @Value("${cdr.pool.size:8}")
     private int poolSize;
-
-    private ApplicationContext applicationContext;
-
-    private List<CdrHandler> cdrHandlers = new ArrayList<>(4);
-
     private final ExecutorService poolExecutor = new ScheduledThreadPoolExecutor(poolSize,
             new BasicThreadFactory.Builder().namingPattern("pool-executor-%d").daemon(true).build());
+    private ApplicationContext applicationContext;
+    private List<CdrHandler> cdrHandlers = new ArrayList<>(4);
 
     /**
      * {@inheritDoc}
@@ -85,7 +82,9 @@ public class CdrServiceImpl implements CdrService, ApplicationContextAware, Init
         }
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;

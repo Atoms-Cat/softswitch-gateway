@@ -25,11 +25,11 @@ public class LocalDateTimeUtil {
     }
 
     public static int epochToSeconds(long epochMillis) {
-        return (int)(epochMillis / 1000L);
+        return (int) (epochMillis / 1000L);
     }
 
     public static int uepochToSeconds(long uepochMillis) {
-        return (int)(uepochMillis / 1000000L);
+        return (int) (uepochMillis / 1000000L);
     }
 
     public static long toEpochMilli(LocalDateTime localDateTime) {

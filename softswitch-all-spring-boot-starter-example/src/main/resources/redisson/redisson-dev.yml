@@ -9,7 +9,7 @@ clusterServersConfig:
   password: null
   subscriptionsPerConnection: 5
   clientName: null
-  loadBalancer: !<org.redisson.connection.balancer.RoundRobinLoadBalancer> {}
+  loadBalancer: !<org.redisson.connection.balancer.RoundRobinLoadBalancer> { }
   subscriptionConnectionMinimumIdleSize: 1
   subscriptionConnectionPoolSize: 50
   slaveConnectionMinimumIdleSize: 24
@@ -28,5 +28,5 @@ clusterServersConfig:
   tcpNoDelay: false
   threads: 16
   nettyThreads: 32
-  codec: !<org.redisson.codec.MarshallingCodec> {}
+  codec: !<org.redisson.codec.MarshallingCodec> { }
   transportMode: "NIO"

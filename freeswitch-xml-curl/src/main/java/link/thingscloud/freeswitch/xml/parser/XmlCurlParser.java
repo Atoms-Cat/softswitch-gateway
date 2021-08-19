@@ -1,19 +1,14 @@
 package link.thingscloud.freeswitch.xml.parser;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import link.thingscloud.freeswitch.xml.domain.XmlCurl;
 import link.thingscloud.freeswitch.xml.exception.ParserException;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.dom4j.Attribute;
-import org.dom4j.Document;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.*;
-import java.util.function.BiConsumer;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <p>XmlCurlParser class.</p>
@@ -25,12 +20,10 @@ import java.util.function.BiConsumer;
 public class XmlCurlParser {
 
 
-
     private XmlCurlParser() {
     }
 
     /**
-     *
      * @param request
      * @return
      * @throws ParserException

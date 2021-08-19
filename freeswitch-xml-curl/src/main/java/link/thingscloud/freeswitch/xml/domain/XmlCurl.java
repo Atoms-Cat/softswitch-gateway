@@ -438,8 +438,4 @@ public class XmlCurl implements Serializable {
     String huntPrivacyHideNumbe;
 
 
-
-
-
-
 }

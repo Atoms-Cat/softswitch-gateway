@@ -24,12 +24,14 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.util.concurrent.DefaultThreadFactory;
+import link.thingscloud.freeswitch.esl.helper.ChannelCacheHelper;
 import link.thingscloud.freeswitch.esl.helper.EslHelper;
 import link.thingscloud.freeswitch.esl.outbound.listener.ChannelEventListener;
 import link.thingscloud.freeswitch.esl.transport.event.EslEvent;
 import link.thingscloud.freeswitch.esl.transport.event.EslEventHeaderNames;
 import link.thingscloud.freeswitch.esl.transport.message.EslHeaders;
 import link.thingscloud.freeswitch.esl.transport.message.EslMessage;
+import link.thingscloud.freeswitch.esl.util.EslEventUtil;
 import link.thingscloud.freeswitch.esl.util.RemotingUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -60,22 +62,28 @@ public class OutboundChannelHandler extends SimpleChannelInboundHandler<EslMessa
 
     private final ExecutorService backgroundJobExecutor = new ScheduledThreadPoolExecutor(8,
             new DefaultThreadFactory("Outbound-BackgroundJob-Executor", true));
+    //这是保证事件接收顺序的单线程池
+    private final ExecutorService onEslEventExecutor;
+    //这是用于并发处理onConnect的多线程池
+    private final ExecutorService onConnectExecutor;
 
     private final boolean isTraceEnabled = log.isTraceEnabled();
-    private final ConcurrentLinkedQueue<CompletableFuture<EslMessage>> apiCalls =
-            new ConcurrentLinkedQueue<>();
+    private final ConcurrentLinkedQueue<CompletableFuture<EslMessage>> apiCalls = new ConcurrentLinkedQueue<>();
     private Channel channel;
     private String remoteAddr;
+
 
     /**
      * <p>Constructor for OutboundChannelHandler.</p>
      *
-     * @param listener              a {@link ChannelEventListener} object.
-     * @param publicExecutor        a {@link ExecutorService} object.
+     * @param listener       a {@link ChannelEventListener} object.
+     * @param publicExecutor a {@link ExecutorService} object.
      */
-    public OutboundChannelHandler(ChannelEventListener listener, ExecutorService publicExecutor) {
+    public OutboundChannelHandler(ChannelEventListener listener, ExecutorService publicExecutor, ExecutorService onEslEventExecutor, ExecutorService onConnectExecutor) {
         this.listener = listener;
         this.publicExecutor = publicExecutor;
+        this.onEslEventExecutor = onEslEventExecutor;
+        this.onConnectExecutor = onConnectExecutor;
     }
 
     /**
@@ -89,10 +97,16 @@ public class OutboundChannelHandler extends SimpleChannelInboundHandler<EslMessa
 
         sendApiSingleLineCommand(ctx.channel(), "connect")
                 .thenAcceptAsync(response -> {
-                    log.info("{}", listener);
-                    listener.onConnect(
-                            new Context(ctx.channel(), OutboundChannelHandler.this, 120),
-                            new EslEvent(response, true));
+                    //这里改为线程池执行
+                    onConnectExecutor.execute(() -> {
+                        EslEvent eslEvent = new EslEvent(response, true);
+                        String coreUUID = EslEventUtil.getCoreUuid(eslEvent);
+                        ChannelCacheHelper.setCache(coreUUID, ctx.channel());
+                        listener.onConnect(
+                                new Context(ctx.channel(), OutboundChannelHandler.this, 120),
+                                eslEvent
+                        );
+                    });
                 }, publicExecutor)
                 .exceptionally(throwable -> {
                     log.error("Outbound Error", throwable);
@@ -126,7 +140,6 @@ public class OutboundChannelHandler extends SimpleChannelInboundHandler<EslMessa
     }
 
     /**
-     *
      * {@inheritDoc}
      */
     @Override
@@ -148,30 +161,30 @@ public class OutboundChannelHandler extends SimpleChannelInboundHandler<EslMessa
     }
 
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, EslMessage message) throws Exception {
         final String contentType = message.getContentType();
-        log.info("contentType : {}", contentType);
         if (contentType.equals(EslHeaders.Value.TEXT_EVENT_PLAIN) ||
-                contentType.equals(EslHeaders.Value.TEXT_EVENT_XML)
-        ) {
+                contentType.equals(EslHeaders.Value.TEXT_EVENT_XML)) {
             //  transform into an event
             final EslEvent eslEvent = new EslEvent(message);
-            if (eslEvent.getEventName().equals("BACKGROUND_JOB")) {
+            if ("BACKGROUND_JOB".equals(eslEvent.getEventName())) {
                 final String backgroundUuid = eslEvent.getEventHeaders().get(EslEventHeaderNames.JOB_UUID);
                 final CompletableFuture<EslEvent> future = backgroundJobs.remove(backgroundUuid);
                 if (null != future) {
                     future.complete(eslEvent);
                 }
             } else {
-                listener.handleEslEvent(new Context(ctx.channel(), OutboundChannelHandler.this, 120), eslEvent);
+                handleEslEvent(ctx, eslEvent);
             }
         } else {
             handleEslMessage(ctx, message);
         }
+    }
+
+    protected void handleEslEvent(final ChannelHandlerContext ctx, final EslEvent event) {
+        onEslEventExecutor.execute(() -> listener.handleEslEvent(
+                new Context(ctx.channel(), OutboundChannelHandler.this, 120), event));
     }
 
     protected void handleEslMessage(ChannelHandlerContext ctx, EslMessage message) {
@@ -288,7 +301,7 @@ public class OutboundChannelHandler extends SimpleChannelInboundHandler<EslMessa
         syncLock.lock();
         try {
             syncCallbacks.add(callback);
-            channel.write(sb.toString());
+            channel.writeAndFlush(sb.toString());
         } finally {
             syncLock.unlock();
         }
@@ -309,7 +322,7 @@ public class OutboundChannelHandler extends SimpleChannelInboundHandler<EslMessa
         syncLock.lock();
         try {
             syncCallbacks.add(callback);
-            channel.write(sb.toString());
+            channel.writeAndFlush(sb.toString());
         } finally {
             syncLock.unlock();
         }
@@ -354,8 +367,7 @@ public class OutboundChannelHandler extends SimpleChannelInboundHandler<EslMessa
         syncLock.lock();
         try {
             final CompletableFuture<EslMessage> future = new CompletableFuture<>();
-            channel.write(sb.toString());
-            channel.flush();
+            channel.writeAndFlush(sb.toString());
             return future;
         } finally {
             syncLock.unlock();

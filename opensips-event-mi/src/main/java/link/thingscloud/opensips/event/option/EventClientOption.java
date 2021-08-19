@@ -365,11 +365,10 @@ public class EventClientOption {
     }
 
     /**
-     *
      * @param serverOption
      */
     public void addServerOption(ServerOption serverOption) {
-         this.serverOption = serverOption;
+        this.serverOption = serverOption;
     }
 
     /**

@@ -38,7 +38,7 @@ public class HeartbeatEslEventHandler implements EslEventHandler {
      * {@inheritDoc}
      */
     @Override
-    public void handle(String address, EslEvent event, String callerUniqueID) {
+    public void handle(String address, EslEvent event, String coreUUID) {
         log.debug("HeartbeatEslEventHandler handle address[{}] EslEvent[{}].", address, event);
     }
 }

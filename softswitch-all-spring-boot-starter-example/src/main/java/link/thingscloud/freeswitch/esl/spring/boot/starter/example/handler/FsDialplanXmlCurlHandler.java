@@ -41,7 +41,7 @@ public class FsDialplanXmlCurlHandler implements XmlCurlHandler {
             e.printStackTrace();
         }
         log.info(xml);
-        log.info("exampel handle xml curl : [{}]", JSON.toJSONString(cdr, true));
+        log.debug("exampel handle xml curl : [{}]", JSON.toJSONString(cdr, true));
         return xml;
     }
 
@@ -83,8 +83,8 @@ public class FsDialplanXmlCurlHandler implements XmlCurlHandler {
     private List<Action> getAction() {
         List<Action> actionList = new ArrayList<>();
         // todo
-        actionList.add(new Action("answer",null));
-        actionList.add(new Action("sleep","2000"));
+        actionList.add(new Action("answer", null));
+        actionList.add(new Action("sleep", "2000"));
         return actionList;
     }
 

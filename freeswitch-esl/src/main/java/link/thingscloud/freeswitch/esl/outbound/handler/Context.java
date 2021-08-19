@@ -16,6 +16,9 @@ import static com.google.common.util.concurrent.Futures.getUnchecked;
 import static com.google.common.util.concurrent.Uninterruptibles.getUninterruptibly;
 
 
+/**
+ * @author th158
+ */
 public class Context implements IModEslApi {
 
     private final OutboundChannelHandler handler;
@@ -145,7 +148,7 @@ public class Context implements IModEslApi {
         try {
 
             final StringBuilder sb = new StringBuilder();
-            sb.append("event ").append(format.toString());
+            sb.append("event ").append(format);
             if (!isNullOrEmpty(events)) {
                 sb.append(' ').append(events);
             }
@@ -244,7 +247,6 @@ public class Context implements IModEslApi {
     }
 
     /**
-     *
      * @param sendMsg
      * @param timeout 秒
      * @return

@@ -43,11 +43,87 @@ public class CdrParser {
     private static final String HOLD_RECORD = "hold-record";
 
     private static final String CALLFLOW = "callflow";
-
+    private static final String AUDIO = "audio";
+    private static final String INBOUND = "inbound";
+    private static final String OUTBOUND = "outbound";
+    private static final String ERROR_LOG = "error-log";
+    private static final String RAW_BYTES = "raw_bytes";
+    private static final String MEDIA_BYTES = "media_bytes";
+    private static final String PACKET_COUNT = "packet_count";
+    private static final String MEDIA_PACKET_COUNT = "media_packet_count";
+    private static final String SKIP_PACKET_COUNT = "skip_packet_count";
+    private static final String JITTER_PACKET_COUNT = "jitter_packet_count";
+    private static final String DTMF_PACKET_COUNT = "dtmf_packet_count";
+    private static final String CNG_PACKET_COUNT = "cng_packet_count";
+    private static final String FLUSH_PACKET_COUNT = "flush_packet_count";
+    private static final String LARGEST_JB_SIZE = "largest_jb_size";
+    private static final String JITTER_MIN_VARIANCE = "jitter_min_variance";
+    private static final String JITTER_MAX_VARIANCE = "jitter_max_variance";
+    private static final String JITTER_LOSS_RATE = "jitter_loss_rate";
+    private static final String JITTER_BURST_RATE = "jitter_burst_rate";
+    private static final String MEAN_INTERVAL = "mean_interval";
+    private static final String FLAW_TOTAL = "flaw_total";
+    private static final String QUALITY_PERCENTAGE = "quality_percentage";
+    private static final String MOS = "mos";
+    private static final String RTCP_PACKET_COUNT = "rtcp_packet_count";
+    private static final String RTCP_OCTET_COUNT = "rtcp_octet_count";
+    private static final String ERROR_PERIOD = "error-period";
+    private static final String START = "start";
+    private static final String STOP = "stop";
+    private static final String FLAWS = "flaws";
+    private static final String CONSECUTIVE_FLAWS = "consecutive-flaws";
+    private static final String DURATION_MSEC = "duration-msec";
+    private static final String HOLD = "hold";
+    private static final String ON = "on";
+    private static final String OFF = "off";
+    private static final String BRIDGED_TO = "bridged-to";
+    private static final String APPLICATION = "application";
+    private static final String APP_NAME = "app_name";
+    private static final String APP_DATA = "app_data";
+    private static final String APP_STAMP = "app_stamp";
+    private static final String DIALPLAN = "dialplan";
+    private static final String UNIQUE_ID = "unique-id";
+    private static final String CLONE_OF = "clone-of";
+    private static final String PROFILE_INDEX = "profile_index";
+    private static final String EXTENSION = "extension";
+    private static final String CALLER_PROFILE = "caller_profile";
+    private static final String TIMES = "times";
+    private static final String NAME = "name";
+    private static final String NUMBER = "number";
+    private static final String USERNAME = "username";
+    private static final String CALLER_ID_NAME = "caller_id_name";
+    private static final String CALLER_ID_NUMBER = "caller_id_number";
+    private static final String CALLEE_ID_NAME = "callee_id_name";
+    private static final String CALLEE_ID_NUMBER = "callee_id_number";
+    private static final String ANI = "ani";
+    private static final String ANIII = "aniii";
+    private static final String NETWORK_ADDR = "network_addr";
+    private static final String RDNIS = "rdnis";
+    private static final String DESTINATION_NUMBER = "destination_number";
+    private static final String UUID = "uuid";
+    private static final String SOURCE = "source";
+    private static final String TRANSFER_SOURCE = "transfer_source";
+    private static final String CONTEXT = "context";
+    private static final String CHAN_NAME = "chan_name";
+    private static final String ORIGINATOR = "originator";
+    private static final String ORIGINATION = "origination";
+    private static final String ORIGINATEE = "originatee";
+    private static final String ORIGINATOR_CALLER_PROFILE = "originator_caller_profile";
+    private static final String ORIGINATION_CALLER_PROFILE = "origination_caller_profile";
+    private static final String ORIGINATEE_CALLER_PROFILE = "originatee_caller_profile";
+    private static final String CREATED_TIME = "created_time";
+    private static final String PROFILE_CREATED_TIME = "profile_created_time";
+    private static final String PROGRESS_TIME = "progress_time";
+    private static final String PROGRESS_MEDIA_TIME = "progress_media_time";
+    private static final String ANSWERED_TIME = "answered_time";
+    private static final String BRIDGED_TIME = "bridged_time";
+    private static final String LAST_HOLD_TIME = "last_hold_time";
+    private static final String HOLD_ACCUM_TIME = "hold_accum_time";
+    private static final String HANGUP_TIME = "hangup_time";
+    private static final String RESURRECT_TIME = "resurrect_time";
+    private static final String TRANSFER_TIME = "transfer_time";
     private static ThreadLocal<String> local = new ThreadLocal<>();
-
     private static boolean isTraceEnabled = log.isTraceEnabled();
-
     private CdrParser() {
     }
 
@@ -99,7 +175,6 @@ public class CdrParser {
             local.remove();
         }
     }
-
 
     private static void assignCdrElement(Cdr cdr, Element rootElement) {
         // cdr 节点属性赋值
@@ -153,7 +228,6 @@ public class CdrParser {
         });
     }
 
-
     private static void assignChannelDataElement(ChannelData channelData, Element rootElement) {
         // channel_data 节点属性赋值
         elements(rootElement, (name, element) -> {
@@ -181,8 +255,6 @@ public class CdrParser {
         });
     }
 
-    private static final String AUDIO = "audio";
-
     private static void assignCallStatsElement(CallStats callStats, Element rootElement) {
         // call-stats 节点属性赋值
         elements(rootElement, (name, element) -> {
@@ -199,10 +271,6 @@ public class CdrParser {
             }
         });
     }
-
-    private static final String INBOUND = "inbound";
-    private static final String OUTBOUND = "outbound";
-    private static final String ERROR_LOG = "error-log";
 
     private static void assignAudioElement(Audio audio, Element rootElement) {
         // call-stats - audio 节点属性赋值
@@ -230,26 +298,6 @@ public class CdrParser {
             }
         });
     }
-
-
-    private static final String RAW_BYTES = "raw_bytes";
-    private static final String MEDIA_BYTES = "media_bytes";
-    private static final String PACKET_COUNT = "packet_count";
-    private static final String MEDIA_PACKET_COUNT = "media_packet_count";
-    private static final String SKIP_PACKET_COUNT = "skip_packet_count";
-    private static final String JITTER_PACKET_COUNT = "jitter_packet_count";
-    private static final String DTMF_PACKET_COUNT = "dtmf_packet_count";
-    private static final String CNG_PACKET_COUNT = "cng_packet_count";
-    private static final String FLUSH_PACKET_COUNT = "flush_packet_count";
-    private static final String LARGEST_JB_SIZE = "largest_jb_size";
-    private static final String JITTER_MIN_VARIANCE = "jitter_min_variance";
-    private static final String JITTER_MAX_VARIANCE = "jitter_max_variance";
-    private static final String JITTER_LOSS_RATE = "jitter_loss_rate";
-    private static final String JITTER_BURST_RATE = "jitter_burst_rate";
-    private static final String MEAN_INTERVAL = "mean_interval";
-    private static final String FLAW_TOTAL = "flaw_total";
-    private static final String QUALITY_PERCENTAGE = "quality_percentage";
-    private static final String MOS = "mos";
 
     private static void assignInboundElement(Inbound inbound, Element rootElement) {
         // call-stats - audio - inbound 节点属性赋值
@@ -317,9 +365,6 @@ public class CdrParser {
         });
     }
 
-    private static final String RTCP_PACKET_COUNT = "rtcp_packet_count";
-    private static final String RTCP_OCTET_COUNT = "rtcp_octet_count";
-
     private static void assignOutboundElement(Outbound outbound, Element rootElement) {
         // call-stats - audio - outbound 节点属性赋值
         elements(rootElement, (name, element) -> {
@@ -359,8 +404,6 @@ public class CdrParser {
         });
     }
 
-    private static final String ERROR_PERIOD = "error-period";
-
     private static void assignErrorLogElement(ErrorLog errorLog, Element rootElement) {
         // call-stats - audio - error-log 节点属性赋值
         elements(rootElement, (name, element) -> {
@@ -377,12 +420,6 @@ public class CdrParser {
             }
         });
     }
-
-    private static final String START = "start";
-    private static final String STOP = "stop";
-    private static final String FLAWS = "flaws";
-    private static final String CONSECUTIVE_FLAWS = "consecutive-flaws";
-    private static final String DURATION_MSEC = "duration-msec";
 
     private static void assignErrorPeriodElement(ErrorPeriod errorPeriod, Element rootElement) {
         // call-stats - audio - error-log 节点属性赋值
@@ -415,8 +452,6 @@ public class CdrParser {
         elements(rootElement, (name, element) -> variables.putVariable(name, element.getTextTrim()));
     }
 
-    private static final String HOLD = "hold";
-
     private static void assignHoldRecordElement(HoldRecord holdRecord, Element rootElement) {
         List<Hold> holds = new ArrayList<>(4);
         holdRecord.setHolds(holds);
@@ -428,10 +463,6 @@ public class CdrParser {
             }
         });
     }
-
-    private static final String ON = "on";
-    private static final String OFF = "off";
-    private static final String BRIDGED_TO = "bridged-to";
 
     private static void assignHoldElement(final List<Hold> holds, final Element rootElement) {
         Hold hold = new Hold();
@@ -454,8 +485,6 @@ public class CdrParser {
         holds.add(hold);
     }
 
-    private static final String APPLICATION = "application";
-
     private static void assignAppLogElement(AppLog appLog, Element rootElement) {
         List<Application> applications = new ArrayList<>();
         appLog.setApplications(applications);
@@ -467,11 +496,6 @@ public class CdrParser {
             }
         });
     }
-
-    private static final String APP_NAME = "app_name";
-    private static final String APP_DATA = "app_data";
-    private static final String APP_STAMP = "app_stamp";
-
 
     private static void assignApplicationElement(final List<Application> applications, final Element rootElement) {
         Application application = new Application();
@@ -493,14 +517,6 @@ public class CdrParser {
         });
         applications.add(application);
     }
-
-    private static final String DIALPLAN = "dialplan";
-    private static final String UNIQUE_ID = "unique-id";
-    private static final String CLONE_OF = "clone-of";
-    private static final String PROFILE_INDEX = "profile_index";
-    private static final String EXTENSION = "extension";
-    private static final String CALLER_PROFILE = "caller_profile";
-    private static final String TIMES = "times";
 
     private static void assignCallflowElement(Callflow callflow, Element rootElement) {
         // 属性
@@ -550,10 +566,6 @@ public class CdrParser {
         });
     }
 
-    private static final String NAME = "name";
-    private static final String NUMBER = "number";
-
-
     private static void assignExtensionElement(Extension extension, Element rootElement) {
         // 属性
         attributes(rootElement, (name, value) -> {
@@ -580,25 +592,6 @@ public class CdrParser {
             }
         });
     }
-
-    private static final String USERNAME = "username";
-    private static final String CALLER_ID_NAME = "caller_id_name";
-    private static final String CALLER_ID_NUMBER = "caller_id_number";
-    private static final String CALLEE_ID_NAME = "callee_id_name";
-    private static final String CALLEE_ID_NUMBER = "callee_id_number";
-    private static final String ANI = "ani";
-    private static final String ANIII = "aniii";
-    private static final String NETWORK_ADDR = "network_addr";
-    private static final String RDNIS = "rdnis";
-    private static final String DESTINATION_NUMBER = "destination_number";
-    private static final String UUID = "uuid";
-    private static final String SOURCE = "source";
-    private static final String TRANSFER_SOURCE = "transfer_source";
-    private static final String CONTEXT = "context";
-    private static final String CHAN_NAME = "chan_name";
-    private static final String ORIGINATOR = "originator";
-    private static final String ORIGINATION = "origination";
-    private static final String ORIGINATEE = "originatee";
 
     private static void assignCallerProfileElement(CallerProfile callerProfile, Element rootElement) {
 
@@ -676,8 +669,6 @@ public class CdrParser {
 
     }
 
-    private static final String ORIGINATOR_CALLER_PROFILE = "originator_caller_profile";
-
     private static void assignOriginatorElement(Originator originator, Element rootElement) {
         elements(rootElement, (name, element) -> {
             if (ORIGINATOR_CALLER_PROFILE.equals(name)) {
@@ -746,8 +737,6 @@ public class CdrParser {
             }
         });
     }
-
-    private static final String ORIGINATION_CALLER_PROFILE = "origination_caller_profile";
 
     private static void assignOriginationElement(Origination origination, Element rootElement) {
         elements(rootElement, (name, element) -> {
@@ -819,8 +808,6 @@ public class CdrParser {
         });
     }
 
-    private static final String ORIGINATEE_CALLER_PROFILE = "originatee_caller_profile";
-
     private static void assignOriginateeElement(Originatee originatee, Element rootElement) {
         elements(rootElement, (name, element) -> {
             if (ORIGINATEE_CALLER_PROFILE.equals(name)) {
@@ -890,18 +877,6 @@ public class CdrParser {
             }
         });
     }
-
-    private static final String CREATED_TIME = "created_time";
-    private static final String PROFILE_CREATED_TIME = "profile_created_time";
-    private static final String PROGRESS_TIME = "progress_time";
-    private static final String PROGRESS_MEDIA_TIME = "progress_media_time";
-    private static final String ANSWERED_TIME = "answered_time";
-    private static final String BRIDGED_TIME = "bridged_time";
-    private static final String LAST_HOLD_TIME = "last_hold_time";
-    private static final String HOLD_ACCUM_TIME = "hold_accum_time";
-    private static final String HANGUP_TIME = "hangup_time";
-    private static final String RESURRECT_TIME = "resurrect_time";
-    private static final String TRANSFER_TIME = "transfer_time";
 
     private static void assignTimesElement(Times times, Element rootElement) {
         elements(rootElement, (name, element) -> {

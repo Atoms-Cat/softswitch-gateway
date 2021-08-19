@@ -44,6 +44,6 @@ public interface EslEventHandler {
      * @param address a {@link java.lang.String} object.
      * @param event   a {@link link.thingscloud.freeswitch.esl.transport.event.EslEvent} object.
      */
-    void handle(String address, EslEvent event, String callerUniqueID);
+    void handle(String address, EslEvent event, String coreUUID);
 
 }

@@ -48,7 +48,7 @@ public class ReScheduleEslEventHandler extends AbstractEslEventHandler {
      */
     @Logging
     @Override
-    public void handle(String address, EslEvent event, String callerUniqueID) {
+    public void handle(String address, EslEvent event, String coreUUID) {
         log.debug("ReScheduleEslEventHandler handle address [{}] EslEvent[{}].", address, event);
         log.debug("{}", inboundClient);
         EslMessage eslMessage = inboundClient.sendSyncApiCommand(address, "version", null);

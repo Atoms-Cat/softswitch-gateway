@@ -17,7 +17,6 @@
 
 package link.thingscloud.opensips.event.handler;
 
-import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelHandlerContext;
@@ -28,7 +27,6 @@ import link.thingscloud.opensips.event.listener.ChannelEventListener;
 import link.thingscloud.opensips.util.RemotingUtil;
 import lombok.extern.slf4j.Slf4j;
 
-import java.nio.charset.StandardCharsets;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.locks.Lock;

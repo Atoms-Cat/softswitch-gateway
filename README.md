@@ -4,6 +4,7 @@
 [![Jdk Version](https://img.shields.io/badge/JDK-1.8-green.svg)](https://img.shields.io/badge/JDK-1.8-green.svg)
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 [![codecov](https://codecov.io/gh/HowellYan/softswitch-gateway/branch/main/graph/badge.svg?token=DH9SNP7V5F)](https://codecov.io/gh/HowellYan/softswitch-gateway)
+
 ## 目标
 
     1、支持连接Opensips MI、 Event
@@ -13,16 +14,16 @@
     5、可动态配置
 
 ## 模块说明
+
 ### 1.[deployment plan](doc)
+
 * [opensips-fs-rtpengine](doc/DeploymentPlan4.md)
 
 ### 2.[freeswitch-esl、freeswitch-cdr](https://github.com/zhouhailin)
 
-
     参考 https://github.com/zhouhailin/freeswitch-esl-all
     参考 https://github.com/zhouhailin/freeswitch-cdr-all
     参考 https://github.com/zhouhailin/spring-boot-common
-
 
 ## 志同道合(微信) - 请备注来源
 

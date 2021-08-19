@@ -1,13 +1,12 @@
 package link.thingscloud.freeswitch.esl.spring.boot.starter.example.handler;
 
+import com.alibaba.fastjson.JSON;
 import link.thingscloud.freeswitch.esl.outbound.handler.Context;
 import link.thingscloud.freeswitch.esl.spring.boot.starter.handler.OutBoundConnectHandler;
 import link.thingscloud.freeswitch.esl.spring.boot.starter.handler.OutBoundEventHandler;
 import link.thingscloud.freeswitch.esl.transport.CommandResponse;
 import link.thingscloud.freeswitch.esl.transport.SendMsg;
 import link.thingscloud.freeswitch.esl.transport.event.EslEvent;
-import link.thingscloud.freeswitch.esl.transport.message.EslHeaders;
-import link.thingscloud.freeswitch.esl.transport.message.EslMessage;
 import link.thingscloud.freeswitch.esl.util.EslEventUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
@@ -23,20 +22,30 @@ public class OutboundConnectPreprocessEslEventHandler implements OutBoundEventHa
 
     @Override
     public void onConnect(Context context, EslEvent eslEvent) {
+        // 获取事件id
 
+        String coreUUID = EslEventUtil.getCoreUuid(eslEvent);
+        log.info("CHANNEL_CREATE: [{}]  [{}]", coreUUID, JSON.toJSONString(eslEvent));
 
         SendMsg bridgeMsg = new SendMsg();
         bridgeMsg.addCallCommand("execute");
+        bridgeMsg.addExecuteAppName("sleep");
+        bridgeMsg.addExecuteAppArg("30000");
+        context.handler().sendAsyncMultiLineCommand(context.channel(), bridgeMsg.getMsgLines());
+
+        bridgeMsg = new SendMsg();
+        bridgeMsg.addCallCommand("execute");
         bridgeMsg.addExecuteAppName("bridge");
         bridgeMsg.addExecuteAppArg(sofia + EslEventUtil.getSipToUri(eslEvent));
+        bridgeMsg.addEventLock();
 
         log.info("bridge to {}", EslEventUtil.getSipToUri(eslEvent));
 
         // 异步发送bridge命令接通
-        // context.handler().sendAsyncMultiLineCommand(context.channel(), bridgeMsg.getMsgLines());
+        context.handler().sendAsyncMultiLineCommand(context.channel(), bridgeMsg.getMsgLines());
 
         CommandResponse commandResponse = context.sendMessage(bridgeMsg);
-        log.info("response : {}", commandResponse);
+        //log.info("response : {}", commandResponse);
 
         //同步发送bridge命令接通
 //        EslMessage response = context.handler().sendSyncMultiLineCommand(context.channel(), bridgeMsg.getMsgLines());

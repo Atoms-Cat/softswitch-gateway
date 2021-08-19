@@ -69,13 +69,13 @@ public class IEslEventListenerTemplate implements IEslEventListener, Initializin
         // 获取事件名称
         String eventName = event.getEventName();
         // 获取事件id
-        String callerUniqueID = EslEventUtil.getCallerUniqueId(event);
+        String coreUUID = EslEventUtil.getCoreUuid(event);
         List<EslEventHandler> handlers = handlerTable.get(eventName);
         if (!CollectionUtils.isEmpty(handlers)) {
-            handlers.forEach(eventHandler -> eventHandler.handle(address, event, callerUniqueID));
+            handlers.forEach(eventHandler -> eventHandler.handle(address, event, coreUUID));
             return;
         }
-        defaultEventHandler.handle(address, event, callerUniqueID);
+        defaultEventHandler.handle(address, event, coreUUID);
     }
 
 

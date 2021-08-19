@@ -18,6 +18,7 @@
 package link.thingscloud.freeswitch.esl.outbound;
 
 import com.google.common.util.concurrent.AbstractService;
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.channel.ChannelInitializer;
@@ -38,8 +39,7 @@ import link.thingscloud.freeswitch.esl.transport.message.EslFrameDecoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.*;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
@@ -55,6 +55,23 @@ abstract class AbstractNettyOutboundClient extends AbstractService implements Ch
     final OutboundClientOption option;
 
     final Logger log = LoggerFactory.getLogger(getClass());
+
+    private static ThreadFactory onEslThreadFactory = new ThreadFactoryBuilder()
+            .setNameFormat("outbound-onEsl-pool-%d").build();
+
+    //专门接收订阅事件的单一线程池(保证顺序)
+    private static ExecutorService onEslExecutor = new ThreadPoolExecutor(1, 1,
+            0L, TimeUnit.MILLISECONDS,
+            new LinkedBlockingQueue<>(100000), onEslThreadFactory);
+
+    private static ThreadFactory onConnectThreadFactory = new ThreadFactoryBuilder()
+            .setNameFormat("outbound-onConnect-pool-%d").build();
+
+    //专用于处理新来电onConnect的多线程池
+    private static ExecutorService onConnectExecutor = new ThreadPoolExecutor(32, 512,
+            60L, TimeUnit.SECONDS,
+            new LinkedBlockingQueue<>(2048), onConnectThreadFactory);
+
 
     AbstractNettyOutboundClient(OutboundClientOption option) {
         this.option = option;
@@ -82,7 +99,7 @@ abstract class AbstractNettyOutboundClient extends AbstractService implements Ch
                         pipeline.addLast("decoder", new EslFrameDecoder(8192, true));
                         pipeline.addLast("server-idle-handler", new IdleStateHandler(0, 0, option.readerIdleTimeSeconds(), MILLISECONDS));
                         // now the inbound client logic
-                        pipeline.addLast("clientHandler", new OutboundChannelHandler(AbstractNettyOutboundClient.this, publicExecutor));
+                        pipeline.addLast("clientHandler", new OutboundChannelHandler(AbstractNettyOutboundClient.this, publicExecutor, onEslExecutor, onConnectExecutor));
                     }
                 });
     }

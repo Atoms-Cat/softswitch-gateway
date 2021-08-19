@@ -96,5 +96,5 @@ abstract class AbstractService extends AbstractNettyService implements EventClie
         this.option().listeners().forEach(listener -> listener.handleEvent(context, msg));
 
     }
-    
+
 }

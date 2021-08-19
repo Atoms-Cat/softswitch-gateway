@@ -19,9 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * todo FS --> [Inbound] --> app --> [sendMsg] --> socket address
- * todo FS <--> [Outbound] <--> app
- * todo 分布式锁
+ * do: FS --> [Inbound] --> app --> [sendMsg] --> socket address
+ * do: FS <--> [Outbound] <--> app
  *
  * @author th158
  */
@@ -44,9 +43,10 @@ public class InboundChannelCreateSendSocketHandler implements EslEventHandler {
      */
     @Override
     // 分布式锁
-    @RedisLock(lockName = EventNames.CHANNEL_CREATE , key = "callerUniqueID")
-    public void handle(String address, EslEvent event, String callerUniqueID) {
+    @RedisLock(lockName = EventNames.CHANNEL_CREATE, key = "coreUUID")
+    public void handle(String address, EslEvent event, String coreUUID) {
         SendMsg sendMsg = new SendMsg(EslEventUtil.getCallerUniqueId(event));
+
 
         try {
             // 判断 是否 是 inbound 处理

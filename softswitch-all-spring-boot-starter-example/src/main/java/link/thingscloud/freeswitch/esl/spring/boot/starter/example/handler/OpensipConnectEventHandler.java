@@ -20,7 +20,7 @@ public class OpensipConnectEventHandler implements ClientEventHandler, ClientCon
     public void onConnect(Context context, Object msg) {
 
         if (msg instanceof DatagramPacket) {
-            DatagramPacket datagramPacket = ((DatagramPacket)msg);
+            DatagramPacket datagramPacket = ((DatagramPacket) msg);
             ByteBuf buf = datagramPacket.copy().content();
             byte[] req = new byte[buf.readableBytes()];
             //复制内容到字节数组bytes
@@ -37,7 +37,7 @@ public class OpensipConnectEventHandler implements ClientEventHandler, ClientCon
     public void handler(Context context, Object msg) {
 
         if (msg instanceof DatagramPacket) {
-            DatagramPacket datagramPacket = ((DatagramPacket)msg);
+            DatagramPacket datagramPacket = ((DatagramPacket) msg);
             ByteBuf buf = datagramPacket.copy().content();
             byte[] req = new byte[buf.readableBytes()];
             //复制内容到字节数组bytes

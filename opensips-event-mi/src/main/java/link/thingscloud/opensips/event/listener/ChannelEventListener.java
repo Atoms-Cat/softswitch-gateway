@@ -37,16 +37,16 @@ public interface ChannelEventListener {
     void handleAuthRequest(ChannelHandlerContext ctx);
 
     /**
-     * @param context  a {@link Context} object.
-     * @param msg a {@link Object} object.
+     * @param context a {@link Context} object.
+     * @param msg     a {@link Object} object.
      */
     void onConnect(Context context, Object msg);
 
     /**
      * <p>handleEslEvent.</p>
      *
-     * @param context  a {@link String} object.
-     * @param msg a {@link Object} object.
+     * @param context a {@link String} object.
+     * @param msg     a {@link Object} object.
      */
     void handleEvent(Context context, Object msg);
 

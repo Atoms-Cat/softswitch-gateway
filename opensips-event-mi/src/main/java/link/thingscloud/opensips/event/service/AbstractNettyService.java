@@ -3,15 +3,10 @@ package link.thingscloud.opensips.event.service;
 import com.google.common.util.concurrent.AbstractService;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.PooledByteBufAllocator;
-import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
-import io.netty.channel.ChannelPipeline;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioDatagramChannel;
-import io.netty.handler.codec.string.StringEncoder;
-import io.netty.handler.timeout.IdleStateHandler;
 import io.netty.util.concurrent.DefaultThreadFactory;
 import link.thingscloud.opensips.event.EventClientService;
 import link.thingscloud.opensips.event.handler.EventChannelHandler;
@@ -22,8 +17,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
-
-import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 /**
  * @author th158
