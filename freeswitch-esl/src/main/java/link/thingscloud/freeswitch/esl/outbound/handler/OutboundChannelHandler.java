@@ -27,6 +27,7 @@ import io.netty.util.concurrent.DefaultThreadFactory;
 import link.thingscloud.freeswitch.esl.helper.ChannelCacheHelper;
 import link.thingscloud.freeswitch.esl.helper.EslHelper;
 import link.thingscloud.freeswitch.esl.outbound.listener.ChannelEventListener;
+import link.thingscloud.freeswitch.esl.transport.SendMsg;
 import link.thingscloud.freeswitch.esl.transport.event.EslEvent;
 import link.thingscloud.freeswitch.esl.transport.event.EslEventHeaderNames;
 import link.thingscloud.freeswitch.esl.transport.message.EslHeaders;
@@ -54,7 +55,6 @@ public class OutboundChannelHandler extends SimpleChannelInboundHandler<EslMessa
     private static final String LINE_TERMINATOR = "\n";
 
     private final Lock syncLock = new ReentrantLock();
-    private final Queue<SyncCallback> syncCallbacks = new ConcurrentLinkedQueue<>();
     private final ChannelEventListener listener;
     private final ExecutorService publicExecutor;
     private final ConcurrentHashMap<String, CompletableFuture<EslEvent>> backgroundJobs =
@@ -134,7 +134,15 @@ public class OutboundChannelHandler extends SimpleChannelInboundHandler<EslMessa
         if (evt instanceof IdleStateEvent) {
             if (((IdleStateEvent) evt).state() == IdleState.READER_IDLE) {
                 log.debug("userEventTriggered remoteAddr : {}, evt state : {} ", remoteAddr, ((IdleStateEvent) evt).state());
-                publicExecutor.execute(() -> sendAsyncCommand("bgapi status"));
+                publicExecutor.execute(() -> {
+                    try {
+                        sendAsyncCommand(ctx.channel(), "bgapi status");
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                });
             }
         }
     }
@@ -153,7 +161,6 @@ public class OutboundChannelHandler extends SimpleChannelInboundHandler<EslMessa
         for (final CompletableFuture<EslEvent> backgroundJob : backgroundJobs.values()) {
             backgroundJob.completeExceptionally(cause.getCause());
         }
-        ctx.channel().close();
 
         ctx.close();
 
@@ -224,94 +231,34 @@ public class OutboundChannelHandler extends SimpleChannelInboundHandler<EslMessa
 
 
     /**
-     * Synthesise a synchronous command/response by creating a callback object which is placed in
-     * queue and blocks waiting for another IO thread to process an incoming {@link EslMessage} and
-     * attach it to the callback.
-     *
-     * @param command single string to send
-     * @return the {@link EslMessage} attached to this command's callback
-     */
-    public EslMessage sendSyncSingleLineCommand(final String command) {
-        if (isTraceEnabled) {
-            log.trace("sendSyncSingleLineCommand command : {}", command);
-        }
-        SyncCallback callback = new SyncCallback();
-        syncLock.lock();
-        try {
-            syncCallbacks.add(callback);
-            channel.writeAndFlush(command + MESSAGE_TERMINATOR);
-        } finally {
-            syncLock.unlock();
-        }
-        //  Block until the response is available
-        return callback.get();
-    }
-
-    /**
-     * Synthesise a synchronous command/response by creating a callback object which is placed in
-     * queue and blocks waiting for another IO thread to process an incoming {@link EslMessage} and
-     * attach it to the callback.
-     *
-     * @param commandLines List of command lines to send
-     * @return the {@link EslMessage} attached to this command's callback
-     */
-    public EslMessage sendSyncMultiLineCommand(final List<String> commandLines) {
-        SyncCallback callback = new SyncCallback();
-        //  Build command with double line terminator at the end
-        StringBuilder sb = new StringBuilder();
-        for (String line : commandLines) {
-            sb.append(line);
-            sb.append(LINE_TERMINATOR);
-        }
-        sb.append(LINE_TERMINATOR);
-        if (isTraceEnabled) {
-            log.trace("sendSyncMultiLineCommand command : {}", sb);
-        }
-        syncLock.lock();
-        try {
-            syncCallbacks.add(callback);
-            channel.writeAndFlush(sb.toString());
-        } finally {
-            syncLock.unlock();
-        }
-
-        //  Block until the response is available
-        return callback.get();
-    }
-
-    /**
-     * Synthesise a synchronous command/response by creating a callback object which is placed in
-     * queue and blocks waiting for another IO thread to process an incoming {@link EslMessage} and
-     * attach it to the callback.
      *
      * @param channel
-     * @param commandLines List of command lines to send
-     * @return the {@link EslMessage} attached to this command's callback
+     * @param sendMsgList
      */
-    public EslMessage sendSyncMultiLineCommand(Channel channel, final List<String> commandLines) {
-        SyncCallback callback = new SyncCallback();
+    public void sendAsyncMultiSendMsgCommand(Channel channel, final List<SendMsg> sendMsgList) {
         //  Build command with double line terminator at the end
         StringBuilder sb = new StringBuilder();
-        for (String line : commandLines) {
-            sb.append(line);
+        for (SendMsg sendMsg : sendMsgList) {
+            for (String line : sendMsg.getMsgLines()) {
+                sb.append(line);
+                sb.append(LINE_TERMINATOR);
+            }
             sb.append(LINE_TERMINATOR);
         }
-        sb.append(LINE_TERMINATOR);
-
         syncLock.lock();
         try {
-            syncCallbacks.add(callback);
             channel.writeAndFlush(sb.toString());
         } finally {
             syncLock.unlock();
         }
-
-        //  Block until the response is available
-        return callback.get();
     }
 
+    /**
+     * 异步
+     * @param channel
+     * @param commandLines
+     */
     public void sendAsyncMultiLineCommand(Channel channel, final List<String> commandLines) {
-        SyncCallback callback = new SyncCallback();
         //  Build command with double line terminator at the end
         StringBuilder sb = new StringBuilder();
         for (String line : commandLines) {
@@ -321,13 +268,18 @@ public class OutboundChannelHandler extends SimpleChannelInboundHandler<EslMessa
         sb.append(LINE_TERMINATOR);
         syncLock.lock();
         try {
-            syncCallbacks.add(callback);
             channel.writeAndFlush(sb.toString());
         } finally {
             syncLock.unlock();
         }
     }
 
+    /**
+     *
+     * @param channel
+     * @param command
+     * @return
+     */
     public CompletableFuture<EslMessage> sendApiSingleLineCommand(Channel channel, final String command) {
         final CompletableFuture<EslMessage> future = new CompletableFuture<>();
         syncLock.lock();
@@ -338,6 +290,70 @@ public class OutboundChannelHandler extends SimpleChannelInboundHandler<EslMessa
             syncLock.unlock();
         }
         return future;
+    }
+
+    public CompletableFuture<EslMessage> sendApiMultiLineCommand(Channel channel, final List<String> commandLines) {
+        //  Build command with double line terminator at the end
+        final StringBuilder sb = new StringBuilder();
+        for (final String line : commandLines) {
+            sb.append(line);
+            sb.append(LINE_TERMINATOR);
+        }
+        sb.append(LINE_TERMINATOR);
+        syncLock.lock();
+        try {
+            final CompletableFuture<EslMessage> future = new CompletableFuture<>();
+            channel.writeAndFlush(sb.toString());
+            apiCalls.add(future);
+            return future;
+        } finally {
+            syncLock.unlock();
+        }
+    }
+
+    public CompletableFuture<EslMessage> sendApiMultiSendMsgCommand(Channel channel, final List<SendMsg> sendMsgList) {
+        //  Build command with double line terminator at the end
+        final StringBuilder sb = new StringBuilder();
+        for (SendMsg sendMsg : sendMsgList) {
+            for (final String line : sendMsg.getMsgLines()) {
+                sb.append(line);
+                sb.append(LINE_TERMINATOR);
+            }
+            sb.append(LINE_TERMINATOR);
+        }
+        syncLock.lock();
+        try {
+            final CompletableFuture<EslMessage> future = new CompletableFuture<>();
+            channel.writeAndFlush(sb.toString());
+            apiCalls.add(future);
+            return future;
+        } finally {
+            syncLock.unlock();
+        }
+    }
+
+    /**
+     * Returns the Job UUID of that the response event will have.
+     *
+     * @param command cmd
+     * @return Job-UUID as a string
+     */
+    public String sendAsyncCommand(Channel channel, final String command) throws ExecutionException, InterruptedException {
+        /*
+         * Send synchronously to get the Job-UUID to return, the results of the actual
+         * job request will be returned by the server as an async event.
+         */
+        CompletableFuture<EslMessage> messageCompletableFuture = sendApiSingleLineCommand(channel, command);
+        if (isTraceEnabled) {
+            log.trace("sendAsyncCommand command : {}, response : {}", command, messageCompletableFuture);
+        }
+        EslMessage response = messageCompletableFuture.get();
+        if (response.hasHeader(EslHeaders.Name.JOB_UUID)) {
+            return response.getHeaderValue(EslHeaders.Name.JOB_UUID);
+        } else {
+            log.warn("sendAsyncCommand command : {}, response : {}", command, EslHelper.formatEslMessage(response));
+            throw new IllegalStateException("Missing Job-UUID header in bgapi response");
+        }
     }
 
     public CompletableFuture<EslEvent> sendBackgroundApiCommand(Channel channel, final String command) {
@@ -355,48 +371,6 @@ public class OutboundChannelHandler extends SimpleChannelInboundHandler<EslMessa
                     }
                 }, backgroundJobExecutor);
     }
-
-    public CompletableFuture<EslMessage> sendApiMultiLineCommand(Channel channel, final List<String> commandLines) {
-        //  Build command with double line terminator at the end
-        final StringBuilder sb = new StringBuilder();
-        for (final String line : commandLines) {
-            sb.append(line);
-            sb.append(LINE_TERMINATOR);
-        }
-        sb.append(LINE_TERMINATOR);
-        syncLock.lock();
-        try {
-            final CompletableFuture<EslMessage> future = new CompletableFuture<>();
-            channel.writeAndFlush(sb.toString());
-            return future;
-        } finally {
-            syncLock.unlock();
-        }
-    }
-
-    /**
-     * Returns the Job UUID of that the response event will have.
-     *
-     * @param command cmd
-     * @return Job-UUID as a string
-     */
-    public String sendAsyncCommand(final String command) {
-        /*
-         * Send synchronously to get the Job-UUID to return, the results of the actual
-         * job request will be returned by the server as an async event.
-         */
-        EslMessage response = sendSyncSingleLineCommand(command);
-        if (isTraceEnabled) {
-            log.trace("sendAsyncCommand command : {}, response : {}", command, response);
-        }
-        if (response.hasHeader(EslHeaders.Name.JOB_UUID)) {
-            return response.getHeaderValue(EslHeaders.Name.JOB_UUID);
-        } else {
-            log.warn("sendAsyncCommand command : {}, response : {}", command, EslHelper.formatEslMessage(response));
-            throw new IllegalStateException("Missing Job-UUID header in bgapi response");
-        }
-    }
-
     /**
      * <p>close.</p>
      *
@@ -406,39 +380,6 @@ public class OutboundChannelHandler extends SimpleChannelInboundHandler<EslMessa
         return channel.close();
     }
 
-    class SyncCallback {
-        private final CountDownLatch latch = new CountDownLatch(1);
-        private EslMessage response;
-
-        /**
-         * Block waiting for the countdown latch to be released, then return the
-         * associated response object.
-         *
-         * @return msg
-         */
-        EslMessage get() {
-            try {
-                log.trace("awaiting latch ... ");
-                latch.await();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-
-            log.trace("returning response [{}]", response);
-            return response;
-        }
-
-        /**
-         * Attach this response to the callback and release the countdown latch.
-         *
-         * @param response res
-         */
-        void handle(EslMessage response) {
-            this.response = response;
-            log.trace("releasing latch for response [{}]", response);
-            latch.countDown();
-        }
-    }
 
 
 }

@@ -6,6 +6,7 @@ import link.thingscloud.freeswitch.esl.transport.SendMsg;
 import link.thingscloud.freeswitch.esl.transport.event.EslEvent;
 import link.thingscloud.freeswitch.esl.transport.message.EslMessage;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
@@ -20,6 +21,9 @@ import static com.google.common.util.concurrent.Uninterruptibles.getUninterrupti
  * @author th158
  */
 public class Context implements IModEslApi {
+
+    private static final String MESSAGE_TERMINATOR = "\n\n";
+    private static final String LINE_TERMINATOR = "\n";
 
     private final OutboundChannelHandler handler;
     // 通道
@@ -274,7 +278,25 @@ public class Context implements IModEslApi {
         } catch (Throwable t) {
             throw propagate(t);
         }
+    }
 
+    @Override
+    public CommandResponse sendMessage(List<SendMsg> sendMsgList) {
+        checkNotNull(sendMsgList, "sendMsg cannot be null");
+        try {
+            final StringBuilder sb = new StringBuilder();
+            for (SendMsg sendMsg : sendMsgList) {
+                for (final String line : sendMsg.getMsgLines()) {
+                    sb.append(line);
+                    sb.append(LINE_TERMINATOR);
+                }
+                sb.append(LINE_TERMINATOR);
+            }
+            final EslMessage response = getUnchecked(handler.sendApiSingleLineCommand(channel, sb.toString()));
+            return new CommandResponse(sb.toString(), response);
+        } catch (Throwable t) {
+            throw propagate(t);
+        }
     }
 
     /**

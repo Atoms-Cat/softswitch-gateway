@@ -11,6 +11,9 @@ import link.thingscloud.freeswitch.esl.util.EslEventUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * fs-outbound 呼入
  */
@@ -27,25 +30,55 @@ public class OutboundConnectPreprocessEslEventHandler implements OutBoundEventHa
         String coreUUID = EslEventUtil.getCoreUuid(eslEvent);
         log.info("CHANNEL_CREATE: [{}]  [{}]", coreUUID, JSON.toJSONString(eslEvent));
 
+        List<SendMsg> bridgeMsgList = new ArrayList<>();
         SendMsg bridgeMsg = new SendMsg();
         bridgeMsg.addCallCommand("execute");
-        bridgeMsg.addExecuteAppName("sleep");
-        bridgeMsg.addExecuteAppArg("30000");
-        context.handler().sendAsyncMultiLineCommand(context.channel(), bridgeMsg.getMsgLines());
+        bridgeMsg.addExecuteAppName("set");
+        bridgeMsg.addExecuteAppArg("hangup_after_bridge=true");
+        //context.sendMessage(bridgeMsg);
+        bridgeMsgList.add(bridgeMsg);
 
         bridgeMsg = new SendMsg();
         bridgeMsg.addCallCommand("execute");
         bridgeMsg.addExecuteAppName("bridge");
         bridgeMsg.addExecuteAppArg(sofia + EslEventUtil.getSipToUri(eslEvent));
         bridgeMsg.addEventLock();
-
+        bridgeMsgList.add(bridgeMsg);
         log.info("bridge to {}", EslEventUtil.getSipToUri(eslEvent));
 
-        // 异步发送bridge命令接通
-        context.handler().sendAsyncMultiLineCommand(context.channel(), bridgeMsg.getMsgLines());
+        CommandResponse commandResponse = context.sendMessage(bridgeMsgList);
+        log.info("response : {}", JSON.toJSONString(commandResponse));
 
-        CommandResponse commandResponse = context.sendMessage(bridgeMsg);
-        //log.info("response : {}", commandResponse);
+        // 异步发送bridge命令接通
+        //context.handler().sendAsyncMultiLineCommand(context.channel(), bridgeMsg.getMsgLines());
+
+        List<SendMsg> sendMsgList = new ArrayList<>();
+
+        SendMsg hangupMsg = new SendMsg();
+        hangupMsg.addCallCommand("execute");
+        hangupMsg.addExecuteAppName("answer");
+        //context.handler().sendAsyncMultiLineCommand(context.channel(), hangupMsg.getMsgLines());
+        //context.sendMessage(hangupMsg);
+        sendMsgList.add(hangupMsg);
+
+        hangupMsg = new SendMsg();
+        hangupMsg.addCallCommand("execute");
+        hangupMsg.addExecuteAppName("sleep");
+        hangupMsg.addExecuteAppArg("1000");
+        //context.handler().sendAsyncMultiLineCommand(context.channel(), hangupMsg.getMsgLines());
+        sendMsgList.add(hangupMsg);
+
+        // todo 评价或者 其他
+        hangupMsg = new SendMsg();
+        hangupMsg.addCallCommand("execute");
+        hangupMsg.addExecuteAppName("bridge");
+        hangupMsg.addExecuteAppArg("loopback/app=voicemail:default ${domain_name} ${dialed_extension}");
+        sendMsgList.add(hangupMsg);
+
+        context.handler().sendAsyncMultiSendMsgCommand(context.channel(), sendMsgList);
+
+  //      CommandResponse commandResponse = context.sendMessage(bridgeMsg);
+  //      log.info("response : {}", commandResponse);
 
         //同步发送bridge命令接通
 //        EslMessage response = context.handler().sendSyncMultiLineCommand(context.channel(), bridgeMsg.getMsgLines());

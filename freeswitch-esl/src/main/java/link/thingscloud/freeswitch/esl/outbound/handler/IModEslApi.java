@@ -6,6 +6,7 @@ import link.thingscloud.freeswitch.esl.transport.SendMsg;
 import link.thingscloud.freeswitch.esl.transport.event.EslEvent;
 import link.thingscloud.freeswitch.esl.transport.message.EslMessage;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public interface IModEslApi {
@@ -25,6 +26,8 @@ public interface IModEslApi {
     CommandResponse deleteEventFilter(String eventHeader, String valueToFilter);
 
     CommandResponse sendMessage(SendMsg sendMsg);
+
+    CommandResponse sendMessage(List<SendMsg> sendMsgList);
 
     CommandResponse sendMessage(SendMsg sendMsg, long timeout);
 
