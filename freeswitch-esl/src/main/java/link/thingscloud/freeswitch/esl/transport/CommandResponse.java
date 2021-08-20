@@ -21,13 +21,15 @@ package link.thingscloud.freeswitch.esl.transport;
 import link.thingscloud.freeswitch.esl.transport.message.EslHeaders;
 import link.thingscloud.freeswitch.esl.transport.message.EslMessage;
 
+import java.io.Serializable;
+
 /**
  * <p>CommandResponse class.</p>
  *
  * @author : <a href="mailto:ant.zhou@aliyun.com">zhouhailin</a>
  * @version 1.0.0
  */
-public class CommandResponse {
+public class CommandResponse implements Serializable {
 
     private final String command;
     private final String replyText;

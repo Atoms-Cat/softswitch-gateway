@@ -62,9 +62,14 @@ public class OutboundChannelHandler extends SimpleChannelInboundHandler<EslMessa
 
     private final ExecutorService backgroundJobExecutor = new ScheduledThreadPoolExecutor(8,
             new DefaultThreadFactory("Outbound-BackgroundJob-Executor", true));
-    //这是保证事件接收顺序的单线程池
+    /**
+     * 这是保证事件接收顺序的单线程池
+     */
     private final ExecutorService onEslEventExecutor;
-    //这是用于并发处理onConnect的多线程池
+
+    /**
+     * 这是用于并发处理onConnect的多线程池
+     */
     private final ExecutorService onConnectExecutor;
 
     private final boolean isTraceEnabled = log.isTraceEnabled();

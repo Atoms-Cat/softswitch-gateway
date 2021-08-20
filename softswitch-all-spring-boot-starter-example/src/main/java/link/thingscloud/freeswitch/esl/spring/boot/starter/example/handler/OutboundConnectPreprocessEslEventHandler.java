@@ -8,6 +8,7 @@ import link.thingscloud.freeswitch.esl.transport.CommandResponse;
 import link.thingscloud.freeswitch.esl.transport.SendMsg;
 import link.thingscloud.freeswitch.esl.transport.event.EslEvent;
 import link.thingscloud.freeswitch.esl.util.EslEventUtil;
+import link.thingscloud.freeswitch.esl.util.RemotingUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 
@@ -28,7 +29,9 @@ public class OutboundConnectPreprocessEslEventHandler implements OutBoundEventHa
         // 获取事件id
 
         String coreUUID = EslEventUtil.getCoreUuid(eslEvent);
-        log.info("CHANNEL_CREATE: [{}]  [{}]", coreUUID, JSON.toJSONString(eslEvent));
+        String remoteAddr = RemotingUtil.socketAddress2String(context.channel().remoteAddress());
+
+        log.info("Outbound CHANNEL_CREATE:[{}] [{}]  [{}]", remoteAddr, coreUUID, JSON.toJSONString(eslEvent));
 
         List<SendMsg> bridgeMsgList = new ArrayList<>();
         SendMsg bridgeMsg = new SendMsg();
@@ -77,6 +80,8 @@ public class OutboundConnectPreprocessEslEventHandler implements OutBoundEventHa
 
         context.handler().sendAsyncMultiSendMsgCommand(context.channel(), sendMsgList);
 
+        // 关闭通道 todo 工作流
+        context.closeChannel();
   //      CommandResponse commandResponse = context.sendMessage(bridgeMsg);
   //      log.info("response : {}", commandResponse);
 

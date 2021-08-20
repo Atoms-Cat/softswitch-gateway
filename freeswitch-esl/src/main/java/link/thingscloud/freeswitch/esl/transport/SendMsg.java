@@ -17,6 +17,7 @@
 
 package link.thingscloud.freeswitch.esl.transport;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +27,7 @@ import java.util.List;
  * @author : <a href="mailto:ant.zhou@aliyun.com">zhouhailin</a>
  * @version 1.0.0
  */
-public class SendMsg {
+public class SendMsg implements Serializable {
 
     private final List<String> msgLines = new ArrayList<>();
     private final boolean hasUuid;

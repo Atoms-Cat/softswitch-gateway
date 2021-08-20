@@ -19,6 +19,7 @@ package link.thingscloud.freeswitch.esl.transport.message;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
@@ -40,7 +41,7 @@ import java.util.Map;
  * @see EslHeaders.Name
  */
 @Slf4j
-public class EslMessage {
+public class EslMessage implements Serializable {
 
     private final Map<EslHeaders.Name, String> headers = new EnumMap<>(EslHeaders.Name.class);
     private final List<String> body = new ArrayList<>();

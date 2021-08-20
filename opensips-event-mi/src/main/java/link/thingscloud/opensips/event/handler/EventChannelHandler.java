@@ -122,7 +122,7 @@ public class EventChannelHandler extends SimpleChannelInboundHandler<DatagramPac
      */
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        log.info("channelRead remoteAddr : {}, msg : {} ", remoteAddr, msg);
+        log.debug("channelRead remoteAddr : {}, msg : {} ", remoteAddr, msg);
         if (msg instanceof DatagramPacket) {
             channelRead0(ctx, (DatagramPacket) msg);
         }
@@ -136,7 +136,7 @@ public class EventChannelHandler extends SimpleChannelInboundHandler<DatagramPac
         } else {
             this.remoteAddr = msg.sender().getAddress().getHostAddress() + ":" + msg.sender().getPort();
         }
-        log.info("channelRead0 remoteAddr : {}, msg : {}", remoteAddr, msg);
+        log.debug("channelRead0 remoteAddr : {}, msg : {}", remoteAddr, msg);
         listener.handleEvent(new Context(ctx.channel(), EventChannelHandler.this), msg);
     }
 

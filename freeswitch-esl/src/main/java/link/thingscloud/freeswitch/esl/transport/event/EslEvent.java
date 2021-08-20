@@ -22,6 +22,7 @@ import link.thingscloud.freeswitch.esl.transport.message.EslMessage;
 import link.thingscloud.freeswitch.esl.transport.util.HeaderParser;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
@@ -49,7 +50,7 @@ import java.util.Map;
  * @see EslEventHeaderNames
  */
 @Slf4j
-public class EslEvent {
+public class EslEvent implements Serializable {
 
     private final Map<EslHeaders.Name, String> messageHeaders;
     private final Map<String, String> eventHeaders;

@@ -1,5 +1,6 @@
 package link.thingscloud.freeswitch.esl.spring.boot.starter.example.handler;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.nacos.api.annotation.NacosInjected;
 import com.alibaba.nacos.api.exception.NacosException;
 import com.alibaba.nacos.api.naming.NamingService;
@@ -42,11 +43,11 @@ public class InboundChannelCreateSendSocketHandler implements EslEventHandler {
      * {@inheritDoc}
      */
     @Override
-    // 分布式锁
     @RedisLock(lockName = EventNames.CHANNEL_CREATE, key = "coreUUID")
     public void handle(String address, EslEvent event, String coreUUID) {
         SendMsg sendMsg = new SendMsg(EslEventUtil.getCallerUniqueId(event));
 
+        log.info("Inbound CHANNEL_CREATE:[{}] [{}]  [{}]",  address, coreUUID, JSON.toJSONString(event));
 
         try {
             // 判断 是否 是 inbound 处理

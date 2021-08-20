@@ -6,6 +6,7 @@ import com.google.common.cache.RemovalListener;
 import com.google.common.cache.RemovalNotification;
 import io.netty.channel.Channel;
 
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -16,8 +17,8 @@ import java.util.concurrent.TimeUnit;
 public class ChannelCacheHelper {
 
     private static final Cache<String, Channel> channelCache = CacheBuilder.newBuilder()
-            .maximumSize(1000)
-            .expireAfterWrite(60, TimeUnit.MINUTES)
+            .maximumSize(8000)
+            .expireAfterWrite(1, TimeUnit.DAYS)
             .removalListener(new RemovalListener<String, Channel>() {
                 @Override
                 public void onRemoval(RemovalNotification<String, Channel> removalNotification) {
@@ -27,13 +28,26 @@ public class ChannelCacheHelper {
             .build();
 
 
-    public static void setCache(String callerUniqueID, Channel channel) {
-        channelCache.put(callerUniqueID, channel);
+    private static final Cache<String, List<ChannelStateMachine>> listCache = CacheBuilder.newBuilder()
+            .maximumSize(8000)
+            .expireAfterWrite(1, TimeUnit.DAYS)
+            .removalListener(new RemovalListener<String, List<ChannelStateMachine>>() {
+                @Override
+                public void onRemoval(RemovalNotification<String, List<ChannelStateMachine>> removalNotification) {
+                    // todo
+
+                }
+            })
+            .build();
+
+
+    public static void setCache(String coreUUID, Channel channel) {
+        channelCache.put(coreUUID, channel);
     }
 
-    public static Channel getCache(String callerUniqueID) {
+    public static Channel getCache(String coreUUID) {
         try {
-            return channelCache.get(callerUniqueID, new Callable<Channel>() {
+            return channelCache.get(coreUUID, new Callable<Channel>() {
                 @Override
                 public Channel call() throws Exception {
                     return null;
