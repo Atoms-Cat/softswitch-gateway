@@ -84,7 +84,7 @@ public class FsDialplanXmlCurlHandler implements XmlCurlHandler {
         List<Action> actionList = new ArrayList<>();
         // todo
         actionList.add(new Action("answer", null));
-        actionList.add(new Action("sleep", "1000"));
+        actionList.add(new Action("sleep", "60000"));
         return actionList;
     }
 

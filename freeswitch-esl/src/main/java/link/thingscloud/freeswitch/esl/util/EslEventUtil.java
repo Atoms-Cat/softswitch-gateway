@@ -29,6 +29,8 @@ public class EslEventUtil {
     public static final String CALLER_UNIQUE_ID = "Caller-Unique-ID";
     public static final String CALLER_NETWORK_ADDR = "Caller-Network-address";
 
+    public static final String CALL_CHANNEL_UUID= "Channel-Call-UUID";
+
     public static final String CALLER_CONTEXT = "Caller-Context";
     public static final String CALLER_DIALPLAN = "Caller-Dialplan";
     public static final String CALLER_DIRECTION = "Caller-Direction";
@@ -74,6 +76,10 @@ public class EslEventUtil {
 
     public static String getCallerUniqueId(EslEvent event) {
         return event.getEventHeaders().get(CALLER_UNIQUE_ID);
+    }
+
+    public static String getCallChannelUuid(EslEvent event) {
+        return event.getEventHeaders().get(CALL_CHANNEL_UUID);
     }
 
     public static String getEventName(EslEvent event) {

@@ -11,8 +11,10 @@ import link.thingscloud.freeswitch.esl.helper.EslHelper;
 import link.thingscloud.freeswitch.esl.spring.boot.starter.annotation.EslEventName;
 import link.thingscloud.freeswitch.esl.spring.boot.starter.handler.EslEventHandler;
 import link.thingscloud.freeswitch.esl.spring.boot.starter.propeties.OutboundClientProperties;
+import link.thingscloud.freeswitch.esl.transport.CommandResponse;
 import link.thingscloud.freeswitch.esl.transport.SendMsg;
 import link.thingscloud.freeswitch.esl.transport.event.EslEvent;
+import link.thingscloud.freeswitch.esl.transport.message.EslMessage;
 import link.thingscloud.freeswitch.esl.util.EslEventUtil;
 import link.thingscloud.spring.boot.common.aop.annotation.RedisLock;
 import lombok.extern.slf4j.Slf4j;
@@ -47,7 +49,7 @@ public class InboundChannelCreateSendSocketHandler implements EslEventHandler {
     public void handle(String address, EslEvent event, String coreUUID) {
         SendMsg sendMsg = new SendMsg(EslEventUtil.getCallerUniqueId(event));
 
-        log.info("Inbound CHANNEL_CREATE:[{}] [{}]  [{}]",  address, coreUUID, JSON.toJSONString(event));
+        log.info("Inbound CHANNEL_CREATE:[{}] [{}]  [{}]", address, coreUUID, JSON.toJSONString(event));
 
         try {
             // 判断 是否 是 inbound 处理
@@ -62,9 +64,33 @@ public class InboundChannelCreateSendSocketHandler implements EslEventHandler {
 
                 log.info("instance socket: ip [{}] port [{}], arg: [{}]", instance.getIp(), outboundClientProperties.getServer().getPort(), arg);
                 sendMsg.addExecuteAppArg(arg);
+                //inboundClient.sendMessage(address, sendMsg);
 
-                inboundClient.sendMessage(address, sendMsg);
+
+                String callerUUID = EslEventUtil.getCallChannelUuid(event);
+
+                EslMessage phoneHold = inboundClient.sendSyncApiCommand(address, "uuid_phone_event", callerUUID + " hold");
+                log.info("phoneHold: {}", JSON.toJSONString(phoneHold));
+
+                EslMessage eslMessageUUID = inboundClient.sendSyncApiCommand(address, "create_uuid","");
+                String calleeUUID =  eslMessageUUID.getBodyLines().get(0);
+                log.info("create_uuid:  {}", calleeUUID);
+
+                EslMessage originate =  inboundClient.sendSyncApiCommand(address, "originate", "{origination_uuid="+ calleeUUID +"}sofia/external/" + EslEventUtil.getSipToUri(event) + " &park");
+                log.info("originate: {}", JSON.toJSONString(originate));
+
+                EslMessage uuidBridge =  inboundClient.sendSyncApiCommand(address, "uuid_bridge", calleeUUID + " " + callerUUID);
+                log.info("uuidBridge: {}", JSON.toJSONString(uuidBridge));
+
+                EslMessage phoneTalk = inboundClient.sendSyncApiCommand(address, "uuid_phone_event", callerUUID + " talk");
+                log.info("phoneTalk: {}", JSON.toJSONString(phoneTalk));
+
+                // uuid_bridge
+
             }
+
+            EslMessage eslMessage = inboundClient.sendSyncApiCommand(address, "show", "channels as json");
+            log.info("show channels as json {}", JSON.toJSONString(eslMessage));
 
         } catch (NacosException e) {
             e.printStackTrace();
