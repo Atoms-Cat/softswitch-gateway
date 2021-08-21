@@ -64,28 +64,28 @@ public class InboundChannelCreateSendSocketHandler implements EslEventHandler {
 
                 log.info("instance socket: ip [{}] port [{}], arg: [{}]", instance.getIp(), outboundClientProperties.getServer().getPort(), arg);
                 sendMsg.addExecuteAppArg(arg);
-                //inboundClient.sendMessage(address, sendMsg);
+                inboundClient.sendMessage(address, sendMsg);
 
 
-                String callerUUID = EslEventUtil.getCallChannelUuid(event);
-
-                EslMessage phoneHold = inboundClient.sendSyncApiCommand(address, "uuid_phone_event", callerUUID + " hold");
-                log.info("phoneHold: {}", JSON.toJSONString(phoneHold));
-
-                EslMessage eslMessageUUID = inboundClient.sendSyncApiCommand(address, "create_uuid","");
-                String calleeUUID =  eslMessageUUID.getBodyLines().get(0);
-                log.info("create_uuid:  {}", calleeUUID);
-
-                EslMessage originate =  inboundClient.sendSyncApiCommand(address, "originate", "{origination_uuid="+ calleeUUID +"}sofia/external/" + EslEventUtil.getSipToUri(event) + " &park");
-                log.info("originate: {}", JSON.toJSONString(originate));
-
-                EslMessage uuidBridge =  inboundClient.sendSyncApiCommand(address, "uuid_bridge", calleeUUID + " " + callerUUID);
-                log.info("uuidBridge: {}", JSON.toJSONString(uuidBridge));
-
-                EslMessage phoneTalk = inboundClient.sendSyncApiCommand(address, "uuid_phone_event", callerUUID + " talk");
-                log.info("phoneTalk: {}", JSON.toJSONString(phoneTalk));
-
-                // uuid_bridge
+//                String callerUUID = EslEventUtil.getCallChannelUuid(event);
+//
+//                EslMessage phoneHold = inboundClient.sendSyncApiCommand(address, "uuid_phone_event", callerUUID + " hold");
+//                log.info("phoneHold: {}", JSON.toJSONString(phoneHold));
+//
+//                EslMessage eslMessageUUID = inboundClient.sendSyncApiCommand(address, "create_uuid","");
+//                String calleeUUID =  eslMessageUUID.getBodyLines().get(0);
+//                log.info("create_uuid:  {}", calleeUUID);
+//
+//                EslMessage originate =  inboundClient.sendSyncApiCommand(address, "originate", "{origination_uuid="+ calleeUUID +"}sofia/external/" + EslEventUtil.getSipToUri(event) + " &park");
+//                log.info("originate: {}", JSON.toJSONString(originate));
+//
+//                EslMessage uuidBridge =  inboundClient.sendSyncApiCommand(address, "uuid_bridge", calleeUUID + " " + callerUUID);
+//                log.info("uuidBridge: {}", JSON.toJSONString(uuidBridge));
+//
+//                EslMessage phoneTalk = inboundClient.sendSyncApiCommand(address, "uuid_phone_event", callerUUID + " talk");
+//                log.info("phoneTalk: {}", JSON.toJSONString(phoneTalk));
+//
+//                // uuid_bridge
 
             }
 
