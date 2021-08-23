@@ -650,7 +650,7 @@ route[rtpengine_answer] {
 
 ```
 INSERT INTO "dispatcher" ("id", "setid", "destination", "socket", "state", "weight", "priority", "attrs", "description") VALUES (1, 1, 'sip:192.168.10.114:5060', '', 0, '50', 0, 'fs1', 'inbound Gateway1');
-INSERT INTO "dispatcher" ("id", "setid", "destination", "socket", "state", "weight", "priority", "attrs", "description") VALUES (2, 1, 'sip:192.168.10.112:5060', NULL, 0, '50', 0, 'fs2', 'inbound Gateway2');
+INSERT INTO "dispatcher" ("id", "setid", "destination", "socket", "state", "weight", "priority", "attrs", "description") VALUES (2, 1, 'sip:192.168.10.112:5060', '', 0, '50', 0, 'fs2', 'inbound Gateway2');
 ```
 
 #### load_balancer table

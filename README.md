@@ -18,6 +18,8 @@
 ### 1.[deployment plan](doc)
 
 * [opensips-fs-rtpengine](doc/DeploymentPlan4.md)
+* [opensips-register-fs](doc/DeploymentPlan3.md)
+
 
 ### 2.[freeswitch-esl、freeswitch-cdr](https://github.com/zhouhailin)
 
