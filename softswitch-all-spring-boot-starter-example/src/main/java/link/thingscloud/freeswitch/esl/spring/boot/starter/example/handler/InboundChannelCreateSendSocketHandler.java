@@ -64,7 +64,7 @@ public class InboundChannelCreateSendSocketHandler implements EslEventHandler {
 
                 log.info("instance socket: ip [{}] port [{}], arg: [{}]", instance.getIp(), outboundClientProperties.getServer().getPort(), arg);
                 sendMsg.addExecuteAppArg(arg);
-                inboundClient.sendMessage(address, sendMsg);
+                //inboundClient.sendMessage(address, sendMsg);
 
 
 //                String callerUUID = EslEventUtil.getCallChannelUuid(event);

@@ -24,7 +24,6 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.util.concurrent.DefaultThreadFactory;
-import link.thingscloud.freeswitch.esl.helper.ChannelCacheHelper;
 import link.thingscloud.freeswitch.esl.helper.EslHelper;
 import link.thingscloud.freeswitch.esl.outbound.listener.ChannelEventListener;
 import link.thingscloud.freeswitch.esl.transport.SendMsg;
@@ -32,12 +31,10 @@ import link.thingscloud.freeswitch.esl.transport.event.EslEvent;
 import link.thingscloud.freeswitch.esl.transport.event.EslEventHeaderNames;
 import link.thingscloud.freeswitch.esl.transport.message.EslHeaders;
 import link.thingscloud.freeswitch.esl.transport.message.EslMessage;
-import link.thingscloud.freeswitch.esl.util.EslEventUtil;
 import link.thingscloud.freeswitch.esl.util.RemotingUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
-import java.util.Queue;
 import java.util.concurrent.*;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -105,8 +102,6 @@ public class OutboundChannelHandler extends SimpleChannelInboundHandler<EslMessa
                     //这里改为线程池执行
                     onConnectExecutor.execute(() -> {
                         EslEvent eslEvent = new EslEvent(response, true);
-                        String coreUUID = EslEventUtil.getCoreUuid(eslEvent);
-                        ChannelCacheHelper.setCache(coreUUID, ctx.channel());
                         listener.onConnect(
                                 new Context(ctx.channel(), OutboundChannelHandler.this, 120),
                                 eslEvent
@@ -236,7 +231,6 @@ public class OutboundChannelHandler extends SimpleChannelInboundHandler<EslMessa
 
 
     /**
-     *
      * @param channel
      * @param sendMsgList
      */
@@ -260,6 +254,7 @@ public class OutboundChannelHandler extends SimpleChannelInboundHandler<EslMessa
 
     /**
      * 异步
+     *
      * @param channel
      * @param commandLines
      */
@@ -280,7 +275,6 @@ public class OutboundChannelHandler extends SimpleChannelInboundHandler<EslMessa
     }
 
     /**
-     *
      * @param channel
      * @param command
      * @return
@@ -376,6 +370,7 @@ public class OutboundChannelHandler extends SimpleChannelInboundHandler<EslMessa
                     }
                 }, backgroundJobExecutor);
     }
+
     /**
      * <p>close.</p>
      *
@@ -384,7 +379,6 @@ public class OutboundChannelHandler extends SimpleChannelInboundHandler<EslMessa
     public ChannelFuture close() {
         return channel.close();
     }
-
 
 
 }

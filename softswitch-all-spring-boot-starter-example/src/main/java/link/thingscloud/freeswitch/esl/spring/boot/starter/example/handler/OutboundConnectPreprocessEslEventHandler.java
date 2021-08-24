@@ -82,6 +82,7 @@ public class OutboundConnectPreprocessEslEventHandler implements OutBoundEventHa
 
         // 关闭通道 todo 工作流
         context.closeChannel();
+
   //      CommandResponse commandResponse = context.sendMessage(bridgeMsg);
   //      log.info("response : {}", commandResponse);
 

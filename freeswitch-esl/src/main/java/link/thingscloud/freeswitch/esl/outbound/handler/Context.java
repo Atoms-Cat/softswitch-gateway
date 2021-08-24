@@ -68,7 +68,7 @@ public class Context implements IModEslApi {
             return getUninterruptibly(handler.sendApiSingleLineCommand(channel, command.toLowerCase().trim()), timeout, TimeUnit.SECONDS);
 
         } catch (Throwable t) {
-            throw propagate(t);
+            throw new RuntimeException(t);
         }
     }
 
@@ -98,7 +98,7 @@ public class Context implements IModEslApi {
             return getUninterruptibly(handler.sendApiSingleLineCommand(channel, sb.toString()), timeout, TimeUnit.SECONDS);
 
         } catch (Throwable t) {
-            throw propagate(t);
+            throw new RuntimeException(t);
         }
     }
 
@@ -161,7 +161,7 @@ public class Context implements IModEslApi {
             return new CommandResponse(sb.toString(), response);
 
         } catch (Throwable t) {
-            throw propagate(t);
+            throw new RuntimeException(t);
         }
 
     }
@@ -178,7 +178,7 @@ public class Context implements IModEslApi {
             final EslMessage response = getUninterruptibly(handler.sendApiSingleLineCommand(channel, "noevents"), timeout, TimeUnit.SECONDS);
             return new CommandResponse("noevents", response);
         } catch (Throwable t) {
-            throw propagate(t);
+            throw new RuntimeException(t);
         }
     }
 
@@ -218,7 +218,7 @@ public class Context implements IModEslApi {
             return new CommandResponse(sb.toString(), response);
 
         } catch (Throwable t) {
-            throw propagate(t);
+            throw new RuntimeException(t);
         }
     }
 
@@ -246,7 +246,7 @@ public class Context implements IModEslApi {
             return new CommandResponse(sb.toString(), response);
 
         } catch (Throwable t) {
-            throw propagate(t);
+            throw new RuntimeException(t);
         }
     }
 
@@ -264,7 +264,7 @@ public class Context implements IModEslApi {
             final EslMessage response = getUninterruptibly(handler.sendApiMultiLineCommand(channel, sendMsg.getMsgLines()), timeout, TimeUnit.SECONDS);
             return new CommandResponse(sendMsg.toString(), response);
         } catch (Throwable t) {
-            throw propagate(t);
+            throw new RuntimeException(t);
         }
 
     }
@@ -276,7 +276,7 @@ public class Context implements IModEslApi {
             final EslMessage response = getUnchecked(handler.sendApiMultiLineCommand(channel, sendMsg.getMsgLines()));
             return new CommandResponse(sendMsg.toString(), response);
         } catch (Throwable t) {
-            throw propagate(t);
+            throw new RuntimeException(t);
         }
     }
 
@@ -295,7 +295,7 @@ public class Context implements IModEslApi {
             final EslMessage response = getUnchecked(handler.sendApiSingleLineCommand(channel, sb.toString()));
             return new CommandResponse(sb.toString(), response);
         } catch (Throwable t) {
-            throw propagate(t);
+            throw new RuntimeException(t);
         }
     }
 
@@ -315,7 +315,7 @@ public class Context implements IModEslApi {
             final EslMessage response = getUninterruptibly(handler.sendApiSingleLineCommand(channel, sb.toString()), timeout, TimeUnit.SECONDS);
             return new CommandResponse(sb.toString(), response);
         } catch (Throwable t) {
-            throw propagate(t);
+            throw new RuntimeException(t);
         }
 
     }
@@ -332,7 +332,7 @@ public class Context implements IModEslApi {
             final EslMessage response = getUninterruptibly(handler.sendApiSingleLineCommand(channel, "nolog"), timeout, TimeUnit.SECONDS);
             return new CommandResponse("nolog", response);
         } catch (Throwable t) {
-            throw propagate(t);
+            throw new RuntimeException(t);
         }
     }
 
@@ -342,7 +342,7 @@ public class Context implements IModEslApi {
                 channel.close();
             }
         } catch (Throwable t) {
-            throw propagate(t);
+            throw new RuntimeException(t);
         }
     }
 }

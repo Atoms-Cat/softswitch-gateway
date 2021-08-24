@@ -42,9 +42,5 @@ public class ChannelStateMachine implements Serializable {
      */
     private String coreUUID;
 
-    /**
-     * 事件集合
-     */
-    private EslEvent eslEvent;
 
 }
