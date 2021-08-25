@@ -27,6 +27,10 @@
     参考 https://github.com/zhouhailin/freeswitch-cdr-all
     参考 https://github.com/zhouhailin/spring-boot-common
 
+### 3.HA Topology Diagram
+![](doc/img/opensips-fs-app.png)
+
+
 ## 志同道合(微信) - 请备注来源
 
 ![微信](doc/img/wechat.jpg)
