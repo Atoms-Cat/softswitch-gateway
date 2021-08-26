@@ -5,6 +5,11 @@ package link.thingscloud.freeswitch.xml.constant;
  */
 public class SectionNames {
 
+    /**
+     * configuration:
+     * - ivr.conf
+     * -
+     */
     public static final String CONFIGURATION = "CONFIGURATION";
 
     public static final String DIALPLAN = "DIALPLAN";
