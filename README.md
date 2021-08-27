@@ -31,9 +31,9 @@
 ![](doc/img/opensips-fs-app.png)
 
 
-## 志同道合(微信) - 请备注来源
+## 志同道合(钉钉) - 请备注来源
 
-![微信](doc/img/wechat.jpg)
+![微信](doc/img/dingding.JPG)
 
 ## License
 
