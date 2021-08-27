@@ -1,5 +1,8 @@
 # Opensips And FreeSWITCH For In One
 
+Based on netty 4 docking Opensips Exported Event, Exported MI and Freeswitch Event Socket Library, cdr, xml_curl and other interface implementation solutions
+
+
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/3a4aef1c199844c69f273ddd7f0bff16)](https://www.codacy.com/gh/HowellYan/softswitch-gateway/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=HowellYan/softswitch-gateway&amp;utm_campaign=Badge_Grade)
 [![Jdk Version](https://img.shields.io/badge/JDK-1.8-green.svg)](https://img.shields.io/badge/JDK-1.8-green.svg)
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
