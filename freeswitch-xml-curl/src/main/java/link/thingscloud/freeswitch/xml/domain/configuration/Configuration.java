@@ -24,7 +24,7 @@ public class Configuration<T> implements Serializable {
     @JacksonXmlProperty(localName = "description", isAttribute = true)
     private String description;
 
-    @JacksonXmlElementWrapper(useWrapping = true)
+    @JacksonXmlElementWrapper(localName = "list", useWrapping = false)
     private List<T> list;
 
 

@@ -2,6 +2,7 @@ package link.thingscloud.freeswitch.xml.domain.configuration.ivr;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -11,6 +12,7 @@ import java.util.List;
  * @author th158
  */
 @Data
+@JacksonXmlRootElement(localName = "menu", namespace = "menu")
 public class Menu implements Serializable {
 
     /**
@@ -112,5 +114,5 @@ public class Menu implements Serializable {
 
 
     @JacksonXmlElementWrapper(localName = "entry", useWrapping = false)
-    private List<Entry> entryList;
+    private List<Entry> entry;
 }

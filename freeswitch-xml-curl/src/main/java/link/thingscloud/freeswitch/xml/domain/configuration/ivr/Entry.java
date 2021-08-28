@@ -1,7 +1,9 @@
 package link.thingscloud.freeswitch.xml.domain.configuration.ivr;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -9,6 +11,8 @@ import java.io.Serializable;
  * @author th158
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Entry implements Serializable {
 
     /**

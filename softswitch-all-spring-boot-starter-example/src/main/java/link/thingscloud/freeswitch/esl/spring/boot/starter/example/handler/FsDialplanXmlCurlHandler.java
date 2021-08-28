@@ -96,7 +96,7 @@ public class FsDialplanXmlCurlHandler implements XmlCurlHandler {
         actionList.add(new Action(AppEnum.answer, null));
         actionList.add(new Action(AppEnum.sleep, "1000"));
         // <action application="ivr" data="demo_ivr"/>
-        actionList.add(new Action(AppEnum.ivr, "demo_ivr"));
+        actionList.add(new Action(AppEnum.ivr, "test_ivr"));
         // 根据服务名从注册中心获取一个健康的服务实例
         try {
             Instance instance = namingService.selectOneHealthyInstance("softswitch-gateway");
