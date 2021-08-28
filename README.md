@@ -16,6 +16,8 @@ Based on netty 4 docking Opensips Exported Event, Exported MI and Freeswitch Eve
     4. Integrate with spring boot 2.3.x, nacos configuration center, service discovery
     5. Can be dynamically configured
 
+---
+
 ## Illustrate
 
 ### 1.[deployment plan](doc) 
@@ -23,9 +25,6 @@ Based on netty 4 docking Opensips Exported Event, Exported MI and Freeswitch Eve
 * [opensips-fs-tandem](doc/DeploymentPlan1.md)
 * [opensips-register-fs](doc/DeploymentPlan3.md)
 * [opensips-fs-rtpengine](doc/DeploymentPlan4.md) (recommend)
-
-
-
 
 ### 2.[freeswitch-esl、freeswitch-cdr](https://github.com/zhouhailin)
 
@@ -36,6 +35,7 @@ Based on netty 4 docking Opensips Exported Event, Exported MI and Freeswitch Eve
 ### 3.HA Topology Diagram
 ![](doc/img/opensips-fs-app.png)
 
+---
 
 ## 志同道合(钉钉) - 请备注来源
 
