@@ -12,10 +12,7 @@ import link.thingscloud.freeswitch.esl.spring.boot.starter.propeties.OutboundCli
 import link.thingscloud.freeswitch.xml.annotation.XmlCurlSectionName;
 import link.thingscloud.freeswitch.xml.constant.SectionNames;
 import link.thingscloud.freeswitch.xml.domain.XmlCurl;
-import link.thingscloud.freeswitch.xml.domain.dialplan.Action;
-import link.thingscloud.freeswitch.xml.domain.dialplan.Condition;
-import link.thingscloud.freeswitch.xml.domain.dialplan.Context;
-import link.thingscloud.freeswitch.xml.domain.dialplan.Extension;
+import link.thingscloud.freeswitch.xml.domain.dialplan.*;
 import link.thingscloud.freeswitch.xml.handler.XmlCurlHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,15 +93,16 @@ public class FsDialplanXmlCurlHandler implements XmlCurlHandler {
     private List<Action> getAction() {
         List<Action> actionList = new ArrayList<>();
         // todo
-        actionList.add(new Action("answer", null));
-        actionList.add(new Action("sleep", "1000"));
-
+        actionList.add(new Action(AppEnum.answer, null));
+        actionList.add(new Action(AppEnum.sleep, "1000"));
+        // <action application="ivr" data="demo_ivr"/>
+        actionList.add(new Action(AppEnum.ivr, "demo_ivr"));
         // 根据服务名从注册中心获取一个健康的服务实例
         try {
             Instance instance = namingService.selectOneHealthyInstance("softswitch-gateway");
             // 组装  <action application="socket" data=" IP : yaml配置的端口 async full" />
             String arg = instance.getIp() + ":" + outboundClientProperties.getServer().getPort() + " async full";
-            actionList.add(new Action("socket", arg));
+            actionList.add(new Action(AppEnum.socket, arg));
         } catch (NacosException e) {
             e.printStackTrace();
         }

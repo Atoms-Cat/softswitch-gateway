@@ -7,14 +7,33 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
+/**
+ * @author th158
+ *
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Action implements Serializable {
 
+    /**
+     * application:
+     *  set
+     *  answer
+     *  sleep
+     *  ivr
+     *  socket
+     *
+     */
     @JacksonXmlProperty(localName = "application", isAttribute = true)
-    private String application;
+    private AppEnum application;
 
     @JacksonXmlProperty(localName = "data", isAttribute = true)
     private String data;
+
+    public Action(String application, String data) {
+        this.application = AppEnum.instance(application);
+        this.data = data;
+    }
+
 }
