@@ -564,7 +564,7 @@ local_route {
 }
 ```
 
-### fs 拨号计划
+### 2.fs 拨号计划
 ```
 <extension name="Local_Extension">
       <condition field="destination_number" expression="^(10[01][0-9])$">
@@ -600,15 +600,15 @@ local_route {
     </extension>
 ```
 
-### opensips数据库
-#### dispatcher table
+### 3.opensips数据库
+#### dispatcher table # CUSTOMIZE ME
 
 ```
 INSERT INTO "dispatcher" ("id", "setid", "destination", "socket", "state", "weight", "priority", "attrs", "description") VALUES (1, 1, 'sip:192.168.10.114:5060', '', 0, '50', 0, 'fs1', 'inbound Gateway1');
 INSERT INTO "dispatcher" ("id", "setid", "destination", "socket", "state", "weight", "priority", "attrs", "description") VALUES (2, 1, 'sip:192.168.10.112:5060', '', 0, '50', 0, 'fs2', 'inbound Gateway2');
 ```
 
-#### load_balancer table
+#### load_balancer table # CUSTOMIZE ME
 
 ```
 INSERT INTO "load_balancer" ("id", "group_id", "dst_uri", "resources", "probe_mode", "description") VALUES (1, 1, 'sip:192.168.10.112:5060', 'vm=100;conf=100;transc=100;pstn=500', 1, 'internal FS1');

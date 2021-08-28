@@ -646,14 +646,14 @@ route[rtpengine_answer] {
 
 ### 2. opensips database, customize ip
 
-#### dispatcher table
+#### dispatcher table # CUSTOMIZE ME
 
 ```
 INSERT INTO "dispatcher" ("id", "setid", "destination", "socket", "state", "weight", "priority", "attrs", "description") VALUES (1, 1, 'sip:192.168.10.114:5060', '', 0, '50', 0, 'fs1', 'inbound Gateway1');
 INSERT INTO "dispatcher" ("id", "setid", "destination", "socket", "state", "weight", "priority", "attrs", "description") VALUES (2, 1, 'sip:192.168.10.112:5060', '', 0, '50', 0, 'fs2', 'inbound Gateway2');
 ```
 
-#### load_balancer table
+#### load_balancer table # CUSTOMIZE ME
 
 ```
 INSERT INTO "load_balancer" ("id", "group_id", "dst_uri", "resources", "probe_mode", "description") VALUES (1, 1, 'sip:192.168.10.112:5060', 'vm=100;conf=100;transc=100;pstn=500', 1, 'internal FS1');
@@ -662,13 +662,13 @@ INSERT INTO "load_balancer" ("id", "group_id", "dst_uri", "resources", "probe_mo
 INSERT INTO "load_balancer" ("id", "group_id", "dst_uri", "resources", "probe_mode", "description") VALUES (5, 3, 'sip:192.168.10.112:5080', 'vm=100;conf=100;transc=100;pstn=500', 1, 'external FS2');
 ```
 
-#### rtpengine table
+#### rtpengine table # CUSTOMIZE ME
 
 ```
 INSERT INTO "rtpengine" ("id", "socket_uri", "set_id") VALUES (1, 'udp:192.168.10.113:7722', 1);
 ```
 
-### 3. configuration ${freeswitch_home}/conf/dialplan/default.xml
+### 3. configuration ${freeswitch_home}/conf/dialplan/default.xml # CUSTOMIZE ME
 
 ```
 <extension name="Local_Extension">

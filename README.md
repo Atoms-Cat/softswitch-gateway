@@ -8,20 +8,23 @@ Based on netty 4 docking Opensips Exported Event, Exported MI and Freeswitch Eve
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 [![codecov](https://codecov.io/gh/HowellYan/softswitch-gateway/branch/main/graph/badge.svg?token=DH9SNP7V5F)](https://codecov.io/gh/HowellYan/softswitch-gateway)
 
-## 目标
+## Target
 
-    1、支持连接Opensips MI、 Event
-    2、支持连接FreeSWITCH ESL(inbound、outbound)、cdr、xml_curl(configuration | directory | dialplan | phrases)
-    3、更易于分布式集成方案使用
-    4、与spring boot 2.3.x 整合，nacos 配置中心、服务发现
-    5、可动态配置
+    1. Support to connect to Opensips MI and events
+    2. Support connection to FreeSWITCH ESL (inbound, outbound), cdr, xml_curl (configuration|directory|dial plan|phrase)
+    3. Easier to use integrated solutions
+    4. Integrate with spring boot 2.3.x, nacos configuration center, service discovery
+    5. Can be dynamically configured
 
-## 模块说明
+## Illustrate
 
-### 1.[deployment plan](doc)
+### 1.[deployment plan](doc) 
 
-* [opensips-fs-rtpengine](doc/DeploymentPlan4.md)
+* [opensips-fs-tandem](doc/DeploymentPlan1.md)
 * [opensips-register-fs](doc/DeploymentPlan3.md)
+* [opensips-fs-rtpengine](doc/DeploymentPlan4.md) (recommend)
+
+
 
 
 ### 2.[freeswitch-esl、freeswitch-cdr](https://github.com/zhouhailin)
