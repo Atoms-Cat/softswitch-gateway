@@ -70,7 +70,10 @@ public class XmlCurlServiceImpl implements XmlCurlService, InitializingBean {
             stringBuilder.append("<section name=\"" + section + "\">");
             handlers.forEach(xmlCurlHandler -> {
                 try {
-                    stringBuilder.append(xmlCurlHandler.handleXmlCurl(xmlCurl));
+                    // section 为 configuration时， 判断 key_value 类型执行对应的Handler
+                    if (hasKey(xmlCurlHandler, xmlCurl.getKeyValue())) {
+                        stringBuilder.append(xmlCurlHandler.handleXmlCurl(xmlCurl));
+                    }
                 } catch (Throwable e) {
                     log.error("freeswitch xml curl handler[{}] handle exception : ", xmlCurlHandler.getClass(), e);
                 }
@@ -107,6 +110,24 @@ public class XmlCurlServiceImpl implements XmlCurlService, InitializingBean {
 
         if (CollectionUtils.isEmpty(xmlCurlHandlers)) {
             log.warn("freeswitch xml curl Handlers is empty, you can implements Handler to handle xml curl.");
+        }
+    }
+
+    protected boolean hasKey(XmlCurlHandler eventHandler, String keyValue) {
+        XmlCurlSectionName eventName = eventHandler.getClass().getAnnotation(XmlCurlSectionName.class);
+        if (eventName == null) {
+            // FIXED : AOP
+            eventName = eventHandler.getClass().getSuperclass().getAnnotation(XmlCurlSectionName.class);
+        }
+        if (eventName == null || ArrayUtils.isEmpty(eventName.value())) {
+            return false;
+        }
+        if (StringUtils.isBlank(eventName.key())) {
+            return true;
+        } else if (StringUtils.isNotBlank(keyValue) && keyValue.equals(eventName.key())) {
+            return true;
+        } else {
+            return false;
         }
     }
 

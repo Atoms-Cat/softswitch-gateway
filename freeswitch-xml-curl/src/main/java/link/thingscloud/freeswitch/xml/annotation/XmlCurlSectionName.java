@@ -30,5 +30,17 @@ import java.lang.annotation.*;
 @Documented
 public @interface XmlCurlSectionName {
 
+    /**
+     * section
+     * @return
+     */
     String[] value();
+
+    /**
+     * configuration :
+     *  ivr.conf
+     * key_value
+     * @return
+     */
+    String key() default "";
 }

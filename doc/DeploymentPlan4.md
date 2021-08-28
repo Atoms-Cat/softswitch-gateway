@@ -440,7 +440,7 @@ route{
                         exit;
                     }
                 } else {
-                    xlog(“终端 TO OPENSIPS，再到 FS”);
+                    xlog("终端 TO OPENSIPS，再到 FS");
                     # 选举 fs, todo  
                     if (!lb_start_or_next("1","pstn","ns")) {
                         send_reply("500","Internal Server Error");

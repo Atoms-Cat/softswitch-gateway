@@ -1,4 +1,4 @@
-# Opensips And FreeSWITCH For In One
+# SoftSwitch-Gateway : Opensips And FreeSWITCH For In One
 
 Based on netty 4 docking Opensips Exported Event, Exported MI and Freeswitch Event Socket Library, cdr, xml_curl and other interface implementation solutions
 
@@ -11,7 +11,7 @@ Based on netty 4 docking Opensips Exported Event, Exported MI and Freeswitch Eve
 ## Target
 
     1. Support to connect to Opensips MI and events
-    2. Support connection to FreeSWITCH ESL (inbound, outbound), cdr, xml_curl (configuration|directory|dial plan|phrase)
+    2. Support connection to FreeSWITCH ESL (inbound, outbound), cdr, xml_curl (configuration(ivr)|directory|dial plan|phrase)
     3. Easier to use integrated solutions
     4. Integrate with spring boot 2.3.x, nacos configuration center, service discovery
     5. Can be dynamically configured
