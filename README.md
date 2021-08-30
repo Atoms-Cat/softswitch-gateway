@@ -31,7 +31,19 @@ Based on netty 4 docking Opensips Exported Event, Exported MI and Freeswitch Eve
     参考 https://github.com/zhouhailin/freeswitch-cdr-all
     参考 https://github.com/zhouhailin/spring-boot-common
 
-### 3.HA Topology Diagram
+### 3.[freeswitch-xml-curl](freeswitch-xml-curl/README.md)
+http url path:
+    
+    /freeswitch/xml/curl
+
+example: ${freeswitch_home}/conf/autoload_configs/xml_curl.conf.xml
+
+    <binding name="all configs">
+        <param name="gateway-url" value="http://127.0.0.1:8080/freeswitch/xml/curl" bindings="dialplan|configuration|directory|phrases"/>
+        <param name="method" value="GET"/>
+    </binding>
+
+### 4.HA Topology Diagram
 ![](doc/img/opensips-fs-app.png)
 
 ---
