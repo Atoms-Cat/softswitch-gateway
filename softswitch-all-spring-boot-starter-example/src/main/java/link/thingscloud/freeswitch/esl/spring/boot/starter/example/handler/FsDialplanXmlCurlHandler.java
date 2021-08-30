@@ -6,8 +6,6 @@ import com.alibaba.nacos.api.exception.NacosException;
 import com.alibaba.nacos.api.naming.NamingService;
 import com.alibaba.nacos.api.naming.pojo.Instance;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import link.thingscloud.freeswitch.esl.spring.boot.starter.propeties.OutboundClientProperties;
 import link.thingscloud.freeswitch.xml.annotation.XmlCurlSectionName;
 import link.thingscloud.freeswitch.xml.constant.SectionNames;
@@ -56,12 +54,11 @@ public class FsDialplanXmlCurlHandler implements XmlCurlHandler {
     }
 
     private String getContext(String name) throws JsonProcessingException {
-        ObjectMapper xmlMapper = new XmlMapper();
         Context context = new Context();
         context.setName(name);
         // todo
         context.setExtension(getExtension());
-        return xmlMapper.writeValueAsString(context);
+        return context.toXmlString();
     }
 
 

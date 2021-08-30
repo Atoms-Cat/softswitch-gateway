@@ -13,6 +13,9 @@ public class Condition implements Serializable {
     @JacksonXmlProperty(localName = "field", isAttribute = true)
     private String field;
 
+    /**
+     * 匹配被叫分机号正则表达式
+     */
     @JacksonXmlProperty(localName = "expression", isAttribute = true)
     private String expression;
 

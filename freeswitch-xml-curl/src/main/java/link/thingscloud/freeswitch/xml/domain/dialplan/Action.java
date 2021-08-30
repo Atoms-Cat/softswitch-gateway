@@ -16,15 +16,6 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class Action implements Serializable {
 
-    /**
-     * application:
-     *  set
-     *  answer
-     *  sleep
-     *  ivr
-     *  socket
-     *
-     */
     @JacksonXmlProperty(localName = "application", isAttribute = true)
     private AppEnum application;
 

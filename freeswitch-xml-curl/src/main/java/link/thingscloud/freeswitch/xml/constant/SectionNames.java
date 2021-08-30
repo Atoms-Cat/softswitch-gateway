@@ -17,4 +17,10 @@ public class SectionNames {
     public static final String DIRECTORY = "DIRECTORY";
 
     public static final String PHRASES = "PHRASES";
+
+    public static class Configuration {
+        public static final String IVR = "ivr.conf";
+
+    }
+
 }
