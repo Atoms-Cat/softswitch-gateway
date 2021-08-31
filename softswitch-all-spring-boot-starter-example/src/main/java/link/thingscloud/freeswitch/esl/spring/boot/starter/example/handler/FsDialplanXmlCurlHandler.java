@@ -48,8 +48,7 @@ public class FsDialplanXmlCurlHandler implements XmlCurlHandler {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        log.info(xml);
-        log.debug("exampel handle xml curl : [{}]", JSON.toJSONString(cdr, true));
+        log.debug("exampel handle xml curl : [{}] [{}]", JSON.toJSONString(cdr, true), xml);
         return xml;
     }
 
@@ -65,11 +64,18 @@ public class FsDialplanXmlCurlHandler implements XmlCurlHandler {
     private List<Extension> getExtension() {
         List<Extension> extensionlist = new ArrayList<>();
 
+        // 默认拨号计划
         Extension extension = new Extension();
         extension.setName("call");
         // todo
         extension.setCondition(getCondition());
+        extensionlist.add(extension);
 
+        // 语音网关 拨号计划 voice gateway
+        extension = new Extension();
+        extension.setName("voice_gateway");
+        // todo
+        extension.setCondition(getVoiceCondition());
         extensionlist.add(extension);
         return extensionlist;
     }
@@ -79,7 +85,7 @@ public class FsDialplanXmlCurlHandler implements XmlCurlHandler {
 
         Condition condition = new Condition();
         condition.setField("destination_number");
-        condition.setExpression("^([0-9]\\d+)$");
+        condition.setExpression("^[1-9]([0-9]\\d+)$");
         // todo
         condition.setAction(getAction());
 
@@ -106,5 +112,40 @@ public class FsDialplanXmlCurlHandler implements XmlCurlHandler {
         return actionList;
     }
 
+    /**
+     * 走语音网关 拨号计划
+     * @return
+     */
+    private List<Condition> getVoiceCondition() {
+        List<Condition> conditionList = new ArrayList<>();
 
+        Condition condition = new Condition();
+        condition.setField("destination_number");
+        condition.setExpression("^0(.*)$");
+        // todo
+        condition.setAction(getVoiceAction());
+
+        conditionList.add(condition);
+        return conditionList;
+    }
+
+    private List<Action> getVoiceAction() {
+        List<Action> actionList = new ArrayList<>();
+        // 注意：X-Voice-Gateway 为自定义 fs-opensips 统一标识 外呼 走 语音网关
+        actionList.add(new Action(AppEnum.export, "sip_h_X-Voice-Gateway=true"));
+        // 自定义获取真实用户号码
+        actionList.add(new Action(AppEnum.export, "sip_h_X-To-Real-User=$1"));
+        actionList.add(new Action(AppEnum.answer, null));
+        actionList.add(new Action(AppEnum.sleep, "1000"));
+        // 根据服务名从注册中心获取一个健康的服务实例
+        try {
+            Instance instance = namingService.selectOneHealthyInstance("softswitch-gateway");
+            // 组装  <action application="socket" data=" IP : yaml配置的端口 async full" />
+            String arg = instance.getIp() + ":" + outboundClientProperties.getServer().getPort() + " async full";
+            actionList.add(new Action(AppEnum.socket, arg));
+        } catch (NacosException e) {
+            e.printStackTrace();
+        }
+        return actionList;
+    }
 }

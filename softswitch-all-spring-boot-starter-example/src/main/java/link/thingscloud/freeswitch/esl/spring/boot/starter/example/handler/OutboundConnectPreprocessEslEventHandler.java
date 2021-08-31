@@ -41,13 +41,25 @@ public class OutboundConnectPreprocessEslEventHandler implements OutBoundEventHa
         //context.sendMessage(bridgeMsg);
         bridgeMsgList.add(bridgeMsg);
 
-        bridgeMsg = new SendMsg();
-        bridgeMsg.addCallCommand("execute");
-        bridgeMsg.addExecuteAppName("bridge");
-        bridgeMsg.addExecuteAppArg(sofia + EslEventUtil.getSipToUri(eslEvent));
-        bridgeMsg.addEventLock();
-        bridgeMsgList.add(bridgeMsg);
-        log.info("bridge to {}", EslEventUtil.getSipToUri(eslEvent));
+        String voiceGateway = EslEventUtil.getVoiceGateway(eslEvent);
+        if (voiceGateway != null && "true".equals(voiceGateway)) {
+            // sip bridge to voice gateway
+            bridgeMsg = new SendMsg();
+            bridgeMsg.addCallCommand("execute");
+            bridgeMsg.addExecuteAppName("bridge");
+            bridgeMsg.addExecuteAppArg(sofia + EslEventUtil.getToRealUser(eslEvent) + "@" + EslEventUtil.getToHost(eslEvent) );
+            bridgeMsg.addEventLock();
+            bridgeMsgList.add(bridgeMsg);
+        } else {
+            // sip bridge to sip
+            bridgeMsg = new SendMsg();
+            bridgeMsg.addCallCommand("execute");
+            bridgeMsg.addExecuteAppName("bridge");
+            bridgeMsg.addExecuteAppArg(sofia + EslEventUtil.getSipToUri(eslEvent));
+            bridgeMsg.addEventLock();
+            bridgeMsgList.add(bridgeMsg);
+            log.info("bridge to {}", EslEventUtil.getSipToUri(eslEvent));
+        }
 
         CommandResponse commandResponse = context.sendMessage(bridgeMsgList);
         log.info("response : {}", JSON.toJSONString(commandResponse));

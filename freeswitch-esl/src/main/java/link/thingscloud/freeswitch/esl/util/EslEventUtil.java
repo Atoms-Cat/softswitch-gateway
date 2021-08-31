@@ -63,6 +63,14 @@ public class EslEventUtil {
 
     public static final String VARIABLE_SIP_TO_URI = "variable_sip_to_uri";
 
+    public static final String VARIABLE_SIP_TO_HOST = "variable_sip_to_host";
+
+    public static final String VARIABLE_SIP_TO_REAL_USER = "variable_sip_h_X-To-Real-User";
+
+    public static final String VARIABLE_SIP_VOICE_GATEWAY = "variable_sip_h_X-Voice-Gateway";
+
+
+
     private EslEventUtil() {
     }
 
@@ -233,4 +241,17 @@ public class EslEventUtil {
     public static String getSipToUri(EslEvent event) {
         return event.getEventHeaders().get(VARIABLE_SIP_TO_URI);
     }
+
+    public static String getVoiceGateway(EslEvent event) {
+        return event.getEventHeaders().get(VARIABLE_SIP_VOICE_GATEWAY);
+    }
+
+    public static String getToHost(EslEvent event) {
+        return event.getEventHeaders().get(VARIABLE_SIP_TO_HOST);
+    }
+
+    public static String getToRealUser(EslEvent event) {
+        return event.getEventHeaders().get(VARIABLE_SIP_TO_REAL_USER);
+    }
+
 }

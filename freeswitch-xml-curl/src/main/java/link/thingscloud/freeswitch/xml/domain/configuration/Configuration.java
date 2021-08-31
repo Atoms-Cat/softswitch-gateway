@@ -19,7 +19,8 @@ import java.util.List;
 public class Configuration<T> implements Serializable {
 
     /**
-     * ivr.conf
+     * SectionNames.Configuration
+     *   - ivr.conf
      */
     @JacksonXmlProperty(localName = "name", isAttribute = true)
     private String name;

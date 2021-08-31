@@ -40,10 +40,9 @@ public class FsConfigurationIvrXmlCurlHandler implements XmlCurlHandler {
 
     @Override
     public String handleXmlCurl(XmlCurl xmlCurl) {
-        log.info("IVR exampel handle xml curl : [{}]", JSON.toJSONString(xmlCurl, true));
         try {
             String xml = getConfiguration();
-            log.info(xml);
+            log.info("IVR exampel handle xml curl : [{}] [{}]", JSON.toJSONString(xmlCurl, true), xml);
             return xml;
         } catch (JsonProcessingException e) {
             e.printStackTrace();
@@ -81,10 +80,13 @@ public class FsConfigurationIvrXmlCurlHandler implements XmlCurlHandler {
     private List<Entry> getEntry() {
         List<Entry> list = new ArrayList<>();
         try {
+            // 组装，触发数字按键 1，执行事件
             Instance instance = namingService.selectOneHealthyInstance("softswitch-gateway");
-            // 组装
             String arg = "socket " + instance.getIp() + ":" + outboundClientProperties.getServer().getPort() + " async full";
             list.add(new Entry("menu-exec-app", "1", arg));
+            // 组装，触发数字按键 2，执行事件
+
+
         } catch (NacosException e) {
             e.printStackTrace();
         }
