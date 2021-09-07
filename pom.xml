@@ -24,7 +24,7 @@
     <groupId>com.atomscat</groupId>
     <artifactId>softswitch-gateway</artifactId>
     <packaging>pom</packaging>
-    <version>1.6.2.RELEASE</version>
+    <version>1.0.0.RELEASE</version>
 
     <name>softswitch-gateway-${project.version}</name>
     <description>freeswitch event socket library on netty 4.1</description>

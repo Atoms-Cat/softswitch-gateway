@@ -22,7 +22,7 @@
     <parent>
         <artifactId>softswitch-gateway</artifactId>
         <groupId>com.atomscat</groupId>
-        <version>1.6.2.RELEASE</version>
+        <version>1.0.0.RELEASE</version>
     </parent>
 
     <artifactId>freeswitch-esl-spring-boot-starter-example</artifactId>
