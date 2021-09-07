@@ -1,4 +1,4 @@
-package link.thingscloud.spring.boot.common.constant;
+package com.atomscat.spring.boot.common.constant;
 
 public class NumberConstant {
     public static final int NUM_1 = 1;

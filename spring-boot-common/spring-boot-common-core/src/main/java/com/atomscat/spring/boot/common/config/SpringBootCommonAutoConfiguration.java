@@ -1,11 +1,11 @@
-package link.thingscloud.spring.boot.common.config;
+package com.atomscat.spring.boot.common.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ComponentScan(
-        basePackages = {"link.thingscloud.spring.boot.common"}
+        basePackages = {"com.atomscat.spring.boot.common"}
 )
 public class SpringBootCommonAutoConfiguration {
     public SpringBootCommonAutoConfiguration() {

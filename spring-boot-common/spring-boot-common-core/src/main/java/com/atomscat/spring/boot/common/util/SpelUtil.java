@@ -1,4 +1,4 @@
-package link.thingscloud.spring.boot.common.util;
+package com.atomscat.spring.boot.common.util;
 
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;

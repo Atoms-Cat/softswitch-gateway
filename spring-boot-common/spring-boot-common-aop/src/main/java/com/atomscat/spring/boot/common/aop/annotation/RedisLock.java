@@ -1,4 +1,4 @@
-package link.thingscloud.spring.boot.common.aop.annotation;
+package com.atomscat.spring.boot.common.aop.annotation;
 
 import java.lang.annotation.*;
 import java.util.concurrent.TimeUnit;

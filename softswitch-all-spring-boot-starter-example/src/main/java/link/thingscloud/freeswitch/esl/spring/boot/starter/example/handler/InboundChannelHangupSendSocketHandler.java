@@ -5,7 +5,7 @@ import link.thingscloud.freeswitch.esl.constant.EventNames;
 import link.thingscloud.freeswitch.esl.spring.boot.starter.annotation.EslEventName;
 import link.thingscloud.freeswitch.esl.spring.boot.starter.handler.EslEventHandler;
 import link.thingscloud.freeswitch.esl.transport.event.EslEvent;
-import link.thingscloud.spring.boot.common.aop.annotation.RedisLock;
+import com.atomscat.spring.boot.common.aop.annotation.RedisLock;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
