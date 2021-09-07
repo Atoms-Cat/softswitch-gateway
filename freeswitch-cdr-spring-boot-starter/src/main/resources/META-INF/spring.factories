@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-link.thingscloud.freeswitch.cdr.spring.boot.starter.config.FreeswitchCdrAutoConfiguration
+com.atomscat.freeswitch.cdr.spring.boot.starter.config.FreeswitchCdrAutoConfiguration
