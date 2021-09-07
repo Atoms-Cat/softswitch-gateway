@@ -21,7 +21,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>softswitch-gateway</artifactId>
-        <groupId>com.atoms.cat</groupId>
+        <groupId>com.atomscat</groupId>
         <version>1.6.2.RELEASE</version>
     </parent>
 
@@ -60,7 +60,7 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.atoms.cat</groupId>
+            <groupId>com.atomscat</groupId>
             <artifactId>spring-boot-common-aop</artifactId>
         </dependency>
         <dependency>
