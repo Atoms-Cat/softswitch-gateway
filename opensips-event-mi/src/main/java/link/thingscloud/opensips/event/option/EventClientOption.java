@@ -365,7 +365,7 @@ public class EventClientOption {
     }
 
     /**
-     * @param serverOption
+     * @param serverOption a {@link ServerOption} object.
      */
     public void addServerOption(ServerOption serverOption) {
         this.serverOption = serverOption;

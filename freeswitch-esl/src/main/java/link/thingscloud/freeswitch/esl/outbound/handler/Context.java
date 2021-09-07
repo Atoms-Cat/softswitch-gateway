@@ -53,7 +53,6 @@ public class Context implements IModEslApi {
     /**
      * Sends a mod_event_socket command to FreeSWITCH server and blocks, waiting for an immediate response from the
      * server.
-     * <p/>
      * The outcome of the command from the server is returned in an {@link EslMessage} object.
      *
      * @param command a mod_event_socket command to send
@@ -75,7 +74,6 @@ public class Context implements IModEslApi {
     /**
      * Sends a FreeSWITCH API command to the server and blocks, waiting for an immediate response from the
      * server.
-     * <p/>
      * The outcome of the command from the server is returned in an {@link EslMessage} object.
      *
      * @param command API command to send
@@ -105,7 +103,7 @@ public class Context implements IModEslApi {
     /**
      * Submit a FreeSWITCH API command to the server to be executed in background mode. A synchronous
      * response from the server provides a UUID to identify the job execution results. When the server
-     * has completed the job execution it fires a BACKGROUND_JOB Event with the execution results.<p/>
+     * has completed the job execution it fires a BACKGROUND_JOB Event with the execution results.
      * Note that this Client must be subscribed in the normal way to BACKGROUND_JOB Events, in order to
      * receive this event.
      *
@@ -129,14 +127,11 @@ public class Context implements IModEslApi {
     /**
      * Set the current event subscription for this connection to the server.  Examples of the events
      * argument are:
-     * <pre>
      *   ALL
      *   CHANNEL_CREATE CHANNEL_DESTROY HEARTBEAT
      *   CUSTOM conference::maintenance
      *   CHANNEL_CREATE CHANNEL_DESTROY CUSTOM conference::maintenance sofia::register sofia::expire
-     * </pre>
      * Subsequent calls to this method replaces any previous subscriptions that were set.
-     * </p>
      * Note: current implementation can only process 'plain' events.
      *
      * @param format can be { plain | xml }
@@ -185,18 +180,14 @@ public class Context implements IModEslApi {
     /**
      * Add an event filter to the current set of event filters on this connection. Any of the event headers
      * can be used as a filter.
-     * </p>
      * Note that event filters follow 'filter-in' semantics. That is, when a filter is applied
      * only the filtered values will be received. Multiple filters can be added to the current
      * connection.
-     * </p>
      * Example filters:
-     * <pre>
      *    eventHeader        valueToFilter
      *    ----------------------------------
      *    Event-Name         CHANNEL_EXECUTE
      *    Channel-State      CS_NEW
-     * </pre>
      *
      * @param eventHeader   to filter on
      * @param valueToFilter the value to match
@@ -251,9 +242,9 @@ public class Context implements IModEslApi {
     }
 
     /**
-     * @param sendMsg
+     * @param sendMsg a {@link SendMsg} object.
      * @param timeout 秒
-     * @return
+     * @return a {@link CommandResponse} object.
      */
     @Override
     public CommandResponse sendMessage(SendMsg sendMsg, long timeout) {

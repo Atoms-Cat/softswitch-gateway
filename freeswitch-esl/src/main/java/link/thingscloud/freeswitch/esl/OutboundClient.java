@@ -41,14 +41,14 @@ public interface OutboundClient extends OutboundClientService, OutboundClientCom
     /**
      * 获取客户可配置选项
      *
-     * @return this
+     * @return a {@link OutboundClientOption} object.
      */
     OutboundClientOption option();
 
     /**
      * 获取 netty bootstrap
      *
-     * @return
+     * @return a {@link ServerBootstrap} object.
      */
     ServerBootstrap bootstrap();
 }

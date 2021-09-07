@@ -16,11 +16,10 @@ import link.thingscloud.freeswitch.esl.util.EslEventUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
+//* todo FS --> [Inbound] --> app --> [sendMsg] --> socket address
+//* todo FS <--> [Outbound] <--> app
+//* todo 分布式锁
 /**
- * todo FS --> [Inbound] --> app --> [sendMsg] --> socket address
- * todo FS <--> [Outbound] <--> app
- * todo 分布式锁
  *
  * @author th158
  */

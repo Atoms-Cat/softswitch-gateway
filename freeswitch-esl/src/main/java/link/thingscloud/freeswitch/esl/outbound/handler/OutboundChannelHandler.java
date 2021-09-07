@@ -76,7 +76,7 @@ public class OutboundChannelHandler extends SimpleChannelInboundHandler<EslMessa
 
 
     /**
-     * <p>Constructor for OutboundChannelHandler.</p>
+     * Constructor for OutboundChannelHandler.
      *
      * @param listener       a {@link ChannelEventListener} object.
      * @param publicExecutor a {@link ExecutorService} object.
@@ -231,8 +231,8 @@ public class OutboundChannelHandler extends SimpleChannelInboundHandler<EslMessa
 
 
     /**
-     * @param channel
-     * @param sendMsgList
+     * @param channel a {@link Channel} object.
+     * @param sendMsgList a {@link List} object.
      */
     public void sendAsyncMultiSendMsgCommand(Channel channel, final List<SendMsg> sendMsgList) {
         //  Build command with double line terminator at the end
@@ -255,8 +255,8 @@ public class OutboundChannelHandler extends SimpleChannelInboundHandler<EslMessa
     /**
      * 异步
      *
-     * @param channel
-     * @param commandLines
+     * @param channel a {@link Channel} object.
+     * @param commandLines a {@link List} object.
      */
     public void sendAsyncMultiLineCommand(Channel channel, final List<String> commandLines) {
         //  Build command with double line terminator at the end
@@ -275,9 +275,9 @@ public class OutboundChannelHandler extends SimpleChannelInboundHandler<EslMessa
     }
 
     /**
-     * @param channel
-     * @param command
-     * @return
+     * @param channel a {@link Channel} object.
+     * @param command a {@link String} String.
+     * @return a {@link CompletableFuture} object.
      */
     public CompletableFuture<EslMessage> sendApiSingleLineCommand(Channel channel, final String command) {
         final CompletableFuture<EslMessage> future = new CompletableFuture<>();

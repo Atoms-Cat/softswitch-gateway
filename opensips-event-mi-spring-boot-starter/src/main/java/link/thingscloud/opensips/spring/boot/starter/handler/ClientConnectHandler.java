@@ -5,8 +5,8 @@ import link.thingscloud.opensips.event.handler.Context;
 
 public interface ClientConnectHandler {
     /**
-     * @param context
-     * @param msg
+     * @param context a {@link Context} object.
+     * @param msg a {@link Object} object.
      */
     void onConnect(Context context, Object msg);
 }

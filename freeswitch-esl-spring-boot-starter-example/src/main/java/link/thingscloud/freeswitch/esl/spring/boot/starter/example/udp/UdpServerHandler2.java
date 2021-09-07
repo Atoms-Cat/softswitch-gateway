@@ -15,8 +15,8 @@ public class UdpServerHandler2 extends SimpleChannelInboundHandler<DatagramPacke
     /**
      * 接收数据
      *
-     * @param ctx
-     * @param packet
+     * @param ctx a {@link ChannelHandlerContext} object.
+     * @param packet a {@link DatagramPacket} object.
      */
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, DatagramPacket packet) {
@@ -34,8 +34,8 @@ public class UdpServerHandler2 extends SimpleChannelInboundHandler<DatagramPacke
     /**
      * 捕获异常
      *
-     * @param ctx
-     * @param cause
+     * @param ctx a {@link ChannelHandlerContext} object.
+     * @param cause a {@link Throwable} object.
      */
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {

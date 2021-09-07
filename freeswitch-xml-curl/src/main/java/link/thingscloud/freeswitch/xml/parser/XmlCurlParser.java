@@ -24,8 +24,8 @@ public class XmlCurlParser {
     }
 
     /**
-     * @param request
-     * @return
+     * @param request a {@link HttpServletRequest} object.
+     * @return a {@link XmlCurl} object.
      * @throws ParserException
      */
     public static XmlCurl decodeThenParse(final HttpServletRequest request) throws ParserException {

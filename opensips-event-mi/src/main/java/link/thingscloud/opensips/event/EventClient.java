@@ -28,7 +28,7 @@ public interface EventClient extends EventClientService, EventClientCommand {
     /**
      * 获取 netty bootstrap
      *
-     * @return
+     * @return a {@link Bootstrap} object.
      */
     Bootstrap bootstrap();
 }
