@@ -21,7 +21,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>softswitch-gateway</artifactId>
-        <groupId>link.thingscloud</groupId>
+        <groupId>com.atoms.cat</groupId>
         <version>1.6.2.RELEASE</version>
     </parent>
 
@@ -60,7 +60,7 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
-            <groupId>link.thingscloud</groupId>
+            <groupId>com.atoms.cat</groupId>
             <artifactId>spring-boot-common-aop</artifactId>
         </dependency>
         <dependency>
