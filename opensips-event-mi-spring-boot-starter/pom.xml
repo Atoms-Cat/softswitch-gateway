@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>opensips-event-mi-spring-boot-starter</artifactId>
+    <name>opensips-event-mi-spring-boot-starter-${project.version}</name>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>

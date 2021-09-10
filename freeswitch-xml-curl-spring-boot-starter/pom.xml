@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>freeswitch-xml-curl-spring-boot-starter</artifactId>
+    <name>freeswitch-xml-curl-spring-boot-starter-${project.version}</name>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>

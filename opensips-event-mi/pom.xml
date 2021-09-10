@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>opensips-event-mi</artifactId>
+    <name>opensips-event-mi-${project.version}</name>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
