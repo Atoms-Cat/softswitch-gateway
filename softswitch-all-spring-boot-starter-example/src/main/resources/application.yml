@@ -42,7 +42,6 @@ nacos:
       enable: true
     data-id: example
     type: yaml
-
 spring:
   application:
     name: softswitch-gateway
@@ -53,3 +52,6 @@ spring:
     password: Aa123456
     #redisson:
     #  file: classpath:redisson/redisson-dev.yaml
+
+server:
+  max-http-header-size: 102400
