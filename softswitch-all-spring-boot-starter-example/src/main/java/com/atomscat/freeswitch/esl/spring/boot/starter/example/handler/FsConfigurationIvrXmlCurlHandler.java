@@ -81,13 +81,14 @@ public class FsConfigurationIvrXmlCurlHandler implements XmlCurlHandler {
         List<Entry> list = new ArrayList<>();
         try {
             // 组装，触发数字按键 1，执行事件
-            Instance instance = namingService.selectOneHealthyInstance("softswitch-gateway");
-            String arg = "socket " + instance.getIp() + ":" + outboundClientProperties.getServer().getPort() + " async full";
+            // Instance instance = namingService.selectOneHealthyInstance("softswitch-gateway");
+            // String arg = "socket " + instance.getIp() + ":" + outboundClientProperties.getServer().getPort() + " async full";
+            String arg = "sleep 10000";
             list.add(new Entry("menu-exec-app", "1", arg));
             // 组装，触发数字按键 2，执行事件
             // todo
 
-        } catch (NacosException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return list;
