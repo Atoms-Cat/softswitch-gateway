@@ -1,7 +1,7 @@
 package com.atomscat.opensips.event.handler;
 
 
-public interface IModEslApi {
+public interface IEventApi {
 
     boolean canSend();
 

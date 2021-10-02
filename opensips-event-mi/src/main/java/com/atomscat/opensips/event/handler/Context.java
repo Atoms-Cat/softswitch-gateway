@@ -6,7 +6,7 @@ import io.netty.channel.Channel;
 /**
  * @author th158
  */
-public class Context implements IModEslApi {
+public class Context implements IEventApi {
 
     private final EventChannelHandler handler;
     private final Channel channel;
