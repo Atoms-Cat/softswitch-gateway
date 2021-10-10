@@ -11,7 +11,7 @@
 
     <artifactId>freeswitch-cdr</artifactId>
     <name>freeswitch-cdr-${project.version}</name>
-
+    <url>https://github.com/Atoms-Cat/softswitch-gateway</url>
 
     <dependencies>
         <dependency>

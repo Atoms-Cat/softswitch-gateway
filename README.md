@@ -27,9 +27,9 @@ Based on netty 4 docking Opensips Exported Event, Exported MI and Freeswitch Eve
 
 ### 2.[freeswitch-esl、freeswitch-cdr](https://github.com/zhouhailin)
 
-    参考 https://github.com/zhouhailin/freeswitch-esl-all
-    参考 https://github.com/zhouhailin/freeswitch-cdr-all
-    参考 https://github.com/zhouhailin/spring-boot-common
+    refer to https://github.com/zhouhailin/freeswitch-esl-all
+    refer to https://github.com/zhouhailin/freeswitch-cdr-all
+    refer to https://github.com/zhouhailin/spring-boot-common
 
 ### 3.[freeswitch-xml-curl](freeswitch-xml-curl/README.md)
 http url path:
@@ -48,7 +48,7 @@ example: ${freeswitch_home}/conf/autoload_configs/xml_curl.conf.xml
 
 ---
 
-## 志同道合(钉钉) - 请备注来源
+## Like-minded (dingtalk)-Please note the source
 
 ![微信](doc/img/dingding.JPG)
 

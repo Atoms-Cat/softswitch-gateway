@@ -67,7 +67,6 @@ public class SendEvent implements Serializable {
      * @param line part of line
      */
     public void addBody(String line) {
-        msgLines.add("");
         msgLines.add(line);
     }
 
