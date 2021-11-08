@@ -30,6 +30,11 @@
     <name>freeswitch-esl-${project.version}</name>
     <description>Freeswitch Esl</description>
 
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
     <dependencies>
         <!-- io framework -->
         <dependency>

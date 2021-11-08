@@ -29,7 +29,10 @@
     <artifactId>freeswitch-esl-example</artifactId>
     <name>freeswitch-esl-example-${project.version}</name>
     <description>Example project for Freeswitch Esl</description>
-
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>

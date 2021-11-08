@@ -29,7 +29,10 @@
     <name>softswitch-all-spring-boot-starter-example-${project.version}</name>
 
     <description>Example project for Freeswitch Esl Spring Boot Starter</description>
-
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
