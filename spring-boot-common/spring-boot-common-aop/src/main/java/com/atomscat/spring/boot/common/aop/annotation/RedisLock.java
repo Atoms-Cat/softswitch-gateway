@@ -29,6 +29,13 @@ public @interface RedisLock {
     int expire() default 5000;
 
     /**
+     * 等待锁毫秒数,默认为0毫秒
+     *
+     * @return 等待锁的时间
+     */
+    int waitTime() default 0;
+
+    /**
      * 超时时间单位
      *
      * @return 秒

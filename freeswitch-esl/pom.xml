@@ -41,7 +41,6 @@
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
         </dependency>
-
         <!-- log framework -->
         <dependency>
             <groupId>org.slf4j</groupId>

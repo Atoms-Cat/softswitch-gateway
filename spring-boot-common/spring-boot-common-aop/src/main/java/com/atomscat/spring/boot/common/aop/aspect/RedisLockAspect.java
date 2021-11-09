@@ -39,16 +39,12 @@ public class RedisLockAspect {
 
         Object result = null;
 
-        try {
+        if (rLock.tryLock(redisLock.waitTime(), redisLock.expire(), redisLock.timeUnit())) {
             log.info("lock key: {}", key);
-            rLock.lock(redisLock.expire(), redisLock.timeUnit());
             //执行方法
             result = joinPoint.proceed();
-
-        } finally {
-            if (rLock.isLocked()) {
-                rLock.unlock();
-            }
+        } else {
+            log.info("is locked key: {}", key);
         }
         return result;
     }
