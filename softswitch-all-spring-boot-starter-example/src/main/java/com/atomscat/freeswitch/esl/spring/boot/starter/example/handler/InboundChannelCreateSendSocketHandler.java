@@ -85,6 +85,9 @@ public class InboundChannelCreateSendSocketHandler implements EslEventHandler {
 //
 //                // uuid_bridge
 
+                // todo 应用选举 opensips 功能 --- ws tcp 长连接
+                // {media_webrtc=true,sip_invite_req_uri=sip:$1@atomscat.com,sip_route_uri=sip:$1@192.168.10.114:5060}sofia/external/$1@192.168.10.116:5060
+                // {media_webrtc=true,sip_invite_req_uri=sip:$1@[域],sip_route_uri=sip:$1@[opensips地址]}sofia/external/$1@[opensips地址]
             }
 
             EslMessage eslMessage = inboundClient.sendSyncApiCommand(address, "show", "channels as json");
