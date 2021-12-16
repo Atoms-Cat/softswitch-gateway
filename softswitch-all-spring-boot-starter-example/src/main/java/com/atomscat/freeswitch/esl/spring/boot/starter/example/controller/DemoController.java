@@ -93,4 +93,13 @@ public class DemoController {
         return inboundClient.bridge("sip:1004@192.168.10.109", "", "");
     }
 
+    /**
+     * fs 執行：reload mod_sofia 重新加載sofia.conf配置
+     * 参考：https://freeswitch.org/confluence/display/FREESWITCH/mod_commands#mod_commands-reload
+     * @return
+     */
+    @GetMapping("/reload/sofia")
+    public String reloadSofia() {
+        return inboundClient.sendAsyncApiCommand("192.168.10.114:8021", "reload", "mod_sofia");
+    }
 }
