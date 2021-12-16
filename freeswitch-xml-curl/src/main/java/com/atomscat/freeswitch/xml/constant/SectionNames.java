@@ -8,7 +8,7 @@ public class SectionNames {
     /**
      * configuration:
      * - ivr.conf
-     * -
+     * - sofia.conf
      */
     public static final String CONFIGURATION = "CONFIGURATION";
 

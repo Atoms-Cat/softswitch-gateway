@@ -6,24 +6,19 @@ package com.atomscat.freeswitch.xml.constant;
 public enum ConfName {
 
 
-    IVR("ivr.conf", "menus")
+    IVR("ivr.conf"),
+    SOFIA("sofia.conf")
     ;
 
     public String confName;
-
-    public String listName;
 
     public String getConfName() {
         return confName;
     }
 
-    public String getListName() {
-        return listName;
-    }
 
-    ConfName(String confName, String listName) {
+    ConfName(String confName) {
         this.confName = confName;
-        this.listName = listName;
     }
 
 }

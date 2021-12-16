@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Data
 @JacksonXmlRootElement(localName = "configuration")
-public class Configuration<T> implements Serializable {
+public class Configuration implements Serializable {
 
     /**
      * {@link com.atomscat.freeswitch.xml.constant.SectionNames.Configuration}
@@ -29,17 +29,13 @@ public class Configuration<T> implements Serializable {
     @JacksonXmlProperty(localName = "description", isAttribute = true)
     private String description;
 
-    @JacksonXmlElementWrapper(localName = "list", useWrapping = false)
-    private List<T> list;
-
     /**
      * obj to xml string
-     * @param name a {@link ConfName} enum val
      * @return xml string
      * @throws JsonProcessingException
      */
-    public String toXmlString(String name) throws JsonProcessingException {
+    public String toXmlString() throws JsonProcessingException {
         ObjectMapper xmlMapper = new XmlMapper();
-        return xmlMapper.writeValueAsString(this).replaceAll("list", name);
+        return xmlMapper.writeValueAsString(this);
     }
 }

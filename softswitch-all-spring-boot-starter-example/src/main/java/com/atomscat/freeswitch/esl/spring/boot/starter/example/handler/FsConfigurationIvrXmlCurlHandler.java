@@ -5,6 +5,7 @@ import com.alibaba.nacos.api.annotation.NacosInjected;
 import com.alibaba.nacos.api.exception.NacosException;
 import com.alibaba.nacos.api.naming.NamingService;
 import com.alibaba.nacos.api.naming.pojo.Instance;
+import com.atomscat.freeswitch.xml.domain.configuration.ivr.Ivr;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.atomscat.freeswitch.esl.spring.boot.starter.propeties.OutboundClientProperties;
 import com.atomscat.freeswitch.xml.annotation.XmlCurlSectionName;
@@ -50,13 +51,11 @@ public class FsConfigurationIvrXmlCurlHandler implements XmlCurlHandler {
         return null;
     }
 
-
     private String getConfiguration() throws JsonProcessingException {
-        Configuration<Menus> configuration = new Configuration<>();
-        configuration.setName(ConfName.IVR.confName);
+        Ivr configuration = new Ivr();
         configuration.setDescription("ivr menus");
-        configuration.setList(getMenus());
-        return configuration.toXmlString(ConfName.IVR.listName);
+        configuration.setMenus(getMenus());
+        return configuration.toXmlString();
     }
 
     private List<Menus> getMenus() {

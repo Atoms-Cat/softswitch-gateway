@@ -1,0 +1,28 @@
+package com.atomscat.freeswitch.xml.domain.configuration.sofia;
+
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import lombok.Data;
+import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.util.List;
+
+/**
+ * @author howell
+ * @date 16/12/2021 5:54 下午
+ */
+@Data
+@Accessors(chain = true)
+@JacksonXmlRootElement(localName = "global_settings", namespace = "global_settings")
+public class GlobalSettings implements Serializable {
+
+    /**
+     * log-level
+     * auto-restart
+     * debug-presence
+     * capture-server
+     */
+    @JacksonXmlElementWrapper(localName = "param", useWrapping = false)
+    private List<Param> param;
+}
