@@ -40,7 +40,7 @@ public class InboundDTMFHandler implements EslEventHandler  {
 
         try {
             log.info("Inbound DTMF:[{}] [{}]  [{}]", address, coreUUID, JSON.toJSONString(event));
-            /**
+
             // 根据服务名从注册中心获取一个健康的服务实例
             Instance instance = namingService.selectOneHealthyInstance("softswitch-gateway");
             // 向fs 发送 socket 信息
@@ -52,12 +52,16 @@ public class InboundDTMFHandler implements EslEventHandler  {
             log.info("instance socket: ip [{}] port [{}], arg: [{}]", instance.getIp(), outboundClientProperties.getServer().getPort(), arg);
             sendMsg.addExecuteAppArg(arg);
             inboundClient.sendMessage(address, sendMsg);
-            **/
+
             //
-            sendMsg.addCallCommand("execute");
-            sendMsg.addExecuteAppName("bridge");
-            sendMsg.addExecuteAppArg("sofia/external/1024@192.168.10.109");
-            inboundClient.sendMessage(address, sendMsg);
+//            sendMsg.addCallCommand("execute");
+//            sendMsg.addExecuteAppName("bridge");
+            // todo ACD(Automatic Call Distributor) 自动呼叫分配
+            // todo get opensips sip adder
+            //sendMsg.addExecuteAppArg("sofia/external/1024@192.168.10.109");
+            // todo keepalived sip adder
+//            sendMsg.addExecuteAppArg("sofia/external/1004@192.168.10.140");
+//            inboundClient.sendMessage(address, sendMsg);
         } catch (Exception e) {
             e.printStackTrace();
         }

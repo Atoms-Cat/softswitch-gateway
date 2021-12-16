@@ -26,6 +26,8 @@ public class XmlCurlController {
     public String curl(HttpServletRequest request) {
         log.info("{} , [{}]", request.getParameterMap().size(), JSONObject.toJSONString(request.getParameterMap()));
         // todo dialplan|configuration|directory|phrases
-        return cdrService.handle(request);
+        String resp = cdrService.handle(request);
+        log.info("xml 相應： {}", resp);
+        return resp;
     }
 }

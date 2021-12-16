@@ -20,6 +20,7 @@ public class SectionNames {
 
     public static class Configuration {
         public static final String IVR = "ivr.conf";
+        public static final String SOFIA = "sofia.conf";
 
     }
 

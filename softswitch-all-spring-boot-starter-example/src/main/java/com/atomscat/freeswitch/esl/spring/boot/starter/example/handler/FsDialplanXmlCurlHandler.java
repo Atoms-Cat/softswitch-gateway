@@ -99,13 +99,15 @@ public class FsDialplanXmlCurlHandler implements XmlCurlHandler {
         actionList.add(new Action(AppEnum.answer, null));
         actionList.add(new Action(AppEnum.sleep, "1000"));
         // <action application="ivr" data="demo_ivr"/>
-        actionList.add(new Action(AppEnum.ivr, "test_ivr"));
+        // actionList.add(new Action(AppEnum.ivr, "test_ivr"));
         // 根据服务名从注册中心获取一个健康的服务实例
         try {
             Instance instance = namingService.selectOneHealthyInstance("softswitch-gateway");
             // 组装  <action application="socket" data=" IP : yaml配置的端口 async full" />
-            String arg = instance.getIp() + ":" + outboundClientProperties.getServer().getPort() + " async full";
-            actionList.add(new Action(AppEnum.socket, arg));
+            //String arg = instance.getIp() + ":" + outboundClientProperties.getServer().getPort() + " async full";
+            //actionList.add(new Action(AppEnum.socket, arg));
+            String arg = "sofia/external/${sip_to_uri}";
+            actionList.add(new Action(AppEnum.bridge, arg));
         } catch (NacosException e) {
             e.printStackTrace();
         }
