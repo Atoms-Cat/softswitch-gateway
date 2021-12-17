@@ -8,9 +8,6 @@ package com.atomscat.freeswitch.xml.domain.configuration.sofia.setting;
  */
 public enum SettingParamEnum {
 
-    /**
-     * sofia conf settings`s param
-     */
     MEDIA_OPTION("media-option",""),
     USER_AGENT_STRING("user-agent-string",""),
     DEBUG("debug",""),
@@ -47,6 +44,7 @@ public enum SettingParamEnum {
     APPLY_INBOUND_ACL("apply-inbound-acl",""),
     LOCAL_NETWORK_ACL("local-network-acl",""),
     APPLY_REGISTER_ACL("apply-register-acl",""),
+    APPLY_CANDIDATE_ACL("apply-candidate-acl", ""),
     DTMF_TYPE("dtmf-type",""),
     SEND_MESSAGE_QUERY_ON_REGISTER("send-message-query-on-register",""),
     SEND_PRESENCE_ON_REGISTER("send-presence-on-register",""),
@@ -141,7 +139,8 @@ public enum SettingParamEnum {
     RENEGOTIATE_CODEC_ON_HOLD("renegotiate-codec-on-hold",""),
     PROXY_HOLD("proxy-hold",""),
     PROXY_NOTIFY_EVENTS("proxy-notify-events",""),
-
+    WS_BINDING("ws-binding",""),
+    WSS_BINDING("wss-binding",""),
 
 
     ;
