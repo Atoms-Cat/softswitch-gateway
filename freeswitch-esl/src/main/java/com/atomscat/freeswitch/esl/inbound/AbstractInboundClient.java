@@ -18,9 +18,6 @@
 package com.atomscat.freeswitch.esl.inbound;
 
 import com.atomscat.freeswitch.esl.InboundClient;
-import com.atomscat.freeswitch.esl.util.StringUtils;
-import io.netty.channel.ChannelFutureListener;
-import io.netty.util.concurrent.DefaultThreadFactory;
 import com.atomscat.freeswitch.esl.constant.EslConstant;
 import com.atomscat.freeswitch.esl.exception.InboundClientException;
 import com.atomscat.freeswitch.esl.inbound.handler.InboundChannelHandler;
@@ -33,10 +30,13 @@ import com.atomscat.freeswitch.esl.transport.CommandResponse;
 import com.atomscat.freeswitch.esl.transport.event.EslEvent;
 import com.atomscat.freeswitch.esl.transport.message.EslHeaders;
 import com.atomscat.freeswitch.esl.transport.message.EslMessage;
+import com.atomscat.freeswitch.esl.util.StringUtils;
+import io.netty.channel.ChannelFutureListener;
+import io.netty.util.concurrent.DefaultThreadFactory;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -57,7 +57,7 @@ abstract class AbstractInboundClient extends AbstractNettyInboundClient implemen
     private final ScheduledThreadPoolExecutor scheduledPoolExecutor = new ScheduledThreadPoolExecutor(1,
             new DefaultThreadFactory("inbound-scheduled-pool", true));
 
-    private final Map<String, InboundChannelHandler> handlerTable = new HashMap<>(32);
+    private final Map<String, InboundChannelHandler> handlerTable = new ConcurrentHashMap<>(32);
 
     AbstractInboundClient(InboundClientOption option) {
         super(option);

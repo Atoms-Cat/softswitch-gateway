@@ -36,9 +36,17 @@ public interface IModEslApi {
     CommandResponse cancelLogging();
 
     enum EventFormat {
-
+        /**
+         * freeswitch esl 数据格式：文本
+         */
         PLAIN("plain"),
+        /**
+         * freeswitch esl 数据格式：XML
+         */
         XML("xml"),
+        /**
+         * freeswitch esl 数据格式：json
+         */
         JSON("json");
 
         private final String text;
@@ -55,7 +63,9 @@ public interface IModEslApi {
     }
 
     enum LoggingLevel {
-
+        /**
+         * 日志类型
+         */
         CONSOLE("console"),
         DEBUG("debug"),
         INFO("info"),

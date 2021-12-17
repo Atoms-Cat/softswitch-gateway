@@ -5,6 +5,7 @@ import lombok.experimental.Accessors;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * <p>Variables class.</p>
@@ -25,7 +26,7 @@ public class Variables {
      */
     public void putVariable(String key, String value) {
         if (variableTable == null) {
-            variableTable = new HashMap<>(256);
+            variableTable = new ConcurrentHashMap<>(256);
         }
         variableTable.put(key, value);
     }

@@ -17,6 +17,7 @@ import org.springframework.util.CollectionUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * <p> XmlCurlServiceImpl class.</p>
@@ -31,7 +32,7 @@ public class XmlCurlServiceImpl implements XmlCurlService, InitializingBean {
 
     @Autowired
     private final List<XmlCurlHandler> xmlCurlHandlers = Collections.emptyList();
-    private final Map<String, List<XmlCurlHandler>> handlerTable = new HashMap<>(16);
+    private final Map<String, List<XmlCurlHandler>> handlerTable = new ConcurrentHashMap<>(16);
 
     /**
      * {@inheritDoc}

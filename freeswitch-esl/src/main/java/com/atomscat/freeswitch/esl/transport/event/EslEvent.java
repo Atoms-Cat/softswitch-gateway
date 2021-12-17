@@ -26,9 +26,9 @@ import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * FreeSWITCH Event Socket <strong>events</strong> are decoded into this data object.
@@ -74,7 +74,7 @@ public class EslEvent implements Serializable {
      */
     public EslEvent(EslMessage rawMessage, boolean parseCommandReply) {
         messageHeaders = rawMessage.getHeaders();
-        eventHeaders = new HashMap<>(rawMessage.getBodyLines().size());
+        eventHeaders = new ConcurrentHashMap<>(rawMessage.getBodyLines().size());
         eventBody = new ArrayList<>();
         // plain or xml body
         if (rawMessage.getContentType().equals(EslHeaders.Value.TEXT_EVENT_PLAIN)) {

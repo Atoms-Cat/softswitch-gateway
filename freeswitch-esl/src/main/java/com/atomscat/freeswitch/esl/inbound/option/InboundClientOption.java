@@ -44,6 +44,7 @@ public class InboundClientOption {
     private int rcvBufSize = 65535;
     private int workerGroupThread = Runtime.getRuntime().availableProcessors() * 2;
     private int publicExecutorThread = Runtime.getRuntime().availableProcessors() * 2;
+    private int privateExecutorThread = Runtime.getRuntime().availableProcessors() * 2;
     private int callbackExecutorThread = Runtime.getRuntime().availableProcessors() * 2;
     private int defaultTimeoutSeconds = 5;
     private String defaultPassword = "ClueCon";
@@ -135,6 +136,26 @@ public class InboundClientOption {
      */
     public InboundClientOption publicExecutorThread(int publicExecutorThread) {
         this.publicExecutorThread = publicExecutorThread;
+        return this;
+    }
+
+    /**
+     * <p>privateExecutorThread.</p>
+     *
+     * @return a int.
+     */
+    public int privateExecutorThread() {
+        return privateExecutorThread;
+    }
+
+    /**
+     * <p>privateExecutorThread.</p>
+     *
+     * @param privateExecutorThread a int.
+     * @return a {@link InboundClientOption} object.
+     */
+    public InboundClientOption privateExecutorThread(int privateExecutorThread) {
+        this.privateExecutorThread = privateExecutorThread;
         return this;
     }
 

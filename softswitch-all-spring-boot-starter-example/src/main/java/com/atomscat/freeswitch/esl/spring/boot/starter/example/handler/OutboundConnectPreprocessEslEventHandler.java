@@ -22,7 +22,7 @@ import java.util.List;
 @Configuration
 public class OutboundConnectPreprocessEslEventHandler implements OutBoundEventHandler, OutBoundConnectHandler {
 
-    public final static String sofia = "sofia/external/";
+    public final static String SOFIA = "sofia/external/";
 
     @Override
     public void onConnect(Context context, EslEvent eslEvent) {
@@ -47,7 +47,7 @@ public class OutboundConnectPreprocessEslEventHandler implements OutBoundEventHa
             bridgeMsg = new SendMsg();
             bridgeMsg.addCallCommand("execute");
             bridgeMsg.addExecuteAppName("bridge");
-            bridgeMsg.addExecuteAppArg(sofia + EslEventUtil.getToRealUser(eslEvent) + "@" + EslEventUtil.getToHost(eslEvent) );
+            bridgeMsg.addExecuteAppArg(SOFIA + EslEventUtil.getToRealUser(eslEvent) + "@" + EslEventUtil.getToHost(eslEvent) );
             bridgeMsg.addEventLock();
             bridgeMsgList.add(bridgeMsg);
         } else {
@@ -55,7 +55,7 @@ public class OutboundConnectPreprocessEslEventHandler implements OutBoundEventHa
             bridgeMsg = new SendMsg();
             bridgeMsg.addCallCommand("execute");
             bridgeMsg.addExecuteAppName("bridge");
-            bridgeMsg.addExecuteAppArg(sofia + EslEventUtil.getSipToUri(eslEvent));
+            bridgeMsg.addExecuteAppArg(SOFIA + EslEventUtil.getSipToUri(eslEvent));
             bridgeMsg.addEventLock();
             bridgeMsgList.add(bridgeMsg);
             log.info("bridge to {}", EslEventUtil.getSipToUri(eslEvent));

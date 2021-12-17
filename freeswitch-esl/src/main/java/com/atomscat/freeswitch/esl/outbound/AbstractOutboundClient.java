@@ -29,6 +29,7 @@ import com.atomscat.freeswitch.esl.transport.event.EslEvent;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 /**
@@ -48,7 +49,7 @@ abstract class AbstractOutboundClient extends AbstractNettyOutboundClient implem
     private final ScheduledThreadPoolExecutor scheduledPoolExecutor = new ScheduledThreadPoolExecutor(1,
             new DefaultThreadFactory("outbound-scheduled-pool", true));
 
-    private final Map<String, OutboundChannelHandler> handlerTable = new HashMap<>(32);
+    private final Map<String, OutboundChannelHandler> handlerTable = new ConcurrentHashMap<>(32);
 
     AbstractOutboundClient(OutboundClientOption option) {
         super(option);
