@@ -45,6 +45,8 @@ nacos:
 spring:
   application:
     name: softswitch-gateway
+#  profiles:
+#    active: dev
   redis:
     database: 1
     host: 192.168.10.114

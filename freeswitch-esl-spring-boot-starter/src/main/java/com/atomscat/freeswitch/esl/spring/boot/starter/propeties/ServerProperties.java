@@ -18,6 +18,7 @@
 package com.atomscat.freeswitch.esl.spring.boot.starter.propeties;
 
 import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * <p>ServerProperties class.</p>
@@ -26,6 +27,7 @@ import lombok.Data;
  * @version 1.0.0
  */
 @Data
+@ConfigurationProperties(prefix = "com.atomscat.freeswitch.esl.outbound.server")
 public class ServerProperties {
     private String host;
     private int port = 8021;
