@@ -1,7 +1,7 @@
 package com.atomscat.freeswitch.esl.spring.boot.starter.template;
 
-import com.atomscat.freeswitch.esl.spring.boot.starter.handler.AbstractOutboundClientOptionHandler;
 import com.atomscat.freeswitch.esl.outbound.option.OutboundClientOption;
+import com.atomscat.freeswitch.esl.spring.boot.starter.handler.AbstractOutboundClientOptionHandler;
 
 /**
  * <p>DefaultInboundClientOptionHandlerTemplate class.</p>

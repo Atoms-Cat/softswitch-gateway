@@ -15,7 +15,6 @@ import java.io.IOException;
 
 
 /**
- *
  * @author : zhouhailin
  * @version 1.0.0
  */
@@ -23,7 +22,6 @@ import java.io.IOException;
 public class MiUlShowContactServiceImpl implements MiUlShowContactService {
 
     /**
-     *
      * @param urlBase
      * @param ulShowContactReq
      * @return

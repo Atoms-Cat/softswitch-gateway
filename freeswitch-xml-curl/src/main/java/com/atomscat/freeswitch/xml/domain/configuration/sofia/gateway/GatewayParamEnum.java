@@ -102,7 +102,6 @@ public enum GatewayParamEnum {
     public String msg;
 
     /**
-     *
      * @param name
      * @param msg
      */
@@ -112,7 +111,6 @@ public enum GatewayParamEnum {
     }
 
     /**
-     *
      * @return
      */
     public String getMsg() {
@@ -120,7 +118,6 @@ public enum GatewayParamEnum {
     }
 
     /**
-     *
      * @return
      */
     public String getName() {

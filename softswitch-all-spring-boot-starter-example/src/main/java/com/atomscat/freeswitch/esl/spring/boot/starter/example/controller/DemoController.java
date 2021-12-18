@@ -96,6 +96,7 @@ public class DemoController {
     /**
      * fs 執行：reload mod_sofia 重新加載sofia.conf配置
      * 参考：https://freeswitch.org/confluence/display/FREESWITCH/mod_commands#mod_commands-reload
+     *
      * @return
      */
     @GetMapping("/reload/sofia")

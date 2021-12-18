@@ -162,6 +162,7 @@ public class EventChannelHandler extends SimpleChannelInboundHandler<DatagramPac
 
     /**
      * <p> get opensips remote addr</p>
+     *
      * @return a {@link String} remote addr
      */
     public String getRemoteAddr() {

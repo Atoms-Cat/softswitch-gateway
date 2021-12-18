@@ -18,13 +18,13 @@
 package com.atomscat.freeswitch.esl.spring.boot.starter.config;
 
 import com.atomscat.freeswitch.esl.*;
-import com.atomscat.freeswitch.esl.spring.boot.starter.template.*;
 import com.atomscat.freeswitch.esl.inbound.option.InboundClientOption;
 import com.atomscat.freeswitch.esl.outbound.option.OutboundClientOption;
 import com.atomscat.freeswitch.esl.spring.boot.starter.handler.InboundClientOptionHandler;
 import com.atomscat.freeswitch.esl.spring.boot.starter.handler.OutboundClientOptionHandler;
 import com.atomscat.freeswitch.esl.spring.boot.starter.propeties.InboundClientProperties;
 import com.atomscat.freeswitch.esl.spring.boot.starter.propeties.OutboundClientProperties;
+import com.atomscat.freeswitch.esl.spring.boot.starter.template.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;

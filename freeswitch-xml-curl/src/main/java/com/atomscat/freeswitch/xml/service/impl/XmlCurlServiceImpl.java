@@ -3,10 +3,10 @@ package com.atomscat.freeswitch.xml.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.atomscat.freeswitch.xml.annotation.XmlCurlSectionName;
 import com.atomscat.freeswitch.xml.domain.XmlCurl;
+import com.atomscat.freeswitch.xml.exception.ParserException;
 import com.atomscat.freeswitch.xml.handler.XmlCurlHandler;
 import com.atomscat.freeswitch.xml.parser.XmlCurlParser;
 import com.atomscat.freeswitch.xml.service.XmlCurlService;
-import com.atomscat.freeswitch.xml.exception.ParserException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -57,7 +57,7 @@ public class XmlCurlServiceImpl implements XmlCurlService, InitializingBean {
 
     private String handleXmlCurl(HttpServletRequest request) throws ParserException {
         XmlCurl xmlCurl = XmlCurlParser.decodeThenParse(request);
-        log.info("handle xml curl : [{}] [{}]", xmlCurl.getSection(),JSONObject.toJSONString(xmlCurl));
+        log.info("handle xml curl : [{}] [{}]", xmlCurl.getSection(), JSONObject.toJSONString(xmlCurl));
         // 获取事件名称
         String section = xmlCurl.getSection();
         if (StringUtils.isBlank(section)) {
@@ -65,10 +65,10 @@ public class XmlCurlServiceImpl implements XmlCurlService, InitializingBean {
         }
         StringBuilder stringBuilder = new StringBuilder();
         List<XmlCurlHandler> handlers = handlerTable.get(section.toUpperCase(Locale.ROOT));
+        stringBuilder.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n" +
+                "<document type=\"freeswitch/xml\">");
+        stringBuilder.append("<section name=\"" + section + "\">");
         if (!CollectionUtils.isEmpty(handlers)) {
-            stringBuilder.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n" +
-                    "<document type=\"freeswitch/xml\">");
-            stringBuilder.append("<section name=\"" + section + "\">");
             handlers.forEach(xmlCurlHandler -> {
                 try {
                     // section 为 configuration时， 判断 key_value 类型执行对应的Handler
@@ -79,9 +79,9 @@ public class XmlCurlServiceImpl implements XmlCurlService, InitializingBean {
                     log.error("freeswitch xml curl handler[{}] handle exception : ", xmlCurlHandler.getClass(), e);
                 }
             });
-            stringBuilder.append("</section>\n" +
-                    "</document>");
         }
+        stringBuilder.append("</section>\n" +
+                "</document>");
         return stringBuilder.toString();
     }
 

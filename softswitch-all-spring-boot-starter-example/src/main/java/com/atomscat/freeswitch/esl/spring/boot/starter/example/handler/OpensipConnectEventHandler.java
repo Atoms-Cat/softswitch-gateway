@@ -1,10 +1,10 @@
 package com.atomscat.freeswitch.esl.spring.boot.starter.example.handler;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.channel.socket.DatagramPacket;
 import com.atomscat.opensips.event.handler.Context;
 import com.atomscat.opensips.spring.boot.starter.handler.ClientConnectHandler;
 import com.atomscat.opensips.spring.boot.starter.handler.ClientEventHandler;
+import io.netty.buffer.ByteBuf;
+import io.netty.channel.socket.DatagramPacket;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 

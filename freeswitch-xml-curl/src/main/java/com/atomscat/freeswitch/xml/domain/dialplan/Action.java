@@ -9,7 +9,6 @@ import java.io.Serializable;
 
 /**
  * @author th158
- *
  */
 @Data
 @NoArgsConstructor

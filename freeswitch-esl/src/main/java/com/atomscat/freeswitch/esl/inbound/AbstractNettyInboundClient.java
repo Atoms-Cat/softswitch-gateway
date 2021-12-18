@@ -18,6 +18,10 @@
 package com.atomscat.freeswitch.esl.inbound;
 
 import com.atomscat.freeswitch.esl.InboundClientService;
+import com.atomscat.freeswitch.esl.inbound.handler.InboundChannelHandler;
+import com.atomscat.freeswitch.esl.inbound.listener.ChannelEventListener;
+import com.atomscat.freeswitch.esl.inbound.option.InboundClientOption;
+import com.atomscat.freeswitch.esl.transport.message.EslFrameDecoder;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
@@ -30,10 +34,6 @@ import io.netty.handler.codec.string.StringEncoder;
 import io.netty.handler.timeout.IdleStateHandler;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 import io.netty.util.concurrent.DefaultThreadFactory;
-import com.atomscat.freeswitch.esl.inbound.handler.InboundChannelHandler;
-import com.atomscat.freeswitch.esl.inbound.listener.ChannelEventListener;
-import com.atomscat.freeswitch.esl.inbound.option.InboundClientOption;
-import com.atomscat.freeswitch.esl.transport.message.EslFrameDecoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

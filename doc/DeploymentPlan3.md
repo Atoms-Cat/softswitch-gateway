@@ -1,4 +1,4 @@
-##  oepnsips load balancing freeswitch
+## oepnsips load balancing freeswitch
 
 ![流程图](img/opensips-register-fs.png)
 
@@ -565,6 +565,7 @@ local_route {
 ```
 
 ### 2.fs 拨号计划
+
 ```
 <extension name="Local_Extension">
       <condition field="destination_number" expression="^(10[01][0-9])$">
@@ -601,6 +602,7 @@ local_route {
 ```
 
 ### 3.opensips数据库
+
 #### dispatcher table # CUSTOMIZE ME
 
 ```

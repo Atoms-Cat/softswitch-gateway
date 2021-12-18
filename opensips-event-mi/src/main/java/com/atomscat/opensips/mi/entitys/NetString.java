@@ -1,7 +1,6 @@
 package com.atomscat.opensips.mi.entitys;
 
 /**
- *
  * @author : zhouhailin
  * @version 1.0.0
  */

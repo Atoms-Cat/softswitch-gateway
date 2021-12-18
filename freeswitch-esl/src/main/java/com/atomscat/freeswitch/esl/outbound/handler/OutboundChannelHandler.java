@@ -18,7 +18,12 @@
 package com.atomscat.freeswitch.esl.outbound.handler;
 
 import com.atomscat.freeswitch.esl.helper.EslHelper;
+import com.atomscat.freeswitch.esl.outbound.listener.ChannelEventListener;
 import com.atomscat.freeswitch.esl.transport.SendMsg;
+import com.atomscat.freeswitch.esl.transport.event.EslEvent;
+import com.atomscat.freeswitch.esl.transport.event.EslEventHeaderNames;
+import com.atomscat.freeswitch.esl.transport.message.EslHeaders;
+import com.atomscat.freeswitch.esl.transport.message.EslMessage;
 import com.atomscat.freeswitch.esl.util.RemotingUtil;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -27,11 +32,6 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.util.concurrent.DefaultThreadFactory;
-import com.atomscat.freeswitch.esl.outbound.listener.ChannelEventListener;
-import com.atomscat.freeswitch.esl.transport.event.EslEvent;
-import com.atomscat.freeswitch.esl.transport.event.EslEventHeaderNames;
-import com.atomscat.freeswitch.esl.transport.message.EslHeaders;
-import com.atomscat.freeswitch.esl.transport.message.EslMessage;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
@@ -231,7 +231,7 @@ public class OutboundChannelHandler extends SimpleChannelInboundHandler<EslMessa
 
 
     /**
-     * @param channel a {@link Channel} object.
+     * @param channel     a {@link Channel} object.
      * @param sendMsgList a {@link List} object.
      */
     public void sendAsyncMultiSendMsgCommand(Channel channel, final List<SendMsg> sendMsgList) {
@@ -255,7 +255,7 @@ public class OutboundChannelHandler extends SimpleChannelInboundHandler<EslMessa
     /**
      * 异步
      *
-     * @param channel a {@link Channel} object.
+     * @param channel      a {@link Channel} object.
      * @param commandLines a {@link List} object.
      */
     public void sendAsyncMultiLineCommand(Channel channel, final List<String> commandLines) {

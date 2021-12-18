@@ -1,7 +1,9 @@
 package com.atomscat.freeswitch.xml.domain.configuration.sofia.domain;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
@@ -21,6 +23,8 @@ import java.io.Serializable;
  * @date 16/12/2021 6:19 下午
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Accessors(chain = true)
 public class Domain implements Serializable {
 

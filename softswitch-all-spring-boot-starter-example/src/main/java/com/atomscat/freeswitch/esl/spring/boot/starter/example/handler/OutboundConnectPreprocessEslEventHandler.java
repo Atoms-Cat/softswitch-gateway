@@ -47,7 +47,7 @@ public class OutboundConnectPreprocessEslEventHandler implements OutBoundEventHa
             bridgeMsg = new SendMsg();
             bridgeMsg.addCallCommand("execute");
             bridgeMsg.addExecuteAppName("bridge");
-            bridgeMsg.addExecuteAppArg(SOFIA + EslEventUtil.getToRealUser(eslEvent) + "@" + EslEventUtil.getToHost(eslEvent) );
+            bridgeMsg.addExecuteAppArg(SOFIA + EslEventUtil.getToRealUser(eslEvent) + "@" + EslEventUtil.getToHost(eslEvent));
             bridgeMsg.addEventLock();
             bridgeMsgList.add(bridgeMsg);
         } else {
@@ -95,8 +95,8 @@ public class OutboundConnectPreprocessEslEventHandler implements OutBoundEventHa
         // 关闭通道 todo 工作流
         context.closeChannel();
 
-  //      CommandResponse commandResponse = context.sendMessage(bridgeMsg);
-  //      log.info("response : {}", commandResponse);
+        //      CommandResponse commandResponse = context.sendMessage(bridgeMsg);
+        //      log.info("response : {}", commandResponse);
 
         //同步发送bridge命令接通
 //        EslMessage response = context.handler().sendSyncMultiLineCommand(context.channel(), bridgeMsg.getMsgLines());

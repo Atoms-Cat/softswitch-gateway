@@ -17,12 +17,12 @@
 
 package com.atomscat.freeswitch.esl.outbound;
 
-import com.atomscat.freeswitch.esl.util.StringUtils;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
 import com.atomscat.freeswitch.esl.outbound.option.ConnectState;
 import com.atomscat.freeswitch.esl.outbound.option.OutboundClientOption;
 import com.atomscat.freeswitch.esl.outbound.option.ServerOption;
+import com.atomscat.freeswitch.esl.util.StringUtils;
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelFuture;
 
 
 /**

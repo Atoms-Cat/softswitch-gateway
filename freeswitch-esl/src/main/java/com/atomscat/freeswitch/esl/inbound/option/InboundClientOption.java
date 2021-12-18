@@ -19,9 +19,9 @@ package com.atomscat.freeswitch.esl.inbound.option;
 
 import com.atomscat.freeswitch.esl.IEslEventListener;
 import com.atomscat.freeswitch.esl.ServerConnectionListener;
-import com.atomscat.freeswitch.esl.util.StringUtils;
 import com.atomscat.freeswitch.esl.inbound.listener.EventListener;
 import com.atomscat.freeswitch.esl.inbound.listener.ServerOptionListener;
+import com.atomscat.freeswitch.esl.util.StringUtils;
 import lombok.ToString;
 
 import java.util.ArrayList;

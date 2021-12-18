@@ -19,15 +19,14 @@ package com.atomscat.freeswitch.esl.outbound;
 
 
 import com.atomscat.freeswitch.esl.OutboundClient;
-import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.util.concurrent.DefaultThreadFactory;
 import com.atomscat.freeswitch.esl.outbound.handler.Context;
 import com.atomscat.freeswitch.esl.outbound.handler.OutboundChannelHandler;
 import com.atomscat.freeswitch.esl.outbound.option.OutboundClientOption;
 import com.atomscat.freeswitch.esl.transport.event.EslEvent;
+import io.netty.bootstrap.ServerBootstrap;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.util.concurrent.DefaultThreadFactory;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ScheduledThreadPoolExecutor;

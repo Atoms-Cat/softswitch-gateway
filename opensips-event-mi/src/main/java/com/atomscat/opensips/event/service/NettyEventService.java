@@ -1,11 +1,11 @@
 package com.atomscat.opensips.event.service;
 
+import com.atomscat.opensips.event.option.ConnectState;
 import com.atomscat.opensips.event.option.EventClientOption;
+import com.atomscat.opensips.event.option.ServerOption;
 import com.atomscat.opensips.util.StringUtils;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
-import com.atomscat.opensips.event.option.ConnectState;
-import com.atomscat.opensips.event.option.ServerOption;
 
 /**
  * @author th158

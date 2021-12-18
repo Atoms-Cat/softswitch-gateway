@@ -17,9 +17,9 @@
 
 package com.atomscat.freeswitch.esl.transport.event;
 
-import com.atomscat.freeswitch.esl.transport.util.HeaderParser;
 import com.atomscat.freeswitch.esl.transport.message.EslHeaders;
 import com.atomscat.freeswitch.esl.transport.message.EslMessage;
+import com.atomscat.freeswitch.esl.transport.util.HeaderParser;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;

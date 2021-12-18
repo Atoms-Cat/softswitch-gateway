@@ -17,15 +17,15 @@
 
 package com.atomscat.opensips.spring.boot.starter.config;
 
+import com.atomscat.opensips.event.EventClient;
 import com.atomscat.opensips.event.listener.ServerConnectionListener;
 import com.atomscat.opensips.event.listener.ServerEventListener;
+import com.atomscat.opensips.event.option.EventClientOption;
+import com.atomscat.opensips.spring.boot.starter.handler.EventClientOptionHandler;
 import com.atomscat.opensips.spring.boot.starter.propeties.OpensipsEventProperties;
 import com.atomscat.opensips.spring.boot.starter.template.DefaultEventClientOptionHandlerTemplate;
 import com.atomscat.opensips.spring.boot.starter.template.ServerConnectionListenerTemplate;
 import com.atomscat.opensips.spring.boot.starter.template.ServerEventListenerTemplate;
-import com.atomscat.opensips.event.EventClient;
-import com.atomscat.opensips.event.option.EventClientOption;
-import com.atomscat.opensips.spring.boot.starter.handler.EventClientOptionHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;

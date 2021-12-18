@@ -32,14 +32,16 @@ public @interface XmlCurlSectionName {
 
     /**
      * section
+     *
      * @return
      */
     String[] value();
 
     /**
      * configuration :
-     *  ivr.conf
+     * ivr.conf
      * key_value
+     *
      * @return
      */
     String key() default "";

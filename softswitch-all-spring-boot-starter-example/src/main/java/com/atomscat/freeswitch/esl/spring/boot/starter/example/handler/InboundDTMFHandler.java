@@ -2,7 +2,6 @@ package com.atomscat.freeswitch.esl.spring.boot.starter.example.handler;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.nacos.api.annotation.NacosInjected;
-import com.alibaba.nacos.api.exception.NacosException;
 import com.alibaba.nacos.api.naming.NamingService;
 import com.alibaba.nacos.api.naming.pojo.Instance;
 import com.atomscat.freeswitch.esl.InboundClient;
@@ -23,7 +22,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @EslEventName(EventNames.DTMF)
 @Component
-public class InboundDTMFHandler implements EslEventHandler  {
+public class InboundDTMFHandler implements EslEventHandler {
 
     @Autowired
     private InboundClient inboundClient;

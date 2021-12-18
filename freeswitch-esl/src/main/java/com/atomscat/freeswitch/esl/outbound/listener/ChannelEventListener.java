@@ -18,8 +18,8 @@
 package com.atomscat.freeswitch.esl.outbound.listener;
 
 import com.atomscat.freeswitch.esl.outbound.handler.Context;
-import io.netty.channel.ChannelHandlerContext;
 import com.atomscat.freeswitch.esl.transport.event.EslEvent;
+import io.netty.channel.ChannelHandlerContext;
 
 /**
  * <p>ChannelEventListener interface.</p>
@@ -54,7 +54,7 @@ public interface ChannelEventListener {
      * <p>handleDisconnectNotice.</p>
      *
      * @param remoteAddr a {@link String} string.
-     * @param ctx a {@link ChannelHandlerContext} object
+     * @param ctx        a {@link ChannelHandlerContext} object
      */
     void handleDisconnectNotice(String remoteAddr, ChannelHandlerContext ctx);
 

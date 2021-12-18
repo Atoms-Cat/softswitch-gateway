@@ -124,6 +124,7 @@ public class CdrParser {
     private static final String TRANSFER_TIME = "transfer_time";
     private static ThreadLocal<String> local = new ThreadLocal<>();
     private static boolean isTraceEnabled = log.isTraceEnabled();
+
     private CdrParser() {
     }
 

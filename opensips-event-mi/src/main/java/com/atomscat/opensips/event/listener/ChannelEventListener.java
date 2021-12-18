@@ -17,8 +17,8 @@
 
 package com.atomscat.opensips.event.listener;
 
-import io.netty.channel.ChannelHandlerContext;
 import com.atomscat.opensips.event.handler.Context;
+import io.netty.channel.ChannelHandlerContext;
 
 
 /**

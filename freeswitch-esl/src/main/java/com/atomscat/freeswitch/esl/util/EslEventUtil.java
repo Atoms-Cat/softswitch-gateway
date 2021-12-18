@@ -29,7 +29,7 @@ public class EslEventUtil {
     public static final String CALLER_UNIQUE_ID = "Caller-Unique-ID";
     public static final String CALLER_NETWORK_ADDR = "Caller-Network-address";
 
-    public static final String CALL_CHANNEL_UUID= "Channel-Call-UUID";
+    public static final String CALL_CHANNEL_UUID = "Channel-Call-UUID";
 
     public static final String CALLER_CONTEXT = "Caller-Context";
     public static final String CALLER_DIALPLAN = "Caller-Dialplan";
@@ -68,7 +68,6 @@ public class EslEventUtil {
     public static final String VARIABLE_SIP_TO_REAL_USER = "variable_sip_h_X-To-Real-User";
 
     public static final String VARIABLE_SIP_VOICE_GATEWAY = "variable_sip_h_X-Voice-Gateway";
-
 
 
     private EslEventUtil() {

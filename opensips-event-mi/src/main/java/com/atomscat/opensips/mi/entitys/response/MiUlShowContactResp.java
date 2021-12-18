@@ -8,7 +8,6 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- *
  * @author : zhouhailin
  * @version 1.0.0
  */

@@ -18,15 +18,14 @@
 package com.atomscat.opensips.event.service;
 
 
+import com.atomscat.opensips.event.EventClient;
 import com.atomscat.opensips.event.handler.Context;
 import com.atomscat.opensips.event.handler.EventChannelHandler;
 import com.atomscat.opensips.event.option.EventClientOption;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.util.concurrent.DefaultThreadFactory;
-import com.atomscat.opensips.event.EventClient;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ScheduledThreadPoolExecutor;

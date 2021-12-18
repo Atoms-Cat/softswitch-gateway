@@ -1,6 +1,7 @@
 # SoftSwitch-Gateway : Opensips And FreeSWITCH For In One
 
-Based on netty 4 docking Opensips Exported Event, Exported MI and Freeswitch Event Socket Library, cdr, xml_curl and other interface implementation solutions
+Based on netty 4 docking Opensips Exported Event, Exported MI and Freeswitch Event Socket Library, cdr, xml_curl and
+other interface implementation solutions
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/74f187c0039a40dd9f044c4def3517d2)](https://www.codacy.com/gh/Atoms-Cat/softswitch-gateway/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Atoms-Cat/softswitch-gateway&amp;utm_campaign=Badge_Grade)
 [![Jdk Version](https://img.shields.io/badge/JDK-1.8-green.svg)](https://img.shields.io/badge/JDK-1.8-green.svg)
@@ -19,7 +20,7 @@ Based on netty 4 docking Opensips Exported Event, Exported MI and Freeswitch Eve
 
 ## Illustrate
 
-### 1.[deployment plan](doc) 
+### 1.[deployment plan](doc)
 
 * [opensips-fs-tandem](doc/DeploymentPlan1.md)
 * [opensips-register-fs](doc/DeploymentPlan3.md)
@@ -32,8 +33,9 @@ Based on netty 4 docking Opensips Exported Event, Exported MI and Freeswitch Eve
     refer to https://github.com/zhouhailin/spring-boot-common
 
 ### 3.[freeswitch-xml-curl](freeswitch-xml-curl/README.md)
+
 http url path:
-    
+
     /freeswitch/xml/curl
 
 example: ${freeswitch_home}/conf/autoload_configs/xml_curl.conf.xml
@@ -44,6 +46,7 @@ example: ${freeswitch_home}/conf/autoload_configs/xml_curl.conf.xml
     </binding>
 
 ### 4.HA Topology Diagram
+
 ![](doc/img/opensips-fs-app.png)
 
 ---

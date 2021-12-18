@@ -17,8 +17,8 @@
 
 package com.atomscat.freeswitch.esl;
 
-import io.netty.bootstrap.ServerBootstrap;
 import com.atomscat.freeswitch.esl.outbound.option.OutboundClientOption;
+import io.netty.bootstrap.ServerBootstrap;
 
 /**
  * <p>InboundClient interface.</p>

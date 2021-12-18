@@ -19,8 +19,8 @@ import org.springframework.stereotype.Component;
 //* todo FS --> [Inbound] --> app --> [sendMsg] --> socket address
 //* todo FS <--> [Outbound] <--> app
 //* todo 分布式锁
+
 /**
- *
  * @author th158
  */
 @Slf4j

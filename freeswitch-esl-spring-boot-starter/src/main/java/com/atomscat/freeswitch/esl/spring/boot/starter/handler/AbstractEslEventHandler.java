@@ -17,8 +17,8 @@
 
 package com.atomscat.freeswitch.esl.spring.boot.starter.handler;
 
-import com.atomscat.freeswitch.esl.OutboundClient;
 import com.atomscat.freeswitch.esl.InboundClient;
+import com.atomscat.freeswitch.esl.OutboundClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

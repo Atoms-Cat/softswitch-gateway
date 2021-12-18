@@ -26,8 +26,8 @@ public class Sofia extends Configuration implements Serializable {
 
     /**
      * This is a sofia sip profile/user agent.  This will service exactly one
-     *         ip and port.  In FreeSWITCH you can run multiple sip user agents on
-     *         their own ip and port.
+     * ip and port.  In FreeSWITCH you can run multiple sip user agents on
+     * their own ip and port.
      */
     @JacksonXmlProperty(localName = "profiles", isAttribute = true)
     private Profiles profiles;

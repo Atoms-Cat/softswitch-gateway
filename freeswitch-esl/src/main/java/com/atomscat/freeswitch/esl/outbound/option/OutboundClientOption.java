@@ -373,7 +373,6 @@ public class OutboundClientOption {
     }
 
     /**
-     *
      * @param serverOption a {@link ServerOption} object.
      */
     public void addServerOption(ServerOption serverOption) {

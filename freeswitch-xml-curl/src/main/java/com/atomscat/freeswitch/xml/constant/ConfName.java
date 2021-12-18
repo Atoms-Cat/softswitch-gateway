@@ -7,8 +7,7 @@ public enum ConfName {
 
 
     IVR("ivr.conf"),
-    SOFIA("sofia.conf")
-    ;
+    SOFIA("sofia.conf");
 
     public String confName;
 

@@ -1,9 +1,9 @@
 package com.atomscat.freeswitch.esl.spring.boot.starter.handler;
 
-import com.atomscat.freeswitch.esl.util.StringUtils;
 import com.atomscat.freeswitch.esl.inbound.option.InboundClientOption;
 import com.atomscat.freeswitch.esl.inbound.option.ServerOption;
 import com.atomscat.freeswitch.esl.spring.boot.starter.propeties.InboundClientProperties;
+import com.atomscat.freeswitch.esl.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

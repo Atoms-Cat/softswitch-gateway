@@ -2,9 +2,9 @@ package com.atomscat.freeswitch.esl.outbound.handler;
 
 import com.atomscat.freeswitch.esl.transport.CommandResponse;
 import com.atomscat.freeswitch.esl.transport.SendMsg;
-import io.netty.channel.Channel;
 import com.atomscat.freeswitch.esl.transport.event.EslEvent;
 import com.atomscat.freeswitch.esl.transport.message.EslMessage;
+import io.netty.channel.Channel;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -126,10 +126,10 @@ public class Context implements IModEslApi {
     /**
      * Set the current event subscription for this connection to the server.  Examples of the events
      * argument are:
-     *   ALL
-     *   CHANNEL_CREATE CHANNEL_DESTROY HEARTBEAT
-     *   CUSTOM conference::maintenance
-     *   CHANNEL_CREATE CHANNEL_DESTROY CUSTOM conference::maintenance sofia::register sofia::expire
+     * ALL
+     * CHANNEL_CREATE CHANNEL_DESTROY HEARTBEAT
+     * CUSTOM conference::maintenance
+     * CHANNEL_CREATE CHANNEL_DESTROY CUSTOM conference::maintenance sofia::register sofia::expire
      * Subsequent calls to this method replaces any previous subscriptions that were set.
      * Note: current implementation can only process 'plain' events.
      *
@@ -183,10 +183,10 @@ public class Context implements IModEslApi {
      * only the filtered values will be received. Multiple filters can be added to the current
      * connection.
      * Example filters:
-     *    eventHeader        valueToFilter
-     *    ----------------------------------
-     *    Event-Name         CHANNEL_EXECUTE
-     *    Channel-State      CS_NEW
+     * eventHeader        valueToFilter
+     * ----------------------------------
+     * Event-Name         CHANNEL_EXECUTE
+     * Channel-State      CS_NEW
      *
      * @param eventHeader   to filter on
      * @param valueToFilter the value to match

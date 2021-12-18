@@ -1,12 +1,12 @@
 package com.atomscat.opensips.spring.boot.starter.template;
 
-import com.atomscat.opensips.event.listener.ServerEventListener;
-import io.netty.channel.socket.DatagramPacket;
 import com.atomscat.opensips.event.handler.Context;
+import com.atomscat.opensips.event.listener.ServerEventListener;
 import com.atomscat.opensips.spring.boot.starter.handler.ClientConnectHandler;
 import com.atomscat.opensips.spring.boot.starter.handler.ClientEventHandler;
 import com.atomscat.opensips.spring.boot.starter.handler.DefaultClientConnectHandler;
 import com.atomscat.opensips.spring.boot.starter.handler.DefaultClientEventHandler;
+import io.netty.channel.socket.DatagramPacket;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;

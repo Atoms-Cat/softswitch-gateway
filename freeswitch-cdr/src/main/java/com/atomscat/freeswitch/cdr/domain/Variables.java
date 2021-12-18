@@ -3,7 +3,6 @@ package com.atomscat.freeswitch.cdr.domain;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 

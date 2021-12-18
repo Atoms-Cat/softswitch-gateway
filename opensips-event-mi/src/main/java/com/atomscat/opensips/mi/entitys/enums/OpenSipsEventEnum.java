@@ -1,7 +1,6 @@
 package com.atomscat.opensips.mi.entitys.enums;
 
 /**
- *
  * @author : zhouhailin
  * @version 1.0.0
  */
@@ -19,8 +18,7 @@ public enum OpenSipsEventEnum {
      * old_state - 对话的旧状态。
      * new_state - 对话框的新状态。
      */
-    E_DLG_STATE_CHANGED("E_DLG_STATE_CHANGED", "当对话框状态改变时引发此事件。")
-    ;
+    E_DLG_STATE_CHANGED("E_DLG_STATE_CHANGED", "当对话框状态改变时引发此事件。");
 
     private String event;
 

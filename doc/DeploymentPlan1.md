@@ -1,9 +1,8 @@
-## opensips sip 代理 freeswitch  汇接
+## opensips sip 代理 freeswitch 汇接
 
 参考：https://freeswitch.org/confluence/display/FREESWITCH/Enterprise+deployment+OpenSIPS
 
 ![流程图](img/opensips-fs-tandem.png)
-
 
 ### 1. configuration opensips.cfg
 
@@ -193,9 +192,10 @@ route{
 }
 ```
 
-
 ### 2.opensips数据库
+
 #### dispatcher table # CUSTOMIZE ME
+
 ```
 INSERT INTO "public"."dispatcher" ("id", "setid", "destination", "socket", "state", "weight", "priority", "attrs", "description") VALUES (1, 1, 'sip:192.168.10.114:5060', '', 0, '50', 0, 'fs1', 'inbound Gateway1');
 INSERT INTO "public"."dispatcher" ("id", "setid", "destination", "socket", "state", "weight", "priority", "attrs", "description") VALUES (2, 1, 'sip:192.168.10.112:5060', NULL, 0, '50', 0, 'fs2', 'inbound Gateway2');
@@ -203,13 +203,15 @@ INSERT INTO "public"."dispatcher" ("id", "setid", "destination", "socket", "stat
 ```
 
 #### load_balancer table # CUSTOMIZE ME
+
 ```
 INSERT INTO "public"."load_balancer" ("id", "group_id", "dst_uri", "resources", "probe_mode", "description") VALUES (1, 1, 'sip:192.168.10.112:5060', 'vm=100;conf=100;transc=100;pstn=500', 1, 'FS1');
 INSERT INTO "public"."load_balancer" ("id", "group_id", "dst_uri", "resources", "probe_mode", "description") VALUES (2, 1, 'sip:192.168.10.114:5060', 'vm=100;conf=100;transc=100;pstn=500', 1, 'FS1');
 INSERT INTO "public"."load_balancer" ("id", "group_id", "dst_uri", "resources", "probe_mode", "description") VALUES (3, 1, 'sip:192.168.10.109:25060', 'vm=100;conf=100;transc=100;pstn=500', 1, 'FS1');
 ```
 
-### 3.fs-A、fs-B 的 freeswitch配置  /conf/dialplan/default.xml # CUSTOMIZE ME
+### 3.fs-A、fs-B 的 freeswitch配置 /conf/dialplan/default.xml # CUSTOMIZE ME
+
 ```
 <extension name="meeting">
   <condition field="destination_number" expression="^(10[01][0-9])$">

@@ -21,8 +21,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 // * do: FS --> [Inbound] --> app --> [sendMsg] --> socket address
 // * do: FS <--> [Outbound] <--> app
+
 /**
- *
  * @author th158
  */
 @Slf4j
