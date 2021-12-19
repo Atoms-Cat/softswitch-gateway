@@ -6,7 +6,7 @@
 
 ### deploy
 
-#### [freeswitch 1.10.5 is installed based on Debian 10.10](softswitch/freeswitch-install-debian.md)
+#### [freeswitch 1.10.5 is installed based on Debian 10.10](softswitch/freeswitch/freeswitch-install-debian.md)
 
 ---
 

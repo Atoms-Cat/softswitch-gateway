@@ -9,12 +9,13 @@ other interface implementation solutions
 [![codecov](https://codecov.io/gh/HowellYan/softswitch-gateway/branch/main/graph/badge.svg?token=DH9SNP7V5F)](https://codecov.io/gh/HowellYan/softswitch-gateway)
 
 ## Target
-
-    1. Support to connect to Opensips MI and events
-    2. Support connection to FreeSWITCH ESL (inbound, outbound), cdr, xml_curl (configuration(ivr)|directory|dial plan|phrase)
-    3. Easier to use integrated solutions
-    4. Integrate with spring boot 2.3.x, nacos configuration center, service discovery
-    5. Can be dynamically configured
+```text
+1. Support to connect to Opensips MI and events
+2. Support connection to FreeSWITCH ESL (inbound, outbound), cdr, xml_curl (configuration(ivr)|directory|dial plan|phrase)
+3. Easier to use integrated solutions
+4. Integrate with spring boot 2.3.x, nacos configuration center, service discovery
+5. Can be dynamically configured
+```
 
 ---
 
@@ -40,10 +41,13 @@ http url path:
 
 example: ${freeswitch_home}/conf/autoload_configs/xml_curl.conf.xml
 
-    <binding name="all configs">
-        <param name="gateway-url" value="http://127.0.0.1:8080/freeswitch/xml/curl" bindings="dialplan|configuration|directory|phrases"/>
-        <param name="method" value="GET"/>
-    </binding>
+```xml
+<binding name="all configs">
+    <param name="gateway-url" value="http://127.0.0.1:8080/freeswitch/xml/curl" bindings="dialplan|configuration|directory|phrases"/>
+    <param name="method" value="GET"/>
+</binding>
+```
+
 
 ### 4.HA Topology Diagram
 

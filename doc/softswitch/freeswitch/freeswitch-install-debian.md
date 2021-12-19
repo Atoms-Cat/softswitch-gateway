@@ -10,7 +10,7 @@ https://freeswitch.org/confluence/display/FREESWITCH/Debian+10+Buster
 
 Debian 10.10
 
-```
+```shell
 apt-get update && apt-get install -yq gnupg2 wget lsb-release
 wget -O - https://files.freeswitch.org/repo/deb/debian-release/fsstretch-archive-keyring.asc | apt-key add -
 
@@ -26,7 +26,7 @@ apt-get build-dep freeswitch
 
 ### 编译安装freeswitch
 
-```
+``` shell
 mkdir -p /tools/software && cd /tools/software
 wget https://github.com/signalwire/freeswitch/archive/refs/tags/v1.10.5.tar.gz
 tar -zxvf  v1.10.5.tar.gz
@@ -52,7 +52,7 @@ make install
 
 ### 相关目录
 
-```
+```text
 -------------------------- FreeSWITCH configuration --------------------------
 Locations:
 prefix: /usr/local/freeswitch
@@ -85,14 +85,14 @@ cachedir: /usr/local/freeswitch/cache
 
 * 改bind ip
 
-```
-<!— ${fs_home}/conf/vars.xml增加如下两行，force_local_ip_v4后改成你需要绑定的ip —>
+```xml
+<!-- ${fs_home}/conf/vars.xml增加如下两行，force_local_ip_v4后改成你需要绑定的ip -->
 <X-PRE-PROCESS cmd="set" data="bind_server_ip=auto"/>
 ```
 
 * 启动
 
-```
+```shell
 cd /usr/local/freeswitch
 ./freeswitch
 
