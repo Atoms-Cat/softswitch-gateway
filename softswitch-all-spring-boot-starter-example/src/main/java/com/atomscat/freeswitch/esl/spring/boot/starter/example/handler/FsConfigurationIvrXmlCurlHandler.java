@@ -54,10 +54,8 @@ public class FsConfigurationIvrXmlCurlHandler implements XmlCurlHandler {
         return configuration.toXmlString();
     }
 
-    private List<Menus> getMenus() {
-        List<Menus> list = new ArrayList<>();
-        list.add(new Menus(getMenu()));
-        return list;
+    private Menus getMenus() {
+        return new Menus(getMenu());
     }
 
     private List<Menu> getMenu() {
