@@ -47,6 +47,7 @@
         <module>freeswitch-xml-curl</module>
         <module>freeswitch-xml-curl-spring-boot-starter</module>
         <module>softswitch-all-spring-boot-starter-example</module>
+        <module>owt-server-client</module>
         <!--        <module>OSSRH-72998</module>-->
     </modules>
 
