@@ -22,5 +22,5 @@ public class Ivr extends Configuration implements Serializable {
     }
 
     @JacksonXmlElementWrapper(localName = "menus", useWrapping = false)
-    private List<Menus> menus;
+    private Menus menus;
 }
