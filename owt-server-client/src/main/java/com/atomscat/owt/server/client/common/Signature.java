@@ -83,8 +83,8 @@ public class Signature {
 
     public static void main(String[] args) {
         try {
-            String serviceid = "6204d134aad120046407941b";
-            String servicekey = "PBeBav+o0qXGjaDwsnBVojJX967uzveTwX4miO1Ioy7K0Tgq2mvzyFVusuk9OcWklF6p/UgAnEmzW0+rkrYY+/dEjES06+OoSLlqVniiau9PbpHjRwi9os9OwqOyIt0fNtn1zILGcEkquO9cekAgDOf65TceZ7/cYNYQH78IkOc=";
+            String serviceid = "620cb31f325f0804648ad036";
+            String servicekey = "OS3zVCNGScojljrZ2xmk322OF1NSi5sGH/aYgASH9H3repuGxEG/zM/0bFuJP+kQ3hyxZX86tjNo99fHFwhMgk6ne6Tzm7++Rnnucs8NoXljo6oD0dKvyO1BGQxtwe8nvxI5rZDztwdrdQZSGTdG+5dZHHPyqGnNBl4Xp1zNwnI=";
             System.out.println(getAuthenticate("test", "role", serviceid, servicekey));
         } catch (Exception e) {
             e.printStackTrace();

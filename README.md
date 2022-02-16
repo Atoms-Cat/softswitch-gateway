@@ -15,6 +15,7 @@ other interface implementation solutions
 3. Easier to use integrated solutions
 4. Integrate with spring boot 2.3.x, nacos configuration center, service discovery
 5. Can be dynamically configured
+6. owt-server management api
 ```
 
 ---
@@ -52,6 +53,11 @@ example: ${freeswitch_home}/conf/autoload_configs/xml_curl.conf.xml
 ### 4.HA Topology Diagram
 
 ![](doc/img/opensips-fs-app.png)
+
+### 5.owt-server management api
+refer to [https://github.com/open-webrtc-toolkit/owt-server](https://github.com/open-webrtc-toolkit/owt-server)
+
+management api demo: https://www.apifox.cn/apidoc/shared-62d670c8-92d6-498c-9abe-7e911cb85a44/api-11520186 
 
 ---
 
