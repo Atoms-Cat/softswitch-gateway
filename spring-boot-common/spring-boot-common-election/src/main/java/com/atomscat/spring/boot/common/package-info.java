@@ -1,0 +1,1 @@
+package com.atomscat.spring.boot.common;

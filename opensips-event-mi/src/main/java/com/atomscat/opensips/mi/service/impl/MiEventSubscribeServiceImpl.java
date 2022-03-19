@@ -21,6 +21,11 @@ import java.io.IOException;
 @Slf4j
 public class MiEventSubscribeServiceImpl implements MiEventSubscribeService {
 
+    /**
+     * @param urlBase  OpenSips MI Service address base url
+     * @param eventSubscribeReq a {@link MiEventSubscribeReq} request param
+     * @return a {@link MiEventSubscribeResp} response param
+     */
     @Override
     public MiEventSubscribeResp setEventSubscribe(String urlBase, MiEventSubscribeReq eventSubscribeReq) {
         MiEventSubscribeResp eventSubscribeResp = new MiEventSubscribeResp();

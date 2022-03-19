@@ -10,9 +10,9 @@ import com.atomscat.opensips.mi.entitys.response.MiEventSubscribeResp;
  */
 public interface MiEventSubscribeService {
     /**
-     * @param urlBase
-     * @param eventSubscribeReq
-     * @return
+     * @param urlBase  OpenSips MI Service address base url
+     * @param eventSubscribeReq a {@link MiEventSubscribeReq} request param
+     * @return a {@link MiEventSubscribeResp} response param
      */
     MiEventSubscribeResp setEventSubscribe(String urlBase, MiEventSubscribeReq eventSubscribeReq);
 }

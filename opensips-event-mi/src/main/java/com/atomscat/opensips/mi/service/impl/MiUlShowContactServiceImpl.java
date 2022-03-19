@@ -22,9 +22,9 @@ import java.io.IOException;
 public class MiUlShowContactServiceImpl implements MiUlShowContactService {
 
     /**
-     * @param urlBase
-     * @param ulShowContactReq
-     * @return
+     * @param urlBase OpenSips MI Service address base url
+     * @param ulShowContactReq a {@link MiUlShowContactReq} request param
+     * @return {@link MiUlShowContactResp}
      */
     @Override
     public MiUlShowContactResp getUlShowContact(String urlBase, MiUlShowContactReq ulShowContactReq) {

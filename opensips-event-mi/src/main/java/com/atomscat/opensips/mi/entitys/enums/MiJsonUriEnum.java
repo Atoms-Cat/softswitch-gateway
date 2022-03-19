@@ -11,11 +11,11 @@ public enum MiJsonUriEnum {
 
     private String uri;
 
-    private String msg;
+    private String desc;
 
-    MiJsonUriEnum(String uri, String msg) {
+    MiJsonUriEnum(String uri, String desc) {
         this.uri = uri;
-        this.msg = msg;
+        this.desc = desc;
     }
 
 
@@ -23,7 +23,7 @@ public enum MiJsonUriEnum {
         return uri;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getDesc() {
+        return desc;
     }
 }

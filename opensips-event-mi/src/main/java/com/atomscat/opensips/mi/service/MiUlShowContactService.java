@@ -10,9 +10,9 @@ import com.atomscat.opensips.mi.entitys.response.MiUlShowContactResp;
  */
 public interface MiUlShowContactService {
     /**
-     * @param urlBase
-     * @param ulShowContactReq
-     * @return
+     * @param urlBase OpenSips MI Service address base url
+     * @param ulShowContactReq a {@link MiUlShowContactReq} request param
+     * @return a {@link MiUlShowContactResp} response param
      */
     MiUlShowContactResp getUlShowContact(String urlBase, MiUlShowContactReq ulShowContactReq);
 }

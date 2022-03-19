@@ -22,18 +22,18 @@ public enum OpenSipsEventEnum {
 
     private String event;
 
-    private String msg;
+    private String desc;
 
-    OpenSipsEventEnum(String event, String msg) {
+    OpenSipsEventEnum(String event, String desc) {
         this.event = event;
-        this.msg = msg;
+        this.desc = desc;
     }
 
     public String getEvent() {
         return event;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getDesc() {
+        return desc;
     }
 }
