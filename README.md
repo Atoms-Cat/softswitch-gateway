@@ -1,7 +1,7 @@
-# SoftSwitch-Gateway : Opensips And FreeSWITCH For In One
+# SoftSwitch-Gateway : Audio and video For In One
 
-Based on netty 4 docking Opensips Exported Event, Exported MI and Freeswitch Event Socket Library, cdr, xml_curl and
-other interface implementation solutions
+Based on netty 4 docking Opensips Exported Event, Exported MI and Freeswitch Event Socket Library, cdr, xml_curl and owt server
+ and ossrs and other interface implementation solutions
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/74f187c0039a40dd9f044c4def3517d2)](https://www.codacy.com/gh/Atoms-Cat/softswitch-gateway/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Atoms-Cat/softswitch-gateway&amp;utm_campaign=Badge_Grade)
 [![Jdk Version](https://img.shields.io/badge/JDK-1.8-green.svg)](https://img.shields.io/badge/JDK-1.8-green.svg)
@@ -16,6 +16,7 @@ other interface implementation solutions
 4. Integrate with spring boot 2.3.x, nacos configuration center, service discovery
 5. Can be dynamically configured
 6. owt-server management api
+7. ossrs management api
 ```
 
 ---
