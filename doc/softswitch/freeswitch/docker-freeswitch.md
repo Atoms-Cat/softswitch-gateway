@@ -7,6 +7,9 @@
 
 ### 下载源码
 ```shell
+# 自2022年3月11日起，通过源编译源码安装signalwire，Signalwire账号登录配置TOKEN
+# 参考：https://freeswitch.org/confluence/display/FREESWITCH/HOWTO+Create+a+SignalWire+Personal+Access+Token
+
 # 下载
 wget https://github.com/signalwire/freeswitch/archive/refs/tags/v1.10.7.tar.gz
 # 解压
@@ -16,24 +19,33 @@ tar -zxvf  v1.10.7.tar.gz
 ### 编写 Dockerfile 脚本
 ```dockerfile
 FROM debian:11.1
-RUN apt-get update -y
 # 参考 https://freeswitch.org/confluence/display/FREESWITCH/Debian+11+Bullseye
+# 安装编译freeswitch，所需要依赖环境
+RUN apt-get update -y 
 RUN apt-get install -y sngrep vim gnupg2 wget lsb-release
-RUN wget -O /usr/share/keyrings/freeswitch-archive-keyring.gpg https://files.freeswitch.org/repo/deb/debian-release/freeswitch-archive-keyring.gpg
-RUN echo "deb [signed-by=/usr/share/keyrings/freeswitch-archive-keyring.gpg] http://files.freeswitch.org/repo/deb/debian-release/ `lsb_release -sc` main" > /etc/apt/sources.list.d/freeswitch.list
-RUN echo "deb-src [signed-by=/usr/share/keyrings/freeswitch-archive-keyring.gpg] http://files.freeswitch.org/repo/deb/debian-release/ `lsb_release -sc` main" >> /etc/apt/sources.list.d/freeswitch.list
+
+# pat_1X8EQXH6EvgajWaBVWSJCG51   是在Signalwire网站上注册账号配置的TOKEN
+RUN wget --http-user=signalwire --http-password=pat_1X8EQXH6EvgajWaBVWSJCG51 -O /usr/share/keyrings/signalwire-freeswitch-repo.gpg https://freeswitch.signalwire.com/repo/deb/debian-release/signalwire-freeswitch-repo.gpg
+RUN echo "machine freeswitch.signalwire.com login signalwire password pat_1X8EQXH6EvgajWaBVWSJCG51" > /etc/apt/auth.conf
+RUN echo "deb [signed-by=/usr/share/keyrings/signalwire-freeswitch-repo.gpg] https://freeswitch.signalwire.com/repo/deb/debian-release/ `lsb_release -sc` main" > /etc/apt/sources.list.d/freeswitch.list
+RUN echo "deb-src [signed-by=/usr/share/keyrings/signalwire-freeswitch-repo.gpg] https://freeswitch.signalwire.com/repo/deb/debian-release/ `lsb_release -sc` main" >> /etc/apt/sources.list.d/freeswitch.list
+ 
 RUN apt-get update -y && apt-get build-dep freeswitch -y
-# 把源码添加到镜像
 RUN mkdir -p /tools
+
+# 需要把下载freeswitch-1.10.7.tar.gz，解压到Dockerfile文件同级目录下，添加到docker镜像里
 ADD ./freeswitch-1.10.7 /tools/freeswitch
+
 RUN cd /tools/freeswitch && ./bootstrap.sh -j
-# 自定义需要加载安装的freeswitch模块
+
+# 自定义安装freeswitch模块
 COPY ./modules.conf /tools/freeswitch/modules.conf
 RUN cd /tools/freeswitch && ./configure
-# 构建安装
-RUN cd /tools/freeswitch && make -j && make all install
-# 安装audio files:
+
+# 安装默认音频
 RUN cd /tools/freeswitch && make cd-sounds-install cd-moh-install
+RUN cd /tools/freeswitch && make -j && make all install
+
 # 添加启动脚本
 ADD ./start.sh /start.sh
 RUN chmod +x /start.sh

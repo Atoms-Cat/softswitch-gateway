@@ -11,17 +11,20 @@ https://freeswitch.org/confluence/display/FREESWITCH/Debian+10+Buster
 Debian 10.10
 
 ```shell
-apt-get update && apt-get install -yq gnupg2 wget lsb-release
-wget -O - https://files.freeswitch.org/repo/deb/debian-release/fsstretch-archive-keyring.asc | apt-key add -
+# 自2022年3月11日起，通过源编译源码安装signalwire，Signalwire账号登录配置TOKEN
+# 参考：https://freeswitch.org/confluence/display/FREESWITCH/HOWTO+Create+a+SignalWire+Personal+Access+Token
 
+apt-get update -y 
+apt-get install -y sngrep vim gnupg2 wget lsb-release
 
-echo "deb http://files.freeswitch.org/repo/deb/debian-release/ `lsb_release -sc` main" > /etc/apt/sources.list.d/freeswitch.list
-echo "deb-src http://files.freeswitch.org/repo/deb/debian-release/ `lsb_release -sc` main" >> /etc/apt/sources.list.d/freeswitch.list
-
-apt-get update
-
+# pat_1X8EQXH6EvgajWaBVWSJCG51   是在Signalwire网站上注册账号配置的TOKEN
+wget --http-user=signalwire --http-password=pat_1X8EQXH6EvgajWaBVWSJCG51 -O /usr/share/keyrings/signalwire-freeswitch-repo.gpg https://freeswitch.signalwire.com/repo/deb/debian-release/signalwire-freeswitch-repo.gpg
+echo "machine freeswitch.signalwire.com login signalwire password pat_1X8EQXH6EvgajWaBVWSJCG51" > /etc/apt/auth.conf
+echo "deb [signed-by=/usr/share/keyrings/signalwire-freeswitch-repo.gpg] https://freeswitch.signalwire.com/repo/deb/debian-release/ `lsb_release -sc` main" > /etc/apt/sources.list.d/freeswitch.list
+echo "deb-src [signed-by=/usr/share/keyrings/signalwire-freeswitch-repo.gpg] https://freeswitch.signalwire.com/repo/deb/debian-release/ `lsb_release -sc` main" >> /etc/apt/sources.list.d/freeswitch.list
+ 
 # Install dependencies required for the build
-apt-get build-dep freeswitch
+apt-get update -y && apt-get build-dep freeswitch -y
 ```
 
 ### 编译安装freeswitch
