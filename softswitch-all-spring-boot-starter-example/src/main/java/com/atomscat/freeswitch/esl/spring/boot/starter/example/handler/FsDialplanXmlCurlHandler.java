@@ -96,8 +96,8 @@ public class FsDialplanXmlCurlHandler implements XmlCurlHandler {
     private List<Action> getAction() {
         List<Action> actionList = new ArrayList<>();
         // todo
-        actionList.add(new Action(AppEnum.answer, null));
-        actionList.add(new Action(AppEnum.sleep, "1000"));
+        actionList.add(new Action(AppEnum.ANSWER, null));
+        actionList.add(new Action(AppEnum.SLEEP, "1000"));
         // <action application="ivr" data="demo_ivr"/>
         // actionList.add(new Action(AppEnum.ivr, "test_ivr"));
         // 根据服务名从注册中心获取一个健康的服务实例
@@ -107,7 +107,7 @@ public class FsDialplanXmlCurlHandler implements XmlCurlHandler {
             //String arg = instance.getIp() + ":" + outboundClientProperties.getServer().getPort() + " async full";
             //actionList.add(new Action(AppEnum.socket, arg));
             String arg = "sofia/external/${sip_to_uri}";
-            actionList.add(new Action(AppEnum.bridge, arg));
+            actionList.add(new Action(AppEnum.BRIDGE, arg));
         } catch (NacosException e) {
             e.printStackTrace();
         }
@@ -135,17 +135,17 @@ public class FsDialplanXmlCurlHandler implements XmlCurlHandler {
     private List<Action> getVoiceAction() {
         List<Action> actionList = new ArrayList<>();
         // 注意：X-Voice-Gateway 为自定义 fs-opensips 统一标识 外呼 走 语音网关
-        actionList.add(new Action(AppEnum.export, "sip_h_X-Voice-Gateway=true"));
+        actionList.add(new Action(AppEnum.EXPORT, "sip_h_X-Voice-Gateway=true"));
         // 自定义获取真实用户号码
-        actionList.add(new Action(AppEnum.export, "sip_h_X-To-Real-User=$1"));
-        actionList.add(new Action(AppEnum.answer, null));
-        actionList.add(new Action(AppEnum.sleep, "1000"));
+        actionList.add(new Action(AppEnum.EXPORT, "sip_h_X-To-Real-User=$1"));
+        actionList.add(new Action(AppEnum.ANSWER, null));
+        actionList.add(new Action(AppEnum.SLEEP, "1000"));
         // 根据服务名从注册中心获取一个健康的服务实例
         try {
             Instance instance = namingService.selectOneHealthyInstance("softswitch-gateway");
             // 组装  <action application="socket" data=" IP : yaml配置的端口 async full" />
             String arg = instance.getIp() + ":" + outboundClientProperties.getServer().getPort() + " async full";
-            actionList.add(new Action(AppEnum.socket, arg));
+            actionList.add(new Action(AppEnum.SOCKET, arg));
         } catch (NacosException e) {
             e.printStackTrace();
         }
