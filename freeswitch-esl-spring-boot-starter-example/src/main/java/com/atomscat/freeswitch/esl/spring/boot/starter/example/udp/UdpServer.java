@@ -6,6 +6,7 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioDatagramChannel;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
 
 import java.net.InetSocketAddress;
@@ -13,7 +14,7 @@ import java.net.InetSocketAddress;
 /**
  * todo 测试
  */
-
+@Slf4j
 public class UdpServer {
 
     //如果不设置超时，连接会一直占用本地线程，端口，连接客户端一多，会导致本地端口用尽及CPU压力
@@ -40,8 +41,13 @@ public class UdpServer {
             Channel channel = b.bind(addr).sync().channel();
             System.out.println("UdpServer start success on " + port);
             channel.closeFuture().await();
+        } catch (InterruptedException e) {
+            log.error("Udp Server start error", e);
+            Thread.currentThread().interrupt();
+            throw new RuntimeException(e);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("Udp Server start error", e);
+            throw new RuntimeException(e);
         } finally {
             group.shutdownGracefully();
         }

@@ -38,9 +38,13 @@ public class UdpServer2 {
             Channel channel = b.bind(addr).sync().channel();
             System.out.println("UdpServer start success on2 " + port);
             channel.closeFuture().await();
+        } catch (InterruptedException e) {
+            log.error("Udp Server start error", e);
+            Thread.currentThread().interrupt();
+            throw new RuntimeException(e);
         } catch (Exception e) {
-            e.printStackTrace();
-            log.error("", e);
+            log.error("Udp Server start error", e);
+            throw new RuntimeException(e);
         } finally {
             group.shutdownGracefully();
         }

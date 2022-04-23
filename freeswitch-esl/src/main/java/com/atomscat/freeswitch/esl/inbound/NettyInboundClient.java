@@ -28,7 +28,9 @@ import com.atomscat.freeswitch.esl.transport.SendMsg;
 import com.atomscat.freeswitch.esl.transport.message.EslMessage;
 import com.atomscat.freeswitch.esl.util.StringUtils;
 
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.function.Consumer;
 
 
@@ -75,8 +77,14 @@ public class NettyInboundClient extends AbstractInboundClientCommand {
     public EslMessage sendSyncApiCommand(String address, String command, String arg, long timeoutSeconds) throws InboundTimeoutExcetion {
         try {
             return publicExecutor.submit(() -> sendSyncApiCommand(address, command, arg)).get(timeoutSeconds, TimeUnit.SECONDS);
-        } catch (Exception e) {
-            throw new InboundTimeoutExcetion(String.format("sendSyncApiCommand address : %s, command : %s, arg : %s, timeoutSeconds : %s", address, command, arg, timeoutSeconds), e);
+        } catch (InterruptedException e) {
+            log.error("send sync api command error", e);
+            Thread.currentThread().interrupt();
+            throw new InboundTimeoutExcetion(String.format("sendSyncApiCommand InterruptedException address : %s, command : %s, arg : %s, timeoutSeconds : %s", address, command, arg, timeoutSeconds), e);
+        } catch (ExecutionException e) {
+            throw new InboundTimeoutExcetion(String.format("sendSyncApiCommand ExecutionException address : %s, command : %s, arg : %s, timeoutSeconds : %s", address, command, arg, timeoutSeconds), e);
+        } catch (TimeoutException e) {
+            throw new InboundTimeoutExcetion(String.format("sendSyncApiCommand TimeoutException address : %s, command : %s, arg : %s, timeoutSeconds : %s", address, command, arg, timeoutSeconds), e);
         }
     }
 

@@ -10,15 +10,9 @@ import java.util.Base64;
 
 /**
  * @author howell
- * @date 15/2/2022 5:47 PM
  */
 public class Signature {
-    /**
-     * @param username
-     * @param role
-     * @param serviceid
-     * @return
-     * @throws Exception
+    /*
      * @see [https://github.com/open-webrtc-toolkit/owt-server/blob/master/doc/servermd/RESTAPI.md] * Authentication and Authorization {#RESTAPIsection4}
      */
     public static String getAuthenticate(String username, String role, String serviceid, String servicekey) throws Exception {

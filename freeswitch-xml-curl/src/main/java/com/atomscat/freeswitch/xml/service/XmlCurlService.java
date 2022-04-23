@@ -10,11 +10,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface XmlCurlService {
 
-    /**
-     * <p>handle.</p>
-     *
-     * @param request a {@link HttpServletRequest} object.
-     */
     String handle(HttpServletRequest request);
 
 }

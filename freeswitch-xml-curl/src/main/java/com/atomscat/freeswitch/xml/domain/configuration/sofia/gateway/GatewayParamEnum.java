@@ -3,7 +3,6 @@ package com.atomscat.freeswitch.xml.domain.configuration.sofia.gateway;
 
 /**
  * @author howell
- * @date 16/12/2021 5:57 下午
  */
 public enum GatewayParamEnum {
     /**
@@ -101,25 +100,15 @@ public enum GatewayParamEnum {
      */
     public String msg;
 
-    /**
-     * @param name
-     * @param msg
-     */
     GatewayParamEnum(String name, String msg) {
         this.name = name;
         this.msg = msg;
     }
 
-    /**
-     * @return
-     */
     public String getMsg() {
         return msg;
     }
 
-    /**
-     * @return
-     */
     public String getName() {
         return name;
     }

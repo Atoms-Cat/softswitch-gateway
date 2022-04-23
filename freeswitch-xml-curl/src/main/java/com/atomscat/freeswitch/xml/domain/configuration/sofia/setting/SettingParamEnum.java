@@ -5,10 +5,9 @@ package com.atomscat.freeswitch.xml.domain.configuration.sofia.setting;
  * https://github.com/signalwire/freeswitch/blob/master/src/mod/endpoints/mod_sofia/conf/sofia.conf.xml
  *
  * @author howell
- * @date 16/12/2021 6:29 下午
  */
 public enum SettingParamEnum {
-    /**
+    /*
      * <settings>
      * When calls are in no media this will bring them back to media when
      * you press the hold button.
@@ -582,16 +581,10 @@ public enum SettingParamEnum {
         this.msg = msg;
     }
 
-    /**
-     * @return
-     */
     public String getMsg() {
         return msg;
     }
 
-    /**
-     * @return
-     */
     public String getName() {
         return name;
     }

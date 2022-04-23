@@ -17,6 +17,7 @@
 
 package com.atomscat.freeswitch.esl.inbound.handler;
 
+import com.atomscat.freeswitch.esl.exception.InboundTimeoutExcetion;
 import com.atomscat.freeswitch.esl.helper.EslHelper;
 import com.atomscat.freeswitch.esl.inbound.listener.ChannelEventListener;
 import com.atomscat.freeswitch.esl.transport.event.EslEvent;
@@ -276,11 +277,16 @@ public class InboundChannelHandler extends SimpleChannelInboundHandler<EslMessag
             try {
                 log.trace("awaiting latch ... ");
                 // 超时时间
-                latch.await(60, TimeUnit.SECONDS);
+                boolean resp = latch.await(60, TimeUnit.SECONDS);
+                if (!resp) {
+                    log.error("inbound channel sync callback 60 seconds timeout error");
+                    throw new InboundTimeoutExcetion("inbound channel sync callback 60 seconds timeout error");
+                }
             } catch (InterruptedException e) {
+                log.error("inbound channel sync callback error", e);
+                Thread.currentThread().interrupt();
                 throw new RuntimeException(e);
             }
-
             log.trace("returning response [{}]", response);
             return response;
         }

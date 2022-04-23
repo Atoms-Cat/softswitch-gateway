@@ -26,7 +26,6 @@ public class XmlCurlParser {
     /**
      * @param request a {@link HttpServletRequest} object.
      * @return a {@link XmlCurl} object.
-     * @throws ParserException
      */
     public static XmlCurl decodeThenParse(final HttpServletRequest request) throws ParserException {
         return JSONObject.parseObject(JSONObject.toJSONString(getAllRequestParam(request)), XmlCurl.class);

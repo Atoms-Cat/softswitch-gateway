@@ -7,12 +7,12 @@ import com.atomscat.freeswitch.esl.spring.boot.starter.handler.EslEventHandler;
 import com.atomscat.freeswitch.esl.transport.event.EslEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-
+/*
+ dialplan xml setting : <action application="set" data="fire_asr_events=true"/>
+ */
 /**
  * 语音识别事件监听
- * <action application="set" data="fire_asr_events=true"/>
  * @author howell
- * @date 18/2/2022 10:48 AM
  */
 @Slf4j
 @EslEventName(EventNames.DETECTED_SPEECH)

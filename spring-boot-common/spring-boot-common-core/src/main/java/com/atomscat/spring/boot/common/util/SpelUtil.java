@@ -31,9 +31,11 @@ public class SpelUtil {
             return StrUtil.EMPTY;
         }
         //获取被拦截方法参数名列表(使用Spring支持类库)
-        LocalVariableTableParameterNameDiscoverer u =
-                new LocalVariableTableParameterNameDiscoverer();
+        LocalVariableTableParameterNameDiscoverer u = new LocalVariableTableParameterNameDiscoverer();
         String[] paraNameArr = u.getParameterNames(method);
+        if (paraNameArr == null) {
+            return null;
+        }
         if (ArrayUtil.isEmpty(paraNameArr)) {
             return spel;
         }

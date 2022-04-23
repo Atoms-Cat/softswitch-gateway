@@ -8,7 +8,7 @@ import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 
-/**
+/*
  * indicator to parse the directory for domains with parse="true" to
  * get gateways
  * <domain name="$${domain}" parse="true"/>
@@ -18,9 +18,9 @@ import java.io.Serializable;
  * aliasing has real effects on the handling of packets.  If
  * you're sharing a profile between multiple realms, you
  * want to alias all realms to the shared profile.
- *
+ */
+/**
  * @author howell
- * @date 16/12/2021 6:19 下午
  */
 @Data
 @NoArgsConstructor

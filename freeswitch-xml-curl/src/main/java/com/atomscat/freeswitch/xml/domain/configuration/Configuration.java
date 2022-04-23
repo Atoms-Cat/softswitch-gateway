@@ -26,12 +26,6 @@ public class Configuration implements Serializable {
     @JacksonXmlProperty(localName = "description", isAttribute = true)
     private String description;
 
-    /**
-     * obj to xml string
-     *
-     * @return xml string
-     * @throws JsonProcessingException
-     */
     public String toXmlString() throws JsonProcessingException {
         ObjectMapper xmlMapper = new XmlMapper();
         return xmlMapper.writeValueAsString(this);

@@ -31,7 +31,7 @@ public class RedisLockAspect {
     private RedissonClient redissonClient;
 
     @Around("@annotation(redisLock)")
-    public Object around(ProceedingJoinPoint joinPoint, RedisLock redisLock) throws Throwable {
+    public Object around(ProceedingJoinPoint joinPoint, RedisLock redisLock) {
         String spel = redisLock.key();
         String lockName = redisLock.lockName();
         String key = getRedisKey(joinPoint, lockName, spel);
@@ -39,12 +39,18 @@ public class RedisLockAspect {
 
         Object result = null;
 
-        if (rLock.tryLock(redisLock.waitTime(), redisLock.expire(), redisLock.timeUnit())) {
-            log.info("lock key: {}", key);
-            //执行方法
-            result = joinPoint.proceed();
-        } else {
-            log.info("is locked key: {}", key);
+        try {
+            if (rLock.tryLock(redisLock.waitTime(), redisLock.expire(), redisLock.timeUnit())) {
+                log.info("lock key: {}", key);
+                //执行方法
+                result = joinPoint.proceed();
+            } else {
+                log.info("is locked key: {}", key);
+            }
+        } catch (Throwable e) {
+            log.error("redis lock aspect error", e);
+            Thread.currentThread().interrupt();
+            throw new RuntimeException(e);
         }
         return result;
     }

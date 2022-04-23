@@ -11,11 +11,6 @@ import com.atomscat.freeswitch.xml.domain.XmlCurl;
  */
 public interface XmlCurlHandler {
 
-    /**
-     * <p>xmlCurl.</p>
-     *
-     * @param xmlCurl a {@link XmlCurl} object.
-     */
     String handleXmlCurl(XmlCurl xmlCurl);
 
 }

@@ -19,10 +19,7 @@ public class XmlCurlController {
     @Autowired
     private XmlCurlService cdrService;
 
-    /**
-     * @param request
-     * @return
-     */
+
     @GetMapping(value = "/xml/curl", produces = {MediaType.TEXT_XML_VALUE})
     public String getCurl(HttpServletRequest request) {
         log.debug("{} , [{}]", request.getParameterMap().size(), JSONObject.toJSONString(request.getParameterMap()));
@@ -32,10 +29,7 @@ public class XmlCurlController {
         return resp;
     }
 
-    /**
-     * @param request
-     * @return
-     */
+
     @PostMapping(value = "/xml/curl", produces = {MediaType.TEXT_XML_VALUE})
     public String postCurl(HttpServletRequest request) {
         log.debug("{} , [{}]", request.getParameterMap().size(), JSONObject.toJSONString(request.getParameterMap()));

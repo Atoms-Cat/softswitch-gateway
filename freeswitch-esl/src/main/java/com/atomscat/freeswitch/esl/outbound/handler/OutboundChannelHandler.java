@@ -17,6 +17,7 @@
 
 package com.atomscat.freeswitch.esl.outbound.handler;
 
+import com.atomscat.freeswitch.esl.exception.OutboundClientException;
 import com.atomscat.freeswitch.esl.helper.EslHelper;
 import com.atomscat.freeswitch.esl.outbound.listener.ChannelEventListener;
 import com.atomscat.freeswitch.esl.transport.SendMsg;
@@ -130,17 +131,17 @@ public class OutboundChannelHandler extends SimpleChannelInboundHandler<EslMessa
      * {@inheritDoc}
      */
     @Override
-    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) {
         if (evt instanceof IdleStateEvent) {
             if (((IdleStateEvent) evt).state() == IdleState.READER_IDLE) {
                 log.debug("userEventTriggered remoteAddr : {}, evt state : {} ", remoteAddr, ((IdleStateEvent) evt).state());
                 publicExecutor.execute(() -> {
                     try {
                         sendAsyncCommand(ctx.channel(), "bgapi status");
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                    } catch (Exception e) {
+                        log.error("user event triggered error", e);
+                        Thread.currentThread().interrupt();
+                        throw new OutboundClientException(String.format("user event triggered error remoteAddr : %s", remoteAddr), e);
                     }
                 });
             }
@@ -337,7 +338,7 @@ public class OutboundChannelHandler extends SimpleChannelInboundHandler<EslMessa
      * @param command cmd
      * @return Job-UUID as a string
      */
-    public String sendAsyncCommand(Channel channel, final String command) throws ExecutionException, InterruptedException {
+    public String sendAsyncCommand(Channel channel, final String command) {
         /*
          * Send synchronously to get the Job-UUID to return, the results of the actual
          * job request will be returned by the server as an async event.
@@ -346,12 +347,20 @@ public class OutboundChannelHandler extends SimpleChannelInboundHandler<EslMessa
         if (isTraceEnabled) {
             log.trace("sendAsyncCommand command : {}, response : {}", command, messageCompletableFuture);
         }
-        EslMessage response = messageCompletableFuture.get();
-        if (response.hasHeader(EslHeaders.Name.JOB_UUID)) {
-            return response.getHeaderValue(EslHeaders.Name.JOB_UUID);
-        } else {
-            log.warn("sendAsyncCommand command : {}, response : {}", command, EslHelper.formatEslMessage(response));
-            throw new IllegalStateException("Missing Job-UUID header in bgapi response");
+        try {
+            EslMessage response = messageCompletableFuture.get();
+            if (response.hasHeader(EslHeaders.Name.JOB_UUID)) {
+                return response.getHeaderValue(EslHeaders.Name.JOB_UUID);
+            } else {
+                log.warn("sendAsyncCommand command : {}, response : {}", command, EslHelper.formatEslMessage(response));
+                throw new IllegalStateException("Missing Job-UUID header in bgapi response");
+            }
+        } catch (InterruptedException e) {
+            log.error("sendAsyncCommand interruptedException error", e);
+            Thread.currentThread().interrupt();
+            throw new OutboundClientException(String.format("InterruptedException error command : %s", command), e);
+        } catch (ExecutionException e) {
+            throw new OutboundClientException(String.format("ExecutionException error command : %s", command), e);
         }
     }
 
