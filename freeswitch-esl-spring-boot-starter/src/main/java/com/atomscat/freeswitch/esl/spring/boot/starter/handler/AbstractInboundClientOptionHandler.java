@@ -34,7 +34,8 @@ public abstract class AbstractInboundClientOptionHandler implements InboundClien
             if (StringUtils.isNotBlank(server.getHost()) && server.getPort() > 1) {
                 option.addServerOption(new ServerOption(server.getHost(), server.getPort())
                         .timeoutSeconds(server.getTimeoutSeconds())
-                        .password(server.getPassword()));
+                        .password(server.getPassword())
+                        .routingKey(server.getRoutingKey()));
             }
         });
         properties.getEvents().forEach(event -> {

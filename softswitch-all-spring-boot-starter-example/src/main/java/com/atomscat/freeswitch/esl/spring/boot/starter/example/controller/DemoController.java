@@ -19,10 +19,14 @@ package com.atomscat.freeswitch.esl.spring.boot.starter.example.controller;
 
 import com.atomscat.freeswitch.esl.InboundClient;
 import com.atomscat.freeswitch.esl.inbound.option.ServerOption;
+import com.atomscat.freeswitch.esl.spring.boot.starter.handler.MqCommandsClient;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * <p>DemoController class.</p>
@@ -36,6 +40,9 @@ public class DemoController {
 
     @Autowired
     private InboundClient inboundClient;
+
+    @Autowired
+    private MqCommandsClient commandsClient;
 
     /**
      * <p>demo.</p>
@@ -102,5 +109,25 @@ public class DemoController {
     @GetMapping("/reload/sofia")
     public String reloadSofia() {
         return inboundClient.sendAsyncApiCommand("192.168.10.114:8021", "reload", "mod_sofia");
+    }
+
+
+    /**
+     * send freeswitch commands by RabbitMQ
+     * @return
+     */
+    @GetMapping("/send/mq")
+    public String sendMq() {
+        try {
+            // commandBindingKey
+            List<ServerOption> list = inboundClient.option().serverOptions();
+            // send all freeswitch node
+            for (ServerOption serverOption : list) {
+                commandsClient.sendCommands(serverOption.routingKey(), "reload", "mod_sofia");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return "OK";
     }
 }

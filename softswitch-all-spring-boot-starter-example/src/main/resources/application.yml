@@ -1,6 +1,10 @@
 #com:
 #  atomscat:
 #    freeswitch:
+#      amqp:
+#        commandsQueues: TAP.Commands
+#        eventsQueues: FS.Events
+#        loggingQueues: FS.Logging
 #      esl:
 #        inbound:
 #          defaultPassword: ClueCon
@@ -25,23 +29,7 @@
 #          host: 192.168.10.116
 #          port: 8081
 
-logging:
-  level:
-    link: INFO
 
-
-nacos:
-  discovery:
-    server-addr: 192.168.10.112:8848
-    auto-register: true
-    register:
-      ip: 192.168.10.116
-  config:
-    server-addr: 192.168.10.112:8848
-    bootstrap:
-      enable: true
-    data-id: example
-    type: yaml
 spring:
   application:
     name: softswitch-gateway
@@ -49,11 +37,39 @@ spring:
 #    active: dev
   redis:
     database: 1
-    host: 192.168.10.114
+    host: 192.168.181.128
     port: 6379
     password: Aa123456
     #redisson:
     #  file: classpath:redisson/redisson-dev.yaml
+  rabbitmq:
+    host: 192.168.181.130
+    port: 5672
+    virtual-host: /
+    username: guest
+    password: guest
+    listener:
+      direct:
+        acknowledge-mode: manual
+      simple:
+        acknowledge-mode: manual
 
 server:
   max-http-header-size: 102400
+
+logging:
+  level:
+    link: INFO
+
+nacos:
+  discovery:
+    server-addr: 192.168.181.131:8848
+    auto-register: true
+    register:
+      ip: 192.168.181.1
+  config:
+    server-addr: 192.168.181.131:8848
+    bootstrap:
+      enable: true
+    data-id: example
+    type: yaml

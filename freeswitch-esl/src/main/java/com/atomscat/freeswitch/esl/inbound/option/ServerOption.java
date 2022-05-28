@@ -34,6 +34,7 @@ public class ServerOption {
     private final int port;
     private int timeoutSeconds;
     private String password;
+    private String routingKey;
 
     private ConnectState state = ConnectState.INIT;
 

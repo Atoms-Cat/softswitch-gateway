@@ -20,10 +20,11 @@ package com.atomscat.freeswitch.esl.spring.boot.starter.config;
 import com.atomscat.freeswitch.esl.*;
 import com.atomscat.freeswitch.esl.inbound.option.InboundClientOption;
 import com.atomscat.freeswitch.esl.outbound.option.OutboundClientOption;
-import com.atomscat.freeswitch.esl.spring.boot.starter.handler.InboundClientOptionHandler;
-import com.atomscat.freeswitch.esl.spring.boot.starter.handler.OutboundClientOptionHandler;
+import com.atomscat.freeswitch.esl.spring.boot.starter.handler.*;
+import com.atomscat.freeswitch.esl.spring.boot.starter.propeties.AmqpClientProperties;
 import com.atomscat.freeswitch.esl.spring.boot.starter.propeties.InboundClientProperties;
 import com.atomscat.freeswitch.esl.spring.boot.starter.propeties.OutboundClientProperties;
+import com.atomscat.freeswitch.esl.spring.boot.starter.propeties.ServerProperties;
 import com.atomscat.freeswitch.esl.spring.boot.starter.template.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 
@@ -44,6 +46,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableConfigurationProperties({InboundClientProperties.class, OutboundClientProperties.class})
 @ConditionalOnClass({InboundClient.class, OutboundClient.class})
+@ComponentScan({"com.atomscat.freeswitch.esl.spring.boot.starter.propeties"})
 public class FreeswitchEslAutoConfiguration {
 
     /**
@@ -83,6 +86,21 @@ public class FreeswitchEslAutoConfiguration {
     @ConditionalOnMissingBean(OutboundEventListener.class)
     public OutboundEventListener outboundEventListener() {
         return new OutboundEventListenerTemplate();
+    }
+
+    @Bean
+    public MqEventHandler defaultMqEventHandler() {
+        return new DefaultMqEventHandler();
+    }
+
+    @Bean
+    public MqLoggingHandler defaultMqLoggingHandler() {
+        return new DefaultMqLoggingHandler();
+    }
+
+    @Bean
+    public MqListenerTemplate mqListenerTemplate() {
+        return new MqListenerTemplate();
     }
 
     /**
