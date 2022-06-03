@@ -5,6 +5,13 @@ com:
         commandsQueues: TAP.Commands
         eventsQueues: FS.Events
         loggingQueues: FS.Logging
+      xml-curl:
+#        auth-scheme: basic  # you need delete security dependency setting on pom.xml
+        auth-scheme: digest  # you need add security dependency setting on pom.xml
+        digest-enable: true
+        credentials:
+          username: muser
+          password: mypass
       esl:
         inbound:
           defaultPassword: ClueCon
