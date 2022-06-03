@@ -5,7 +5,7 @@ import com.atomscat.opensips.mi.entitys.request.MiEventSubscribeReq;
 import com.atomscat.opensips.mi.entitys.response.MiEventSubscribeResp;
 
 /**
- * @author : zhouhailin
+ * @author : everyone
  * @version 1.0.0
  */
 public interface MiEventSubscribeService {

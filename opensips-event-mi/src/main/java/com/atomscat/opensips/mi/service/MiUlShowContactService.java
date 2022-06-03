@@ -5,7 +5,7 @@ import com.atomscat.opensips.mi.entitys.request.MiUlShowContactReq;
 import com.atomscat.opensips.mi.entitys.response.MiUlShowContactResp;
 
 /**
- * @author : zhouhailin
+ * @author : everyone
  * @version 1.0.0
  */
 public interface MiUlShowContactService {

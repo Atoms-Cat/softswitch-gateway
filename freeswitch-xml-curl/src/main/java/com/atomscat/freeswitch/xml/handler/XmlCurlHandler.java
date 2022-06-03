@@ -6,7 +6,7 @@ import com.atomscat.freeswitch.xml.domain.XmlCurl;
 /**
  * <p>XmlCurlHandler interface.</p>
  *
- * @author : <a href="mailto:ant.zhou@aliyun.com">zhouhailin</a>
+ * @author : <a href="everyone@aliyun.com">everyone</a>
  * @version $Id: $Id
  */
 public interface XmlCurlHandler {

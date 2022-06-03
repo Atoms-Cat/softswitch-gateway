@@ -11,7 +11,7 @@ import static org.apache.commons.lang3.StringUtils.EMPTY;
 /**
  * <p>CdrHelper class.</p>
  *
- * @author : <a href="mailto:ant.zhou@aliyun.com">zhouhailin</a>
+ * @author : <a href="everyone@aliyun.com">everyone</a>
  * @version $Id: $Id
  */
 @Slf4j

@@ -3,7 +3,7 @@ package com.atomscat.freeswitch.cdr.service;
 /**
  * <p>CdrService interface.</p>
  *
- * @author : <a href="mailto:ant.zhou@aliyun.com">zhouhailin</a>
+ * @author : <a href="everyone@aliyun.com">everyone</a>
  * @version $Id: $Id
  */
 public interface CdrService {

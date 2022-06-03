@@ -3,7 +3,7 @@ package com.atomscat.freeswitch.esl.builder;
 import com.atomscat.freeswitch.esl.util.StringUtils;
 
 /**
- * @author zhouhailin
+ * @author everyone
  * @since 1.6.0
  */
 public class Command {

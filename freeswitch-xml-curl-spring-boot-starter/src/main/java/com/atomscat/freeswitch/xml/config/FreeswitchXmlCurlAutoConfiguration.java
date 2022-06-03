@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * <p>FreeswitchCdrAutoConfiguration class.</p>
  *
- * @author : <a href="mailto:ant.zhou@aliyun.com">zhouhailin</a>
+ * @author : <a href="everyone@aliyun.com">everyone</a>
  * @version $Id: $Id
  */
 @Configuration

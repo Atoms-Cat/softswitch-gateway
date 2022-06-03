@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
 /**
  * <p>ServerProperties class.</p>
  *
- * @author : <a href="mailto:ant.zhou@aliyun.com">zhouhailin</a>
+ * @author : <a href="everyone@aliyun.com">everyone</a>
  * @version 1.0.0
  */
 @Data

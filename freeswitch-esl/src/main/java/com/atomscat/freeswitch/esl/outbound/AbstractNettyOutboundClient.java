@@ -44,7 +44,7 @@ import java.util.concurrent.*;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 /**
- * @author : <a href="mailto:ant.zhou@aliyun.com">zhouhailin</a>
+ * @author : <a href="everyone@aliyun.com">everyone</a>
  */
 abstract class AbstractNettyOutboundClient extends AbstractService implements ChannelEventListener, OutboundClientService {
 

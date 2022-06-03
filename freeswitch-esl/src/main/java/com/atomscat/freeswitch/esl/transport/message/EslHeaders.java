@@ -20,7 +20,7 @@ package com.atomscat.freeswitch.esl.transport.message;
 /**
  * <p>EslHeaders class.</p>
  *
- * @author : <a href="mailto:ant.zhou@aliyun.com">zhouhailin</a>
+ * @author : <a href="everyone@aliyun.com">everyone</a>
  * @version 1.0.0
  */
 public class EslHeaders {
@@ -30,7 +30,7 @@ public class EslHeaders {
      * <p>
      * Note this enum will need to be kept in synch with any new headers introduced on the server side.
      *
-     * @author : <a href="mailto:ant.zhou@aliyun.com">zhouhailin</a>
+     * @author : <a href="everyone@aliyun.com">everyone</a>
      */
     public enum Name {
         /*
@@ -91,7 +91,7 @@ public class EslHeaders {
      * This values are not coded as an enum to allow for the very large range of possible values,
      * since they are just Strings.
      *
-     * @author : <a href="mailto:ant.zhou@aliyun.com">zhouhailin</a>
+     * @author : <a href="everyone@aliyun.com">everyone</a>
      */
     public static final class Value {
         /**

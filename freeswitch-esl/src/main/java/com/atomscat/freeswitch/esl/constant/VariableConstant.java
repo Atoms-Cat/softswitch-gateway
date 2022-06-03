@@ -1,7 +1,7 @@
 package com.atomscat.freeswitch.esl.constant;
 
 /**
- * @author zhouhailin
+ * @author everyone
  * @version 1.5.0
  */
 public class VariableConstant {

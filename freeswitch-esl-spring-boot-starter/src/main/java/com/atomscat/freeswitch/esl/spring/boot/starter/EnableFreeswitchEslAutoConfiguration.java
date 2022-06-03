@@ -25,7 +25,7 @@ import java.lang.annotation.*;
 /**
  * <p>EnableFreeswitchEslAutoConfiguration class.</p>
  *
- * @author : <a href="mailto:ant.zhou@aliyun.com">zhouhailin</a>
+ * @author : <a href="everyone@aliyun.com">everyone</a>
  * @version 1.0.0
  */
 @Target({ElementType.TYPE})

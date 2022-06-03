@@ -6,7 +6,7 @@ import com.atomscat.opensips.spring.boot.starter.handler.AbstractEventClientOpti
 /**
  * <p>DefaultInboundClientOptionHandlerTemplate class.</p>
  *
- * @author zhouhailin
+ * @author everyone
  * @version 1.0.0
  */
 public class DefaultEventClientOptionHandlerTemplate extends AbstractEventClientOptionHandler {

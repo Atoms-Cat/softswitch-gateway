@@ -20,7 +20,7 @@ package com.atomscat.freeswitch.esl.exception;
 /**
  * <p>InboundTimeoutExcetion class.</p>
  *
- * @author : zhouhailin
+ * @author : everyone
  * @version 1.0.0
  */
 public class InboundTimeoutExcetion extends InboundClientException {

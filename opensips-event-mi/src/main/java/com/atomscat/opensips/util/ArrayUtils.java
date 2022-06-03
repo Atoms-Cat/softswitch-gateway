@@ -5,7 +5,7 @@ import java.lang.reflect.Array;
 /**
  * <p>ArrayUtils class.</p>
  *
- * @author zhouhailin
+ * @author everyone
  * @version 1.0.0
  */
 public class ArrayUtils {

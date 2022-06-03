@@ -40,7 +40,7 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
  * |                     |
  * ----------------------|
  *
- * @author : <a href="mailto:ant.zhou@aliyun.com">zhouhailin</a>
+ * @author : <a href="everyone@aliyun.com">everyone</a>
  */
 abstract class AbstractService extends AbstractNettyService implements EventClient {
 

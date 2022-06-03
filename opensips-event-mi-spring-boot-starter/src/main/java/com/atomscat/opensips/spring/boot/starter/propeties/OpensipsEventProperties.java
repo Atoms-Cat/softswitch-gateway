@@ -26,7 +26,7 @@ import java.util.List;
 /**
  * <p>InboundClientProperties class.</p>
  *
- * @author : <a href="mailto:ant.zhou@aliyun.com">zhouhailin</a>
+ * @author : <a href="everyone@aliyun.com">everyone</a>
  * @version 1.0.0
  */
 @Data

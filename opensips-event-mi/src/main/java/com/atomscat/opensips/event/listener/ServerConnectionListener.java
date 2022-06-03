@@ -23,7 +23,7 @@ import com.atomscat.opensips.event.option.ServerOption;
 /**
  * <p>ServerConnectionListener interface.</p>
  *
- * @author : zhouhailin
+ * @author : everyone
  * @version 1.0.0
  */
 public interface ServerConnectionListener {

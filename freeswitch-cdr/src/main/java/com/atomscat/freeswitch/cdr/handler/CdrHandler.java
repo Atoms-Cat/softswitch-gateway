@@ -5,7 +5,7 @@ import com.atomscat.freeswitch.cdr.domain.Cdr;
 /**
  * <p>CdrHandler interface.</p>
  *
- * @author : <a href="mailto:ant.zhou@aliyun.com">zhouhailin</a>
+ * @author : <a href="everyone@aliyun.com">everyone</a>
  * @version $Id: $Id
  */
 public interface CdrHandler {

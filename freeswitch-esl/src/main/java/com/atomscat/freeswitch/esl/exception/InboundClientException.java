@@ -20,7 +20,7 @@ package com.atomscat.freeswitch.esl.exception;
 /**
  * <p>InboundClientException class.</p>
  *
- * @author : <a href="mailto:ant.zhou@aliyun.com">zhouhailin</a>
+ * @author : <a href="everyone@aliyun.com">everyone</a>
  * @version 1.0.0
  */
 public class InboundClientException extends RuntimeException {

@@ -50,7 +50,7 @@ import java.util.concurrent.TimeUnit;
  * |                     |
  * ----------------------|
  *
- * @author : <a href="mailto:ant.zhou@aliyun.com">zhouhailin</a>
+ * @author : <a href="everyone@aliyun.com">everyone</a>
  */
 abstract class AbstractInboundClient extends AbstractNettyInboundClient implements InboundClient {
 

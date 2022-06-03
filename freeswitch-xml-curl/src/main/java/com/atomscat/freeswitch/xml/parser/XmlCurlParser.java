@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * <p>XmlCurlParser class.</p>
  *
- * @author : zhouhailin
+ * @author : everyone
  * @version $Id: $Id
  */
 @Slf4j

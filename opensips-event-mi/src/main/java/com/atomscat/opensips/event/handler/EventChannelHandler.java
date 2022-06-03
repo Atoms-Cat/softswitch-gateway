@@ -35,7 +35,7 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * <p>OutboundChannelHandler class.</p>
  *
- * @author : <a href="mailto:ant.zhou@aliyun.com">zhouhailin</a>
+ * @author : <a href="everyone@aliyun.com">everyone</a>
  * @version 1.0.0
  */
 @Slf4j

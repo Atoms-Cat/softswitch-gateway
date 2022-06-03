@@ -24,7 +24,7 @@ import com.atomscat.freeswitch.esl.outbound.option.OutboundClientOption;
 /**
  * 保证单例对象
  *
- * @author : <a href="mailto:ant.zhou@aliyun.com">zhouhailin</a>
+ * @author : <a href="everyone@aliyun.com">everyone</a>
  */
 class OutboundClientFactory {
 

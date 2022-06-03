@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * <p>ExampleInboundClientOptionHandler class.</p>
  *
- * @author zhouhailin
+ * @author everyone
  * @version 1.0.0
  */
 @Slf4j

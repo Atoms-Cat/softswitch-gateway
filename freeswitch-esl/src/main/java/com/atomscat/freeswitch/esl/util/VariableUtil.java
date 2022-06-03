@@ -5,7 +5,7 @@ import com.atomscat.freeswitch.esl.transport.event.EslEvent;
 import java.util.Map;
 
 /**
- * @author zhouhailin
+ * @author everyone
  * @version 1.5.1
  */
 public class VariableUtil {

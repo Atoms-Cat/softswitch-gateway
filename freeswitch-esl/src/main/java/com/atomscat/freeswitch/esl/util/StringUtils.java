@@ -3,7 +3,7 @@ package com.atomscat.freeswitch.esl.util;
 /**
  * <p>StringUtils class.</p>
  *
- * @author zhouhailin
+ * @author everyone
  * @version 1.0.0
  */
 public class StringUtils {

@@ -3,7 +3,7 @@ package com.atomscat.opensips.util;
 /**
  * <p>StringUtils class.</p>
  *
- * @author zhouhailin
+ * @author everyone
  * @version 1.0.0
  */
 public class StringUtils {

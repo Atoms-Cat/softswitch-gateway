@@ -20,7 +20,7 @@ package com.atomscat.freeswitch.esl.transport.event;
 /**
  * <p>EslEventHeaderNames class.</p>
  *
- * @author : <a href="mailto:ant.zhou@aliyun.com">zhouhailin</a>
+ * @author : <a href="everyone@aliyun.com">everyone</a>
  * @version 1.0.0
  */
 public class EslEventHeaderNames {

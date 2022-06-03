@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author zhouhailin
+ * @author everyone
  * @since 1.6.0
  */
 abstract class AbstractInboundClientCommand extends AbstractInboundClient {

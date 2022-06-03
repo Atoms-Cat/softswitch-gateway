@@ -41,7 +41,7 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
  * |                     |
  * ----------------------|
  *
- * @author : <a href="mailto:ant.zhou@aliyun.com">zhouhailin</a>
+ * @author : <a href="everyone@aliyun.com">everyone</a>
  */
 abstract class AbstractOutboundClient extends AbstractNettyOutboundClient implements OutboundClient {
 

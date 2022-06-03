@@ -5,7 +5,7 @@ import com.atomscat.freeswitch.esl.inbound.option.InboundClientOption;
 /**
  * <p>InboundClientOptionHandler interface.</p>
  *
- * @author zhouhailin
+ * @author everyone
  * @version 1.0.0
  */
 public interface InboundClientOptionHandler {

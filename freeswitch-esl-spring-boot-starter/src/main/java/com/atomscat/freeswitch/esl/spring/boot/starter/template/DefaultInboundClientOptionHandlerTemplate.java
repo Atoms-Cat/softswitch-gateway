@@ -6,7 +6,7 @@ import com.atomscat.freeswitch.esl.spring.boot.starter.handler.AbstractInboundCl
 /**
  * <p>DefaultInboundClientOptionHandlerTemplate class.</p>
  *
- * @author zhouhailin
+ * @author everyone
  * @version 1.0.0
  */
 public class DefaultInboundClientOptionHandlerTemplate extends AbstractInboundClientOptionHandler {

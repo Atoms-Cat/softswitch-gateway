@@ -9,7 +9,7 @@ import org.junit.Test;
 /**
  * <p>CdrParserTest class.</p>
  *
- * @author : <a href="mailto:ant.zhou@aliyun.com">zhouhailin</a>
+ * @author : <a href="everyone@aliyun.com">everyone</a>
  * @version $Id: $Id
  * @since 0.0.1
  */

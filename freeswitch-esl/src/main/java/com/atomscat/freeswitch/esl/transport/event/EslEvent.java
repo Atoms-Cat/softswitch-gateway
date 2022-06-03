@@ -45,7 +45,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * <p>
  * The messageHeader lines from the original message are cached in a map keyed by {@link EslHeaders.Name}.
  *
- * @author : <a href="mailto:ant.zhou@aliyun.com">zhouhailin</a>
+ * @author : <a href="everyone@aliyun.com">everyone</a>
  * @version 1.0.0
  * @see EslEventHeaderNames
  */

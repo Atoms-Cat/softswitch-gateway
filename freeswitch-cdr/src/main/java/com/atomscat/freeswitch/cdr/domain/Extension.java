@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * <p>Extension class.</p>
  *
- * @author : <a href="mailto:ant.zhou@aliyun.com">zhouhailin</a>
+ * @author : <a href="everyone@aliyun.com">everyone</a>
  * @version $Id: $Id
  */
 @Data

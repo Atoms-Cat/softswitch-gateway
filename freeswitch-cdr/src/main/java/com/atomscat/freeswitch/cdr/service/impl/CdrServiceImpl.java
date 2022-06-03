@@ -23,7 +23,7 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 /**
  * <p>CdrServiceImpl class.</p>
  *
- * @author : <a href="mailto:ant.zhou@aliyun.com">zhouhailin</a>
+ * @author : <a href="everyone@aliyun.com">everyone</a>
  * @version $Id: $Id
  */
 @Slf4j

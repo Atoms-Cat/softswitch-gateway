@@ -25,7 +25,7 @@ import com.atomscat.opensips.event.service.NettyEventService;
 /**
  * 保证单例对象
  *
- * @author : <a href="mailto:ant.zhou@aliyun.com">zhouhailin</a>
+ * @author : <a href="everyone@aliyun.com">everyone</a>
  */
 class EventClientFactory {
 

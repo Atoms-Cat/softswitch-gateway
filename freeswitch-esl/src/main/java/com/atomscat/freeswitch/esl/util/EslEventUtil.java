@@ -3,7 +3,7 @@ package com.atomscat.freeswitch.esl.util;
 import com.atomscat.freeswitch.esl.transport.event.EslEvent;
 
 /**
- * @author zhouhailin
+ * @author everyone
  * @version 1.5.0
  */
 public class EslEventUtil {

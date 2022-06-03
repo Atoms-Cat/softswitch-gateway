@@ -22,7 +22,7 @@ import junit.framework.TestCase;
 /**
  * <p>ByteBuilderTest class.</p>
  *
- * @author zhouhailin
+ * @author everyone
  * @version 1.0.0
  * @since 1.4.0.SNAPSHOT
  */

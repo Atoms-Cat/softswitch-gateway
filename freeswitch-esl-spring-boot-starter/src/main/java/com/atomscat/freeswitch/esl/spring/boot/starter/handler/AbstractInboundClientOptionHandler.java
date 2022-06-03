@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * <p>Abstract AbstractInboundClientOptionHandler class.</p>
  *
- * @author zhouhailin
+ * @author everyone
  * @version 1.0.0
  */
 public abstract class AbstractInboundClientOptionHandler implements InboundClientOptionHandler {

@@ -22,7 +22,7 @@ import com.atomscat.freeswitch.esl.inbound.option.ServerOption;
 /**
  * <p>ServerOptionListener interface.</p>
  *
- * @author : <a href="mailto:ant.zhou@aliyun.com">zhouhailin</a>
+ * @author : <a href="everyone@aliyun.com">everyone</a>
  * @version 1.0.0
  */
 public interface ServerOptionListener {

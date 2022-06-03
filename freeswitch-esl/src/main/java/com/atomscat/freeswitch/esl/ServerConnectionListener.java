@@ -22,7 +22,7 @@ import com.atomscat.freeswitch.esl.inbound.option.ServerOption;
 /**
  * <p>ServerConnectionListener interface.</p>
  *
- * @author : zhouhailin
+ * @author : everyone
  * @version 1.0.0
  */
 public interface ServerConnectionListener {

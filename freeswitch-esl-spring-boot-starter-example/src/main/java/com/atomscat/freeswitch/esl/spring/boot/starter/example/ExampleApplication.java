@@ -25,7 +25,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * <p>FreeswitchEslSpringBootStarterExampleApplication class.</p>
  *
- * @author zhouhl
+ * @author everyone
  * @version 1.0.0
  */
 @SpringBootApplication

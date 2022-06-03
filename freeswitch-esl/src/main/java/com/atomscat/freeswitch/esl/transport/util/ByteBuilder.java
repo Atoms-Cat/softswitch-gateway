@@ -20,7 +20,7 @@ package com.atomscat.freeswitch.esl.transport.util;
 /**
  * <p>ByteBuilder class.</p>
  *
- * @author zhouhailin
+ * @author everyone
  * @version 1.0.0
  */
 public class ByteBuilder {

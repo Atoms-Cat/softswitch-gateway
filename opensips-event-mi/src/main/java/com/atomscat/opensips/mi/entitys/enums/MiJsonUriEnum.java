@@ -1,7 +1,7 @@
 package com.atomscat.opensips.mi.entitys.enums;
 
 /**
- * @author : zhouhailin
+ * @author : everyone
  * @version 1.0.0
  */
 public enum MiJsonUriEnum {
