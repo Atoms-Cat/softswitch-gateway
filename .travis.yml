@@ -10,4 +10,4 @@ script: "mvn cobertura:cobertura"
 sudo: false # faster builds
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash) -t dc4f5d8f-072a-4dfb-a180-f61f6a00bed6
+  - bash <(curl -s https://codecov.io/bash) -t 4ed3590e-3c8c-48e5-a54e-1f14d47cc476
