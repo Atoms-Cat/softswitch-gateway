@@ -29,11 +29,11 @@ Based on netty 4 docking Opensips Exported Event, Exported MI and Freeswitch Eve
 * [opensips-register-fs](doc/DeploymentPlan3.md)
 * [opensips-fs-rtpengine](doc/DeploymentPlan4.md) (recommend)
 
-### 2.[freeswitch-esl、freeswitch-cdr](https://github.com/everyone)
+### 2.[freeswitch-esl、freeswitch-cdr](https://github.com/zhouhailin)
 
-    refer to https://github.com/everyone/freeswitch-esl-all
-    refer to https://github.com/everyone/freeswitch-cdr-all
-    refer to https://github.com/everyone/spring-boot-common
+    refer to https://github.com/zhouhailin/freeswitch-esl-all
+    refer to https://github.com/zhouhailin/freeswitch-cdr-all
+    refer to https://github.com/zhouhailin/spring-boot-common
 
 ### 3.[freeswitch-xml-curl](freeswitch-xml-curl/README.md)
 
