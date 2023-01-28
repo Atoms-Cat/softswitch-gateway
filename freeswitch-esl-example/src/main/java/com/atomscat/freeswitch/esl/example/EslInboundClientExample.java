@@ -21,6 +21,7 @@ import com.atomscat.freeswitch.esl.IEslEventListener;
 import com.atomscat.freeswitch.esl.InboundClient;
 import com.atomscat.freeswitch.esl.inbound.option.InboundClientOption;
 import com.atomscat.freeswitch.esl.inbound.option.ServerOption;
+import com.atomscat.freeswitch.esl.transport.SendMsg;
 import com.atomscat.freeswitch.esl.transport.event.EslEvent;
 
 /**
@@ -39,8 +40,8 @@ public class EslInboundClientExample {
     public static void main(String[] args) {
         InboundClientOption option = new InboundClientOption();
 
-        option.defaultPassword("NewVois001")
-                .addServerOption(new ServerOption("172.16.2.253", 8014));
+        option.defaultPassword("ClueCon")
+                .addServerOption(new ServerOption("127.0.0.1", 8021).password("ClueCon"));
         option.addEvents("all");
 
         option.addListener(new IEslEventListener() {

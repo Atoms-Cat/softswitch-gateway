@@ -18,24 +18,24 @@ com:
           performance: false
           performanceCostTime: 200
           servers:
-            - host: 192.168.181.128
+            - host: 127.0.0.1
               port: 8021
               timeoutSeconds: 5
-              routingKey: 192.168.181.128
-            - host: 192.168.181.131
+              routingKey: 127.0.0.1
+            - host: 127.0.0.1
               port: 8021
               timeoutSeconds: 5
-              routingKey: 192.168.181.131
+              routingKey: 127.0.0.1
           events:
             - all
         outbound:
           server:
-            host: 192.168.181.1
+            host: 127.0.0.1
             port: 8082
     opensips:
       event:
         server:
-          host: 192.168.181.1
+          host: 127.0.0.1
           port: 8081
 
 logging:
@@ -45,12 +45,12 @@ logging:
 
 nacos:
   discovery:
-    server-addr: 192.168.181.131:8848
+    server-addr: 127.0.0.1:8848
     auto-register: true
     register:
-      ip: 192.168.181.1
+      ip: 127.0.0.1
   config:
-    server-addr: 192.168.181.131:8848
+    server-addr: 127.0.0.1:8848
     bootstrap:
       enable: true
     data-id: example
@@ -60,7 +60,7 @@ spring:
     name: softswitch-gateway
   redis:
     database: 1
-    host: 192.168.181.128
+    host: 127.0.0.1
     port: 6379
     password: Aa123456
     #redisson:

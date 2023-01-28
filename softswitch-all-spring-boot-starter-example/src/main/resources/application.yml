@@ -33,8 +33,8 @@
 spring:
   application:
     name: softswitch-gateway
-#  profiles:
-#    active: dev
+  profiles:
+    active: dev
   redis:
     database: 1
     host: 192.168.181.128
