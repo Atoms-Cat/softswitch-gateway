@@ -42,7 +42,6 @@ logging:
   level:
     link: INFO
 
-
 nacos:
   discovery:
     server-addr: 127.0.0.1:8848
@@ -55,9 +54,22 @@ nacos:
       enable: true
     data-id: example
     type: yaml
+
+
 spring:
   application:
     name: softswitch-gateway
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    virtual-host: /
+    username: guest
+    password: guest
+    listener:
+      direct:
+        acknowledge-mode: manual
+      simple:
+        acknowledge-mode: manual
   redis:
     database: 1
     host: 127.0.0.1
@@ -68,3 +80,4 @@ spring:
 
 server:
   max-http-header-size: 102400
+  port: 8080

@@ -56,6 +56,7 @@ spring:
 
 server:
   max-http-header-size: 102400
+  port: 8080
 
 logging:
   level:
