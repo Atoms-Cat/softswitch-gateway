@@ -41,7 +41,7 @@ public class XmlCurlServiceImpl implements XmlCurlService, InitializingBean {
     public String handle(HttpServletRequest request) {
         try {
             return handleXmlCurl(request);
-        } catch (ParserException e) {
+        } catch (Exception e) {
             log.error("handle xml curl failure, cause : ", e);
             log.error("handle curl xml : [{}]", request);
         }
@@ -55,7 +55,7 @@ public class XmlCurlServiceImpl implements XmlCurlService, InitializingBean {
     }
 
 
-    private String handleXmlCurl(HttpServletRequest request) throws ParserException {
+    private String handleXmlCurl(HttpServletRequest request) throws Exception {
         XmlCurl xmlCurl = XmlCurlParser.decodeThenParse(request);
         log.info("handle xml curl : [{}] [{}]", xmlCurl.getSection(), JSONObject.toJSONString(xmlCurl));
         // 获取事件名称

@@ -12,7 +12,6 @@
 docker run -it -d -p 6379:6379 --name redis redis --requirepass "Aa123456"
 ```
 
-
 ## rabbitmq
 ```shell
 docker run -d -p 14369:4369 -p 5671:5671 -p 5672:5672 -p 15671:15671 -p 15672:15672 -p 15691:15691 -p 15692:15692 -p 25672:25672 -e RABBITMQ_DEFAULT_USER=guest -e RABBITMQ_DEFAULT_PASS=guest --name rabbitmq rabbitmq:3-management 
@@ -29,4 +28,15 @@ http://127.0.0.1:15672/
 # download by https://github.com/alibaba/nacos/releases
 # unzip package
 ./bin/startup.sh -m standalone
+```
+
+## postgres
+```shell
+docker run -d \
+    --name postgres \
+    -p 5432:5432 \
+    -e POSTGRES_PASSWORD=Aa123456 \
+    -e PGDATA=/var/lib/postgresql/data/pgdata \
+    -v /data/postgres/mount:/var/lib/postgresql/data \
+    postgres:9.6
 ```

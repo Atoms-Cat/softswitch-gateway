@@ -37,6 +37,7 @@ public class DirectoryController {
             return "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n" +
                     "<document type=\"freeswitch/xml\">\n" +
                     "  <section name=\"" + section + "\">\n" +
+
                     "<domain name=\"$${domain}\">" +
                     "<params>\n" +
                     "      <param name=\"dial-string\" value=\"{^^:sip_invite_domain=${dialed_domain}:presence_id=${dialed_user}@${dialed_domain}}${sofia_contact(*/${dialed_user}@${dialed_domain})},${verto_contact(${dialed_user}@${dialed_domain})}\"/>\n" +
