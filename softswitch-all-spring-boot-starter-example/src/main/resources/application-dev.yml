@@ -6,7 +6,7 @@ com:
         eventsQueues: FS.Events
         loggingQueues: FS.Logging
       xml-curl:
-        api: /freeswitch/xml/curl
+#        api: /freeswitch/xml/curl
 #        auth-scheme: basic  # you need delete security dependency setting on pom.xml
         auth-scheme: digest  # you need add security dependency setting on pom.xml
         digest-enable: true

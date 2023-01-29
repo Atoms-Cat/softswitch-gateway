@@ -36,7 +36,7 @@ public class FsDirectoryXmlCurlHandler implements XmlCurlHandler {
 
         // todo
         if (!"1090".equals(xmlCurl.getMetadata().get("user"))) {
-            throw new RuntimeException();
+            throw new RuntimeException("can`t find user id");
         }
 
         Domain domain = new Domain();
