@@ -17,7 +17,7 @@
 
 package com.atomscat.freeswitch.esl.outbound.handler;
 
-import com.atomscat.freeswitch.esl.exception.OutboundClientException;
+import com.atomscat.freeswitch.esl.exception.OutboundServerException;
 import com.atomscat.freeswitch.esl.helper.EslHelper;
 import com.atomscat.freeswitch.esl.outbound.listener.ChannelEventListener;
 import com.atomscat.freeswitch.esl.transport.SendMsg;
@@ -141,7 +141,7 @@ public class OutboundChannelHandler extends SimpleChannelInboundHandler<EslMessa
                     } catch (Exception e) {
                         log.error("user event triggered error", e);
                         Thread.currentThread().interrupt();
-                        throw new OutboundClientException(String.format("user event triggered error remoteAddr : %s", remoteAddr), e);
+                        throw new OutboundServerException(String.format("user event triggered error remoteAddr : %s", remoteAddr), e);
                     }
                 });
             }
@@ -358,9 +358,9 @@ public class OutboundChannelHandler extends SimpleChannelInboundHandler<EslMessa
         } catch (InterruptedException e) {
             log.error("sendAsyncCommand interruptedException error", e);
             Thread.currentThread().interrupt();
-            throw new OutboundClientException(String.format("InterruptedException error command : %s", command), e);
+            throw new OutboundServerException(String.format("InterruptedException error command : %s", command), e);
         } catch (ExecutionException e) {
-            throw new OutboundClientException(String.format("ExecutionException error command : %s", command), e);
+            throw new OutboundServerException(String.format("ExecutionException error command : %s", command), e);
         }
     }
 

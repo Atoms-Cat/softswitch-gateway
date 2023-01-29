@@ -3,20 +3,22 @@ package com.atomscat.freeswitch.xml.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.atomscat.freeswitch.xml.annotation.XmlCurlSectionName;
 import com.atomscat.freeswitch.xml.domain.XmlCurl;
-import com.atomscat.freeswitch.xml.exception.ParserException;
 import com.atomscat.freeswitch.xml.handler.XmlCurlHandler;
 import com.atomscat.freeswitch.xml.parser.XmlCurlParser;
 import com.atomscat.freeswitch.xml.service.XmlCurlService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -27,11 +29,10 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class XmlCurlServiceImpl implements XmlCurlService, InitializingBean {
 
-
-    @Autowired
-    private final List<XmlCurlHandler> xmlCurlHandlers = Collections.emptyList();
+    private final List<XmlCurlHandler> xmlCurlHandlers;
     private final Map<String, List<XmlCurlHandler>> handlerTable = new ConcurrentHashMap<>(16);
 
     /**
@@ -57,7 +58,7 @@ public class XmlCurlServiceImpl implements XmlCurlService, InitializingBean {
 
     private String handleXmlCurl(HttpServletRequest request) throws Exception {
         XmlCurl xmlCurl = XmlCurlParser.decodeThenParse(request);
-        log.info("handle xml curl : [{}] [{}]", xmlCurl.getSection(), JSONObject.toJSONString(xmlCurl));
+        log.debug("handle xml curl : [{}] [{}]", xmlCurl.getSection(), JSONObject.toJSONString(xmlCurl));
         // 获取事件名称
         String section = xmlCurl.getSection();
         if (StringUtils.isBlank(section)) {
@@ -67,7 +68,7 @@ public class XmlCurlServiceImpl implements XmlCurlService, InitializingBean {
         List<XmlCurlHandler> handlers = handlerTable.get(section.toUpperCase(Locale.ROOT));
         stringBuilder.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n" +
                 "<document type=\"freeswitch/xml\">");
-        stringBuilder.append("<section name=\"" + section + "\">");
+        stringBuilder.append("<section name=\"").append(section).append("\">");
         if (!CollectionUtils.isEmpty(handlers)) {
             handlers.forEach(xmlCurlHandler -> {
                 try {
@@ -125,11 +126,7 @@ public class XmlCurlServiceImpl implements XmlCurlService, InitializingBean {
         }
         if (StringUtils.isBlank(eventName.key())) {
             return true;
-        } else if (StringUtils.isNotBlank(keyValue) && keyValue.equals(eventName.key())) {
-            return true;
-        } else {
-            return false;
-        }
+        } else return StringUtils.isNotBlank(keyValue) && keyValue.equals(eventName.key());
     }
 
 }

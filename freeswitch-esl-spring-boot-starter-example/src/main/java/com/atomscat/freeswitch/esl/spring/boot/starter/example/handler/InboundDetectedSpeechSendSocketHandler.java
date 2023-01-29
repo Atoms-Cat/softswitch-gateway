@@ -3,7 +3,7 @@ package com.atomscat.freeswitch.esl.spring.boot.starter.example.handler;
 import com.atomscat.freeswitch.esl.constant.EventNames;
 import com.atomscat.freeswitch.esl.helper.EslHelper;
 import com.atomscat.freeswitch.esl.spring.boot.starter.annotation.EslEventName;
-import com.atomscat.freeswitch.esl.spring.boot.starter.handler.EslEventHandler;
+import com.atomscat.freeswitch.esl.spring.boot.starter.handler.InboundEventHandler;
 import com.atomscat.freeswitch.esl.transport.event.EslEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @EslEventName(EventNames.DETECTED_SPEECH)
 @Component
-public class InboundDetectedSpeechSendSocketHandler implements EslEventHandler {
+public class InboundDetectedSpeechSendSocketHandler implements InboundEventHandler {
 
     @Override
     public void handle(String address, EslEvent event, String coreUUID) {

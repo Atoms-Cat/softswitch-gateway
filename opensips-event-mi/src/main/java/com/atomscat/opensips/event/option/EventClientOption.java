@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <p>OutboundClientOption class.</p>
+ * <p>OutboundServerOption class.</p>
  *
  * @author : <a href="everyone@aliyun.com">everyone</a>
  * @version 1.0.0

@@ -31,7 +31,7 @@ import java.util.List;
  */
 @Data
 @ConfigurationProperties(prefix = "com.atomscat.freeswitch.esl.outbound")
-public class OutboundClientProperties {
+public class OutboundServerProperties {
 
     private int sndBufSize = 65535;
     private int rcvBufSize = 65535;

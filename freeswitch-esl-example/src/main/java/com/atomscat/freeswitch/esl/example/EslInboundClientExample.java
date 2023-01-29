@@ -17,7 +17,7 @@
 
 package com.atomscat.freeswitch.esl.example;
 
-import com.atomscat.freeswitch.esl.IEslEventListener;
+import com.atomscat.freeswitch.esl.InboundEventListener;
 import com.atomscat.freeswitch.esl.InboundClient;
 import com.atomscat.freeswitch.esl.inbound.option.InboundClientOption;
 import com.atomscat.freeswitch.esl.inbound.option.ServerOption;
@@ -44,7 +44,7 @@ public class EslInboundClientExample {
                 .addServerOption(new ServerOption("127.0.0.1", 8021).password("ClueCon"));
         option.addEvents("all");
 
-        option.addListener(new IEslEventListener() {
+        option.addListener(new InboundEventListener() {
             @Override
             public void eventReceived(String address, EslEvent event) {
                 System.out.println(address);

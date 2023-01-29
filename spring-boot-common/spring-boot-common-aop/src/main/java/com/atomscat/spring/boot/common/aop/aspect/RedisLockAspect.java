@@ -3,6 +3,7 @@ package com.atomscat.spring.boot.common.aop.aspect;
 import cn.hutool.core.util.StrUtil;
 import com.atomscat.spring.boot.common.aop.annotation.RedisLock;
 import com.atomscat.spring.boot.common.util.SpelUtil;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
@@ -11,7 +12,6 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
@@ -24,11 +24,12 @@ import java.lang.reflect.Method;
 @Slf4j
 @Aspect
 @Component
+@RequiredArgsConstructor
 public class RedisLockAspect {
 
     private static final String REDISSON_LOCK_PREFIX = "redisson_lock:";
-    @Autowired
-    private RedissonClient redissonClient;
+
+    private final RedissonClient redissonClient;
 
     @Around("@annotation(redisLock)")
     public Object around(ProceedingJoinPoint joinPoint, RedisLock redisLock) {

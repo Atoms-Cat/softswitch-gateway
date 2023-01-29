@@ -1,6 +1,6 @@
 package com.atomscat.freeswitch.esl.spring.boot.starter.handler;
 
-import com.atomscat.freeswitch.esl.outbound.option.OutboundClientOption;
+import com.atomscat.freeswitch.esl.outbound.option.OutboundServerOption;
 
 /**
  * <p>InboundClientOptionHandler interface.</p>
@@ -8,13 +8,13 @@ import com.atomscat.freeswitch.esl.outbound.option.OutboundClientOption;
  * @author everyone
  * @version 1.0.0
  */
-public interface OutboundClientOptionHandler {
+public interface OutboundServerOptionHandler {
 
     /**
      * <p>getOption.</p>
      *
-     * @return a {@link OutboundClientOption} object.
+     * @return a {@link OutboundServerOption} object.
      */
-    OutboundClientOption getOption();
+    OutboundServerOption getOption();
 
 }

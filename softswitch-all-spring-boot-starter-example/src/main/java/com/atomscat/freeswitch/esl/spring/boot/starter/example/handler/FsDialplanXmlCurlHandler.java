@@ -5,13 +5,14 @@ import com.alibaba.nacos.api.annotation.NacosInjected;
 import com.alibaba.nacos.api.exception.NacosException;
 import com.alibaba.nacos.api.naming.NamingService;
 import com.alibaba.nacos.api.naming.pojo.Instance;
-import com.atomscat.freeswitch.esl.spring.boot.starter.propeties.OutboundClientProperties;
+import com.atomscat.freeswitch.esl.spring.boot.starter.propeties.OutboundServerProperties;
 import com.atomscat.freeswitch.xml.annotation.XmlCurlSectionName;
 import com.atomscat.freeswitch.xml.constant.SectionNames;
 import com.atomscat.freeswitch.xml.domain.XmlCurl;
 import com.atomscat.freeswitch.xml.domain.dialplan.*;
 import com.atomscat.freeswitch.xml.handler.XmlCurlHandler;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,14 +28,14 @@ import java.util.List;
  */
 @Slf4j
 @Service
+@RequiredArgsConstructor
 @XmlCurlSectionName(SectionNames.DIALPLAN)
 public class FsDialplanXmlCurlHandler implements XmlCurlHandler {
 
     @NacosInjected
     private NamingService namingService;
 
-    @Autowired
-    private OutboundClientProperties outboundClientProperties;
+    private final OutboundServerProperties outboundServerProperties;
 
     /**
      * {@inheritDoc}
@@ -104,7 +105,7 @@ public class FsDialplanXmlCurlHandler implements XmlCurlHandler {
         try {
             Instance instance = namingService.selectOneHealthyInstance("softswitch-gateway");
             // 组装  <action application="socket" data=" IP : yaml配置的端口 async full" />
-            //String arg = instance.getIp() + ":" + outboundClientProperties.getServer().getPort() + " async full";
+            //String arg = instance.getIp() + ":" + outboundServerProperties.getServer().getPort() + " async full";
             //actionList.add(new Action(AppEnum.socket, arg));
             String arg = "sofia/external/${sip_to_uri}";
             actionList.add(new Action(AppEnum.BRIDGE, arg));
@@ -144,7 +145,7 @@ public class FsDialplanXmlCurlHandler implements XmlCurlHandler {
         try {
             Instance instance = namingService.selectOneHealthyInstance("softswitch-gateway");
             // 组装  <action application="socket" data=" IP : yaml配置的端口 async full" />
-            String arg = instance.getIp() + ":" + outboundClientProperties.getServer().getPort() + " async full";
+            String arg = instance.getIp() + ":" + outboundServerProperties.getServer().getPort() + " async full";
             actionList.add(new Action(AppEnum.SOCKET, arg));
         } catch (NacosException e) {
             e.printStackTrace();

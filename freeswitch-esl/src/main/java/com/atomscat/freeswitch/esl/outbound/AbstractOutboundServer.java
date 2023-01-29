@@ -18,10 +18,10 @@
 package com.atomscat.freeswitch.esl.outbound;
 
 
-import com.atomscat.freeswitch.esl.OutboundClient;
+import com.atomscat.freeswitch.esl.OutboundServer;
 import com.atomscat.freeswitch.esl.outbound.handler.Context;
 import com.atomscat.freeswitch.esl.outbound.handler.OutboundChannelHandler;
-import com.atomscat.freeswitch.esl.outbound.option.OutboundClientOption;
+import com.atomscat.freeswitch.esl.outbound.option.OutboundServerOption;
 import com.atomscat.freeswitch.esl.transport.event.EslEvent;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelHandlerContext;
@@ -43,14 +43,14 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
  *
  * @author : <a href="everyone@aliyun.com">everyone</a>
  */
-abstract class AbstractOutboundClient extends AbstractNettyOutboundClient implements OutboundClient {
+abstract class AbstractOutboundServer extends AbstractNettyOutboundServer implements OutboundServer {
 
     private final ScheduledThreadPoolExecutor scheduledPoolExecutor = new ScheduledThreadPoolExecutor(1,
             new DefaultThreadFactory("outbound-scheduled-pool", true));
 
     private final Map<String, OutboundChannelHandler> handlerTable = new ConcurrentHashMap<>(32);
 
-    AbstractOutboundClient(OutboundClientOption option) {
+    AbstractOutboundServer(OutboundServerOption option) {
         super(option);
     }
 
@@ -58,7 +58,7 @@ abstract class AbstractOutboundClient extends AbstractNettyOutboundClient implem
      * {@inheritDoc}
      */
     @Override
-    public OutboundClientOption option() {
+    public OutboundServerOption option() {
         return option;
     }
 

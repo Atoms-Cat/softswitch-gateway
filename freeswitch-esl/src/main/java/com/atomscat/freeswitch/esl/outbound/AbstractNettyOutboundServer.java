@@ -17,10 +17,10 @@
 
 package com.atomscat.freeswitch.esl.outbound;
 
-import com.atomscat.freeswitch.esl.OutboundClientService;
+import com.atomscat.freeswitch.esl.OutboundServerService;
 import com.atomscat.freeswitch.esl.outbound.handler.OutboundChannelHandler;
 import com.atomscat.freeswitch.esl.outbound.listener.ChannelEventListener;
-import com.atomscat.freeswitch.esl.outbound.option.OutboundClientOption;
+import com.atomscat.freeswitch.esl.outbound.option.OutboundServerOption;
 import com.atomscat.freeswitch.esl.transport.message.EslFrameDecoder;
 import com.google.common.util.concurrent.AbstractService;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
@@ -46,13 +46,13 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
 /**
  * @author : <a href="everyone@aliyun.com">everyone</a>
  */
-abstract class AbstractNettyOutboundClient extends AbstractService implements ChannelEventListener, OutboundClientService {
+abstract class AbstractNettyOutboundServer extends AbstractService implements ChannelEventListener, OutboundServerService {
 
     final ServerBootstrap bootstrap;
     final EventLoopGroup workerGroup;
     final EventLoopGroup parentGroup;
     final ExecutorService publicExecutor;
-    final OutboundClientOption option;
+    final OutboundServerOption option;
 
     final Logger log = LoggerFactory.getLogger(getClass());
 
@@ -73,7 +73,7 @@ abstract class AbstractNettyOutboundClient extends AbstractService implements Ch
             new LinkedBlockingQueue<>(2048), onConnectThreadFactory);
 
 
-    AbstractNettyOutboundClient(OutboundClientOption option) {
+    AbstractNettyOutboundServer(OutboundServerOption option) {
         this.option = option;
 
         bootstrap = new ServerBootstrap();
@@ -99,7 +99,7 @@ abstract class AbstractNettyOutboundClient extends AbstractService implements Ch
                         pipeline.addLast("decoder", new EslFrameDecoder(8192, true));
                         pipeline.addLast("server-idle-handler", new IdleStateHandler(0, 0, option.readerIdleTimeSeconds(), MILLISECONDS));
                         // now the inbound client logic
-                        pipeline.addLast("clientHandler", new OutboundChannelHandler(AbstractNettyOutboundClient.this, publicExecutor, onEslExecutor, onConnectExecutor));
+                        pipeline.addLast("clientHandler", new OutboundChannelHandler(AbstractNettyOutboundServer.this, publicExecutor, onEslExecutor, onConnectExecutor));
                     }
                 });
     }

@@ -15,33 +15,23 @@
  * limitations under the License.
  */
 
-package com.atomscat.freeswitch.esl;
+package com.atomscat.freeswitch.esl.spring.boot.starter.handler;
 
+import com.atomscat.freeswitch.esl.helper.EslHelper;
 import com.atomscat.freeswitch.esl.transport.event.EslEvent;
 
 /**
- * <p>IEslEventListener interface.</p>
+ * <p>DefaultInboundEventHandler class.</p>
  *
  * @author : <a href="everyone@aliyun.com">everyone</a>
  * @version 1.0.0
  */
-public interface IEslEventListener {
-
+public class DefaultInboundEventHandler extends AbstractInboundEventHandler {
     /**
-     * Signal of a server initiated event.
-     *
-     * @param address address
-     * @param event   as an {@link EslEvent}
+     * {@inheritDoc}
      */
-    void eventReceived(String address, EslEvent event);
-
-    /**
-     * Signal of an event containing the result of a client requested background job.  The Job-UUID will
-     * be available as an event header of that name.
-     *
-     * @param address address
-     * @param event   as an {@link EslEvent}
-     */
-    void backgroundJobResultReceived(String address, EslEvent event);
-
+    @Override
+    public void handle(String address, EslEvent event, String coreUUID) {
+        log.debug("Default Inbound event handler handle address[{}], event[{}]", address, EslHelper.formatEslEvent(event));
+    }
 }

@@ -5,32 +5,30 @@ import com.atomscat.freeswitch.esl.spring.boot.starter.handler.MqEventHandler;
 import com.atomscat.freeswitch.esl.spring.boot.starter.handler.MqLoggingHandler;
 import com.atomscat.freeswitch.esl.spring.boot.starter.propeties.AmqpClientProperties;
 import com.rabbitmq.client.Channel;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.support.AmqpHeaders;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.Header;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
  * @author th158
  */
 @Slf4j
+@RequiredArgsConstructor
 public class MqListenerTemplate implements InitializingBean, MqCommandsClient {
 
+    private final List<MqEventHandler> eventHandlers;
 
-    @Autowired
-    private final List<MqEventHandler> eventHandlers = Collections.emptyList();
-    @Autowired
-    private final List<MqLoggingHandler> loggingHandlers = Collections.emptyList();
-    @Autowired
-    public AmqpClientProperties amqpClientProperties;
-    @Autowired
-    public AmqpTemplate amqpTemplate;
+    private final List<MqLoggingHandler> loggingHandlers;
+
+    private final AmqpClientProperties amqpClientProperties;
+
+    private final AmqpTemplate amqpTemplate;
 
     @RabbitListener(queues = "#{amqpClientProperties.getEventsQueues()}")
     public void eventsListen(Channel channel, String payload, @Header(AmqpHeaders.DELIVERY_TAG) Long tag, @Header(AmqpHeaders.CONTENT_TYPE) String contentType) {

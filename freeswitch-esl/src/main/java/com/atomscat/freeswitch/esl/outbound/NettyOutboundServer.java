@@ -18,7 +18,7 @@
 package com.atomscat.freeswitch.esl.outbound;
 
 import com.atomscat.freeswitch.esl.outbound.option.ConnectState;
-import com.atomscat.freeswitch.esl.outbound.option.OutboundClientOption;
+import com.atomscat.freeswitch.esl.outbound.option.OutboundServerOption;
 import com.atomscat.freeswitch.esl.outbound.option.ServerOption;
 import com.atomscat.freeswitch.esl.util.StringUtils;
 import io.netty.channel.Channel;
@@ -31,16 +31,16 @@ import io.netty.channel.ChannelFuture;
  * @author : <a href="everyone@aliyun.com">everyone</a>
  * @version 1.0.0
  */
-public class NettyOutboundClient extends AbstractOutboundClientCommand {
+public class NettyOutboundServer extends AbstractOutboundServerCommand {
 
     private Channel channel;
 
     /**
      * <p>Constructor for NettyInboundClient.</p>
      *
-     * @param option a {@link OutboundClientOption} object.
+     * @param option a {@link OutboundServerOption} object.
      */
-    public NettyOutboundClient(OutboundClientOption option) {
+    public NettyOutboundServer(OutboundServerOption option) {
         super(option);
     }
 

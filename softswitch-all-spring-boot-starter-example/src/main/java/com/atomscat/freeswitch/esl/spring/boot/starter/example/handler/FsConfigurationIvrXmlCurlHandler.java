@@ -3,7 +3,7 @@ package com.atomscat.freeswitch.esl.spring.boot.starter.example.handler;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.nacos.api.annotation.NacosInjected;
 import com.alibaba.nacos.api.naming.NamingService;
-import com.atomscat.freeswitch.esl.spring.boot.starter.propeties.OutboundClientProperties;
+import com.atomscat.freeswitch.esl.spring.boot.starter.propeties.OutboundServerProperties;
 import com.atomscat.freeswitch.xml.annotation.XmlCurlSectionName;
 import com.atomscat.freeswitch.xml.constant.SectionNames;
 import com.atomscat.freeswitch.xml.domain.XmlCurl;
@@ -13,8 +13,8 @@ import com.atomscat.freeswitch.xml.domain.configuration.ivr.Menu;
 import com.atomscat.freeswitch.xml.domain.configuration.ivr.Menus;
 import com.atomscat.freeswitch.xml.handler.XmlCurlHandler;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -27,13 +27,12 @@ import java.util.List;
  */
 @Slf4j
 @Service
+@RequiredArgsConstructor
 @XmlCurlSectionName(value = SectionNames.CONFIGURATION, key = SectionNames.Configuration.IVR)
 public class FsConfigurationIvrXmlCurlHandler implements XmlCurlHandler {
+    private final OutboundServerProperties outboundServerProperties;
     @NacosInjected
     private NamingService namingService;
-
-    @Autowired
-    private OutboundClientProperties outboundClientProperties;
 
     @Override
     public String handleXmlCurl(XmlCurl xmlCurl) {
@@ -75,7 +74,7 @@ public class FsConfigurationIvrXmlCurlHandler implements XmlCurlHandler {
         try {
             // 组装，触发数字按键 1，执行事件
             // Instance instance = namingService.selectOneHealthyInstance("softswitch-gateway");
-            // String arg = "socket " + instance.getIp() + ":" + outboundClientProperties.getServer().getPort() + " async full";
+            // String arg = "socket " + instance.getIp() + ":" + outboundServerProperties.getServer().getPort() + " async full";
             String arg = "sleep 10000";
             list.add(new Entry("menu-exec-app", "1", arg));
             // 组装，触发数字按键 2，执行事件

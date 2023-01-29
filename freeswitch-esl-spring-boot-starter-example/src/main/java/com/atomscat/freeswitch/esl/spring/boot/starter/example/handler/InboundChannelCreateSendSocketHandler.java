@@ -8,8 +8,8 @@ import com.atomscat.freeswitch.esl.InboundClient;
 import com.atomscat.freeswitch.esl.constant.EventNames;
 import com.atomscat.freeswitch.esl.helper.EslHelper;
 import com.atomscat.freeswitch.esl.spring.boot.starter.annotation.EslEventName;
-import com.atomscat.freeswitch.esl.spring.boot.starter.handler.EslEventHandler;
-import com.atomscat.freeswitch.esl.spring.boot.starter.propeties.OutboundClientProperties;
+import com.atomscat.freeswitch.esl.spring.boot.starter.handler.InboundEventHandler;
+import com.atomscat.freeswitch.esl.spring.boot.starter.propeties.OutboundServerProperties;
 import com.atomscat.freeswitch.esl.transport.SendMsg;
 import com.atomscat.freeswitch.esl.transport.event.EslEvent;
 import com.atomscat.freeswitch.esl.util.EslEventUtil;
@@ -26,7 +26,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @EslEventName(EventNames.CHANNEL_CREATE)
 @Component
-public class InboundChannelCreateSendSocketHandler implements EslEventHandler {
+public class InboundChannelCreateSendSocketHandler implements InboundEventHandler {
 
     @NacosInjected
     private NamingService namingService;
@@ -35,7 +35,7 @@ public class InboundChannelCreateSendSocketHandler implements EslEventHandler {
     private InboundClient inboundClient;
 
     @Autowired
-    private OutboundClientProperties outboundClientProperties;
+    private OutboundServerProperties outboundServerProperties;
 
     /**
      * {@inheritDoc}
@@ -53,9 +53,9 @@ public class InboundChannelCreateSendSocketHandler implements EslEventHandler {
                 sendMsg.addCallCommand("execute");
                 sendMsg.addExecuteAppName("socket");
                 // 组装  <action application="socket" data=" IP : yaml配置的端口 async full" />
-                String arg = instance.getIp() + ":" + outboundClientProperties.getServer().getPort() + " async full";
+                String arg = instance.getIp() + ":" + outboundServerProperties.getServer().getPort() + " async full";
 
-                log.info("instance socket: ip [{}] port [{}], arg: [{}]", instance.getIp(), outboundClientProperties.getServer().getPort(), arg);
+                log.info("instance socket: ip [{}] port [{}], arg: [{}]", instance.getIp(), outboundServerProperties.getServer().getPort(), arg);
                 sendMsg.addExecuteAppArg(arg);
 
                 inboundClient.sendMessage(address, sendMsg);

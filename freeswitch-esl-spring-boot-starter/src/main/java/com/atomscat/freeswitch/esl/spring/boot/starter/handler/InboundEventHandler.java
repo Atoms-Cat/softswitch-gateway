@@ -21,12 +21,12 @@ package com.atomscat.freeswitch.esl.spring.boot.starter.handler;
 import com.atomscat.freeswitch.esl.transport.event.EslEvent;
 
 /**
- * <p>EslEventHandler interface.</p>
+ * <p>InboundEventHandler interface.</p>
  *
  * @author : <a href="everyone@aliyun.com">everyone</a>
  * @version 1.0.0
  */
-public interface EslEventHandler {
+public interface InboundEventHandler {
 
     /**
      * Constant <code>DEFAULT_ESL_EVENT_HANDLER="DEFAULT_ESL_EVENT_HANDLER"</code>

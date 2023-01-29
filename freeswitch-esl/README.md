@@ -32,7 +32,7 @@
     option.addEvents("all");
 
     // 设置 ESL 事件监听器
-    option.addListener(new IEslEventListener() {
+    option.addListener(new InboundEventListener() {
         @Override
         public void eventReceived(String address, EslEvent event) {
             System.out.println(address);

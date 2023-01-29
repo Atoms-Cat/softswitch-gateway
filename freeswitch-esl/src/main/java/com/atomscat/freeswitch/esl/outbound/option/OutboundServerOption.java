@@ -25,13 +25,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <p>OutboundClientOption class.</p>
+ * <p>OutboundServerOption class.</p>
  *
  * @author : <a href="everyone@aliyun.com">everyone</a>
  * @version 1.0.0
  */
 @ToString
-public class OutboundClientOption {
+public class OutboundServerOption {
 
     private final List<OutboundEventListener> listeners = new ArrayList<>();
     private final List<String> events = new ArrayList<>();
@@ -66,9 +66,9 @@ public class OutboundClientOption {
      * <p>sndBufSize.</p>
      *
      * @param sndBufSize a int.
-     * @return a {@link OutboundClientOption} object.
+     * @return a {@link OutboundServerOption} object.
      */
-    public OutboundClientOption sndBufSize(int sndBufSize) {
+    public OutboundServerOption sndBufSize(int sndBufSize) {
         this.sndBufSize = sndBufSize;
         return this;
     }
@@ -86,9 +86,9 @@ public class OutboundClientOption {
      * <p>rcvBufSize.</p>
      *
      * @param rcvBufSize a int.
-     * @return a {@link OutboundClientOption} object.
+     * @return a {@link OutboundServerOption} object.
      */
-    public OutboundClientOption rcvBufSize(int rcvBufSize) {
+    public OutboundServerOption rcvBufSize(int rcvBufSize) {
         this.rcvBufSize = rcvBufSize;
         return this;
     }
@@ -106,9 +106,9 @@ public class OutboundClientOption {
      * <p>workerGroupThread.</p>
      *
      * @param workerGroupThread a int.
-     * @return a {@link OutboundClientOption} object.
+     * @return a {@link OutboundServerOption} object.
      */
-    public OutboundClientOption workerGroupThread(int workerGroupThread) {
+    public OutboundServerOption workerGroupThread(int workerGroupThread) {
         this.workerGroupThread = workerGroupThread;
         return this;
     }
@@ -134,9 +134,9 @@ public class OutboundClientOption {
      * <p>publicExecutorThread.</p>
      *
      * @param publicExecutorThread a int.
-     * @return a {@link OutboundClientOption} object.
+     * @return a {@link OutboundServerOption} object.
      */
-    public OutboundClientOption publicExecutorThread(int publicExecutorThread) {
+    public OutboundServerOption publicExecutorThread(int publicExecutorThread) {
         this.publicExecutorThread = publicExecutorThread;
         return this;
     }
@@ -154,9 +154,9 @@ public class OutboundClientOption {
      * <p>callbackExecutorThread.</p>
      *
      * @param callbackExecutorThread a int.
-     * @return a {@link OutboundClientOption} object.
+     * @return a {@link OutboundServerOption} object.
      */
-    public OutboundClientOption callbackExecutorThread(int callbackExecutorThread) {
+    public OutboundServerOption callbackExecutorThread(int callbackExecutorThread) {
         this.callbackExecutorThread = callbackExecutorThread;
         return this;
     }
@@ -174,9 +174,9 @@ public class OutboundClientOption {
      * <p>defaultTimeoutSeconds.</p>
      *
      * @param defaultTimeoutSeconds a int.
-     * @return a {@link OutboundClientOption} object.
+     * @return a {@link OutboundServerOption} object.
      */
-    public OutboundClientOption defaultTimeoutSeconds(int defaultTimeoutSeconds) {
+    public OutboundServerOption defaultTimeoutSeconds(int defaultTimeoutSeconds) {
         this.defaultTimeoutSeconds = defaultTimeoutSeconds;
         return this;
     }
@@ -194,9 +194,9 @@ public class OutboundClientOption {
      * <p>defaultPassword.</p>
      *
      * @param defaultPassword a {@link String} object.
-     * @return a {@link OutboundClientOption} object.
+     * @return a {@link OutboundServerOption} object.
      */
-    public OutboundClientOption defaultPassword(String defaultPassword) {
+    public OutboundServerOption defaultPassword(String defaultPassword) {
         this.defaultPassword = defaultPassword;
         return this;
     }
@@ -215,9 +215,9 @@ public class OutboundClientOption {
      * <p>readTimeoutSeconds.</p>
      *
      * @param readTimeoutSeconds a {@link Integer} object.
-     * @return a {@link OutboundClientOption} object.
+     * @return a {@link OutboundServerOption} object.
      */
-    public OutboundClientOption readTimeoutSeconds(int readTimeoutSeconds) {
+    public OutboundServerOption readTimeoutSeconds(int readTimeoutSeconds) {
         this.readTimeoutSeconds = readTimeoutSeconds;
         return this;
     }
@@ -237,9 +237,9 @@ public class OutboundClientOption {
      * 读空闲时长
      *
      * @param readerIdleTimeSeconds a {@link Integer} object.
-     * @return a {@link OutboundClientOption} object.
+     * @return a {@link OutboundServerOption} object.
      */
-    public OutboundClientOption readerIdleTimeSeconds(int readerIdleTimeSeconds) {
+    public OutboundServerOption readerIdleTimeSeconds(int readerIdleTimeSeconds) {
         this.readerIdleTimeSeconds = readerIdleTimeSeconds;
         return this;
     }
@@ -264,9 +264,9 @@ public class OutboundClientOption {
      * </p>
      *
      * @param disablePublicExecutor a boolean.
-     * @return a {@link OutboundClientOption} object.
+     * @return a {@link OutboundServerOption} object.
      */
-    public OutboundClientOption disablePublicExecutor(boolean disablePublicExecutor) {
+    public OutboundServerOption disablePublicExecutor(boolean disablePublicExecutor) {
         this.disablePublicExecutor = disablePublicExecutor;
         return this;
     }
@@ -284,9 +284,9 @@ public class OutboundClientOption {
      * <p>performance.</p>
      *
      * @param performance a boolean.
-     * @return a {@link OutboundClientOption} object.
+     * @return a {@link OutboundServerOption} object.
      */
-    public OutboundClientOption performance(boolean performance) {
+    public OutboundServerOption performance(boolean performance) {
         this.performance = performance;
         return this;
     }
@@ -304,9 +304,9 @@ public class OutboundClientOption {
      * <p>performanceCostTime.</p>
      *
      * @param performanceCostTime a long.
-     * @return a {@link OutboundClientOption} object.
+     * @return a {@link OutboundServerOption} object.
      */
-    public OutboundClientOption performanceCostTime(long performanceCostTime) {
+    public OutboundServerOption performanceCostTime(long performanceCostTime) {
         this.performanceCostTime = performanceCostTime;
         return this;
     }
@@ -324,9 +324,9 @@ public class OutboundClientOption {
      * <p>eventPerformance.</p>
      *
      * @param eventPerformance a boolean.
-     * @return a {@link OutboundClientOption} object.
+     * @return a {@link OutboundServerOption} object.
      */
-    public OutboundClientOption eventPerformance(boolean eventPerformance) {
+    public OutboundServerOption eventPerformance(boolean eventPerformance) {
         this.eventPerformance = eventPerformance;
         return this;
     }
@@ -344,9 +344,9 @@ public class OutboundClientOption {
      * <p>eventPerformanceCostTime.</p>
      *
      * @param eventPerformanceCostTime a long.
-     * @return a {@link OutboundClientOption} object.
+     * @return a {@link OutboundServerOption} object.
      */
-    public OutboundClientOption eventPerformanceCostTime(long eventPerformanceCostTime) {
+    public OutboundServerOption eventPerformanceCostTime(long eventPerformanceCostTime) {
         this.eventPerformanceCostTime = eventPerformanceCostTime;
         return this;
     }
@@ -355,9 +355,9 @@ public class OutboundClientOption {
      * <p>serverConnectionListener.</p>
      *
      * @param serverConnectionListener a {@link ServerConnectionListener} object.
-     * @return a {@link OutboundClientOption} object.
+     * @return a {@link OutboundServerOption} object.
      */
-    public OutboundClientOption serverConnectionListener(ServerConnectionListener serverConnectionListener) {
+    public OutboundServerOption serverConnectionListener(ServerConnectionListener serverConnectionListener) {
         this.serverConnectionListener = serverConnectionListener;
         return this;
     }
@@ -383,9 +383,9 @@ public class OutboundClientOption {
      * <p>addListener.</p>
      *
      * @param listener a {@link OutboundEventListener} object.
-     * @return a {@link OutboundClientOption} object.
+     * @return a {@link OutboundServerOption} object.
      */
-    public OutboundClientOption addListener(OutboundEventListener listener) {
+    public OutboundServerOption addListener(OutboundEventListener listener) {
         listeners.add(listener);
         return this;
     }
@@ -394,9 +394,9 @@ public class OutboundClientOption {
      * <p>removeListener.</p>
      *
      * @param listener a {@link OutboundEventListener} object.
-     * @return a {@link OutboundClientOption} object.
+     * @return a {@link OutboundServerOption} object.
      */
-    public OutboundClientOption removeListener(OutboundEventListener listener) {
+    public OutboundServerOption removeListener(OutboundEventListener listener) {
         listeners.remove(listener);
         return this;
     }
@@ -424,9 +424,9 @@ public class OutboundClientOption {
      * <p>addEvents.</p>
      *
      * @param addEvents a {@link String} object.
-     * @return a {@link OutboundClientOption} object.
+     * @return a {@link OutboundServerOption} object.
      */
-    public OutboundClientOption addEvents(String... addEvents) {
+    public OutboundServerOption addEvents(String... addEvents) {
         if (addEvents == null) {
             return this;
         }
@@ -446,9 +446,9 @@ public class OutboundClientOption {
     /**
      * <p>cancelEvents.</p>
      *
-     * @return a {@link OutboundClientOption} object.
+     * @return a {@link OutboundServerOption} object.
      */
-    public OutboundClientOption cancelEvents() {
+    public OutboundServerOption cancelEvents() {
         if (!events.isEmpty()) {
             events.clear();
         }

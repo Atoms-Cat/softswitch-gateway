@@ -15,23 +15,24 @@
  * limitations under the License.
  */
 
-package com.atomscat.freeswitch.esl.spring.boot.starter.handler;
-
-import com.atomscat.freeswitch.esl.helper.EslHelper;
-import com.atomscat.freeswitch.esl.transport.event.EslEvent;
+package com.atomscat.freeswitch.esl;
 
 /**
- * <p>DefaultEslEventHandler class.</p>
+ * <p>InboundClientService interface.</p>
  *
  * @author : <a href="everyone@aliyun.com">everyone</a>
  * @version 1.0.0
  */
-public class DefaultEslEventHandler extends AbstractEslEventHandler {
+public interface OutboundServerService {
+
     /**
-     * {@inheritDoc}
+     * <p>start.</p>
      */
-    @Override
-    public void handle(String address, EslEvent event, String coreUUID) {
-        log.debug("Default esl event handler handle address[{}], event[{}]", address, EslHelper.formatEslEvent(event));
-    }
+    void start();
+
+    /**
+     * <p>shutdown.</p>
+     */
+    void shutdown();
+
 }

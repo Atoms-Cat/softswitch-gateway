@@ -3,7 +3,7 @@ package com.atomscat.freeswitch.esl.spring.boot.starter.example.handler;
 import com.alibaba.fastjson.JSON;
 import com.atomscat.freeswitch.esl.constant.EventNames;
 import com.atomscat.freeswitch.esl.spring.boot.starter.annotation.EslEventName;
-import com.atomscat.freeswitch.esl.spring.boot.starter.handler.EslEventHandler;
+import com.atomscat.freeswitch.esl.spring.boot.starter.handler.InboundEventHandler;
 import com.atomscat.freeswitch.esl.transport.event.EslEvent;
 import com.atomscat.spring.boot.common.aop.annotation.RedisLock;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @EslEventName(EventNames.CHANNEL_HANGUP_COMPLETE)
 @Component
-public class InboundChannelHangupSendSocketHandler implements EslEventHandler {
+public class InboundChannelHangupSendSocketHandler implements InboundEventHandler {
 
 
     @Override

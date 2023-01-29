@@ -17,37 +17,38 @@
 
 package com.atomscat.freeswitch.esl.spring.boot.starter.template;
 
-import com.atomscat.freeswitch.esl.IEslEventListener;
+import com.atomscat.freeswitch.esl.InboundEventListener;
 import com.atomscat.freeswitch.esl.InboundClient;
 import com.atomscat.freeswitch.esl.spring.boot.starter.annotation.EslEventName;
-import com.atomscat.freeswitch.esl.spring.boot.starter.handler.DefaultEslEventHandler;
-import com.atomscat.freeswitch.esl.spring.boot.starter.handler.EslEventHandler;
+import com.atomscat.freeswitch.esl.spring.boot.starter.handler.DefaultInboundEventHandler;
+import com.atomscat.freeswitch.esl.spring.boot.starter.handler.InboundEventHandler;
 import com.atomscat.freeswitch.esl.transport.event.EslEvent;
 import com.atomscat.freeswitch.esl.util.ArrayUtils;
 import com.atomscat.freeswitch.esl.util.EslEventUtil;
 import com.atomscat.freeswitch.esl.util.StringUtils;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
- * <p>IEslEventListenerTemplate class.</p>
+ * <p>InboundEventListenerTemplate class.</p>
  *
  * @author : <a href="everyone@aliyun.com">everyone</a>
  * @version 1.0.0
  */
 @Slf4j
-public class IEslEventListenerTemplate implements IEslEventListener, InitializingBean {
-
-    @Autowired
-    private final List<EslEventHandler> eslEventHandlers = Collections.emptyList();
-    private final Map<String, List<EslEventHandler>> handlerTable = new HashMap<>(16);
-    @Autowired
-    private InboundClient inboundClient;
-    private EslEventHandler defaultEventHandler = new DefaultEslEventHandler();
+@RequiredArgsConstructor
+public class InboundEventListenerTemplate implements InboundEventListener, InitializingBean {
+    private final List<InboundEventHandler> eslEventHandlers;
+    private final Map<String, List<InboundEventHandler>> handlerTable = new HashMap<>(16);
+    private final InboundClient inboundClient;
+    private InboundEventHandler defaultEventHandler = new DefaultInboundEventHandler();
 
     /**
      * {@inheritDoc}
@@ -70,7 +71,7 @@ public class IEslEventListenerTemplate implements IEslEventListener, Initializin
         String eventName = event.getEventName();
         // 获取事件id
         String coreUUID = EslEventUtil.getCoreUuid(event);
-        List<EslEventHandler> handlers = handlerTable.get(eventName);
+        List<InboundEventHandler> handlers = handlerTable.get(eventName);
         if (!CollectionUtils.isEmpty(handlers)) {
             handlers.forEach(eventHandler -> eventHandler.handle(address, event, coreUUID));
             return;
@@ -84,8 +85,8 @@ public class IEslEventListenerTemplate implements IEslEventListener, Initializin
      */
     @Override
     public void afterPropertiesSet() {
-        log.info("IEslEventListener init ...");
-        for (EslEventHandler eventHandler : eslEventHandlers) {
+        log.info("InboundEventListener init ...");
+        for (InboundEventHandler eventHandler : eslEventHandlers) {
             // com.atomscat.freeswitch.esl.spring.boot.starter.example.HeartbeatEslEventHandler
             // com.atomscat.freeswitch.esl.spring.boot.starter.example.ReScheduleEslEventHandler$$EnhancerBySpringCGLIB$$1b4e8d
             EslEventName eventName = eventHandler.getClass().getAnnotation(EslEventName.class);
@@ -100,8 +101,8 @@ public class IEslEventListenerTemplate implements IEslEventListener, Initializin
                 if (StringUtils.isBlank(value)) {
                     continue;
                 }
-                log.info("IEslEventListener add EventName[{}], EventHandler[{}] ...", value, eventHandler.getClass());
-                if (StringUtils.equals(EslEventHandler.DEFAULT_ESL_EVENT_HANDLER, value)) {
+                log.info("InboundEventListener add EventName[{}], EventHandler[{}] ...", value, eventHandler.getClass());
+                if (StringUtils.equals(InboundEventHandler.DEFAULT_ESL_EVENT_HANDLER, value)) {
                     defaultEventHandler = eventHandler;
                 } else {
                     handlerTable.computeIfAbsent(value, k -> new ArrayList<>(4)).add(eventHandler);

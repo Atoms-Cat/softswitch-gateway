@@ -1,12 +1,12 @@
 package com.atomscat.freeswitch.esl.exception;
 
-public class OutboundClientException extends RuntimeException {
+public class OutboundServerException extends RuntimeException {
     /**
      * <p>Constructor for InboundClientException.</p>
      *
      * @param message a {@link java.lang.String} object.
      */
-    public OutboundClientException(String message) {
+    public OutboundServerException(String message) {
         super(message);
     }
 
@@ -16,7 +16,7 @@ public class OutboundClientException extends RuntimeException {
      * @param message a {@link java.lang.String} object.
      * @param cause   a {@link java.lang.Throwable} object.
      */
-    public OutboundClientException(String message, Throwable cause) {
+    public OutboundServerException(String message, Throwable cause) {
         super(message, cause);
     }
 
@@ -25,7 +25,7 @@ public class OutboundClientException extends RuntimeException {
      *
      * @param cause a {@link java.lang.Throwable} object.
      */
-    public OutboundClientException(Throwable cause) {
+    public OutboundServerException(Throwable cause) {
         super(cause);
     }
 }

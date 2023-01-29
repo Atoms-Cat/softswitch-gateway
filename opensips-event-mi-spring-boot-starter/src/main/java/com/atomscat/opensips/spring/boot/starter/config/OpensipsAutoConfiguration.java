@@ -81,7 +81,7 @@ public class OpensipsAutoConfiguration {
     public EventClient eventClient(@Autowired EventClientOptionHandler eventClientOptionHandler, @Autowired ServerEventListener outboundEventListener) {
         EventClientOption option = eventClientOptionHandler.getOption();
         option.addListener(outboundEventListener);
-        log.info("outboundClient option : [{}]", option);
+        log.info("outboundServer option : [{}]", option);
         return EventClient.newInstance(option);
     }
 

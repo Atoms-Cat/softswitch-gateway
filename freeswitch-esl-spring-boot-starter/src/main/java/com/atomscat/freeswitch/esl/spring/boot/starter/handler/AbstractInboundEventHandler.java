@@ -15,40 +15,19 @@
  * limitations under the License.
  */
 
-package com.atomscat.freeswitch.esl;
+package com.atomscat.freeswitch.esl.spring.boot.starter.handler;
 
-import com.atomscat.freeswitch.esl.outbound.option.OutboundClientOption;
-import io.netty.bootstrap.ServerBootstrap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
- * <p>InboundClient interface.</p>
+ * <p>Abstract AbstractInboundEventHandler class.</p>
  *
  * @author : <a href="everyone@aliyun.com">everyone</a>
  * @version 1.0.0
  */
-public interface OutboundClient extends OutboundClientService, OutboundClientCommand {
+public abstract class AbstractInboundEventHandler implements InboundEventHandler {
 
-    /**
-     * <p>newInstance.</p>
-     *
-     * @param option a {@link OutboundClientOption} object.
-     * @return a {@link OutboundClient} object.
-     */
-    static OutboundClient newInstance(OutboundClientOption option) {
-        return OutboundClientFactory.getInstance().newOutboundClient(option);
-    }
+    protected final Logger log = LoggerFactory.getLogger(getClass());
 
-    /**
-     * 获取客户可配置选项
-     *
-     * @return a {@link OutboundClientOption} object.
-     */
-    OutboundClientOption option();
-
-    /**
-     * 获取 netty bootstrap
-     *
-     * @return a {@link ServerBootstrap} object.
-     */
-    ServerBootstrap bootstrap();
 }

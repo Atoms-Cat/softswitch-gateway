@@ -7,11 +7,12 @@ import com.alibaba.nacos.api.naming.pojo.Instance;
 import com.atomscat.freeswitch.esl.InboundClient;
 import com.atomscat.freeswitch.esl.constant.EventNames;
 import com.atomscat.freeswitch.esl.spring.boot.starter.annotation.EslEventName;
-import com.atomscat.freeswitch.esl.spring.boot.starter.handler.EslEventHandler;
-import com.atomscat.freeswitch.esl.spring.boot.starter.propeties.OutboundClientProperties;
+import com.atomscat.freeswitch.esl.spring.boot.starter.handler.InboundEventHandler;
+import com.atomscat.freeswitch.esl.spring.boot.starter.propeties.OutboundServerProperties;
 import com.atomscat.freeswitch.esl.transport.SendMsg;
 import com.atomscat.freeswitch.esl.transport.event.EslEvent;
 import com.atomscat.freeswitch.esl.util.EslEventUtil;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,17 +22,16 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @EslEventName(EventNames.DTMF)
+@RequiredArgsConstructor
 @Component
-public class InboundDTMFHandler implements EslEventHandler {
+public class InboundDTMFHandler implements InboundEventHandler {
 
-    @Autowired
-    private InboundClient inboundClient;
+    private final InboundClient inboundClient;
 
     @NacosInjected
     private NamingService namingService;
 
-    @Autowired
-    private OutboundClientProperties outboundClientProperties;
+    private final OutboundServerProperties outboundServerProperties;
 
     @Override
     public void handle(String address, EslEvent event, String coreUUID) {
@@ -46,9 +46,9 @@ public class InboundDTMFHandler implements EslEventHandler {
             sendMsg.addCallCommand("execute");
             sendMsg.addExecuteAppName("socket");
             // 组装  <action application="socket" data=" IP : yaml配置的端口 async full" />
-            String arg = instance.getIp() + ":" + outboundClientProperties.getServer().getPort() + " async full";
+            String arg = instance.getIp() + ":" + outboundServerProperties.getServer().getPort() + " async full";
 
-            log.info("instance socket: ip [{}] port [{}], arg: [{}]", instance.getIp(), outboundClientProperties.getServer().getPort(), arg);
+            log.info("instance socket: ip [{}] port [{}], arg: [{}]", instance.getIp(), outboundServerProperties.getServer().getPort(), arg);
             sendMsg.addExecuteAppArg(arg);
             inboundClient.sendMessage(address, sendMsg);
 

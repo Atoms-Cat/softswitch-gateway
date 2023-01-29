@@ -1,8 +1,8 @@
 package com.atomscat.freeswitch.esl.spring.boot.starter.handler;
 
-import com.atomscat.freeswitch.esl.outbound.option.OutboundClientOption;
+import com.atomscat.freeswitch.esl.outbound.option.OutboundServerOption;
 import com.atomscat.freeswitch.esl.outbound.option.ServerOption;
-import com.atomscat.freeswitch.esl.spring.boot.starter.propeties.OutboundClientProperties;
+import com.atomscat.freeswitch.esl.spring.boot.starter.propeties.OutboundServerProperties;
 import com.atomscat.freeswitch.esl.spring.boot.starter.propeties.ServerProperties;
 import com.atomscat.freeswitch.esl.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,24 +13,24 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author everyone
  * @version 1.0.0
  */
-public abstract class AbstractOutboundClientOptionHandler implements OutboundClientOptionHandler {
+public abstract class AbstractOutboundServerOptionHandler implements OutboundServerOptionHandler {
 
     @Autowired
-    protected OutboundClientProperties properties;
+    protected OutboundServerProperties properties;
 
     /**
      * <p>intercept.</p>
      *
-     * @param inboundClientOption a {@link OutboundClientOption} object.
+     * @param inboundClientOption a {@link OutboundServerOption} object.
      */
-    protected abstract void intercept(OutboundClientOption inboundClientOption);
+    protected abstract void intercept(OutboundServerOption inboundClientOption);
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public OutboundClientOption getOption() {
-        OutboundClientOption option = newOutboundClientOption();
+    public OutboundServerOption getOption() {
+        OutboundServerOption option = newOutboundServerOption();
         ServerProperties server = properties.getServer();
         if (StringUtils.isNotBlank(server.getHost()) && server.getPort() > 1) {
             option.addServerOption(new ServerOption(server.getHost(), server.getPort())
@@ -51,10 +51,10 @@ public abstract class AbstractOutboundClientOptionHandler implements OutboundCli
     /**
      * <p>newInboundClientOption.</p>
      *
-     * @return a {@link OutboundClientOption} object.
+     * @return a {@link OutboundServerOption} object.
      */
-    protected OutboundClientOption newOutboundClientOption() {
-        return new OutboundClientOption().sndBufSize(properties.getSndBufSize())
+    protected OutboundServerOption newOutboundServerOption() {
+        return new OutboundServerOption().sndBufSize(properties.getSndBufSize())
                 .rcvBufSize(properties.getRcvBufSize())
                 .workerGroupThread(properties.getWorkerGroupThread())
                 .publicExecutorThread(properties.getPublicExecutorThread())

@@ -19,14 +19,14 @@ package com.atomscat.freeswitch.esl.spring.boot.starter.config;
 
 import com.atomscat.freeswitch.esl.*;
 import com.atomscat.freeswitch.esl.inbound.option.InboundClientOption;
-import com.atomscat.freeswitch.esl.outbound.option.OutboundClientOption;
+import com.atomscat.freeswitch.esl.outbound.option.OutboundServerOption;
 import com.atomscat.freeswitch.esl.spring.boot.starter.handler.*;
 import com.atomscat.freeswitch.esl.spring.boot.starter.propeties.AmqpClientProperties;
 import com.atomscat.freeswitch.esl.spring.boot.starter.propeties.InboundClientProperties;
-import com.atomscat.freeswitch.esl.spring.boot.starter.propeties.OutboundClientProperties;
-import com.atomscat.freeswitch.esl.spring.boot.starter.propeties.ServerProperties;
+import com.atomscat.freeswitch.esl.spring.boot.starter.propeties.OutboundServerProperties;
 import com.atomscat.freeswitch.esl.spring.boot.starter.template.*;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -34,6 +34,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.List;
 
 
 /**
@@ -44,8 +46,8 @@ import org.springframework.context.annotation.Configuration;
  */
 @Slf4j
 @Configuration
-@EnableConfigurationProperties({InboundClientProperties.class, OutboundClientProperties.class})
-@ConditionalOnClass({InboundClient.class, OutboundClient.class})
+@EnableConfigurationProperties({InboundClientProperties.class, OutboundServerProperties.class})
+@ConditionalOnClass({InboundClient.class, OutboundServer.class})
 @ComponentScan({"com.atomscat.freeswitch.esl.spring.boot.starter.propeties"})
 public class FreeswitchEslAutoConfiguration {
 
@@ -66,20 +68,20 @@ public class FreeswitchEslAutoConfiguration {
      * @return a {@link InboundClientOptionHandler} object.
      */
     @Bean
-    @ConditionalOnMissingBean(OutboundClientOptionHandler.class)
-    public OutboundClientOptionHandler outboundClientOptionHandler() {
-        return new DefaultOutboundClientOptionHandlerTemplate();
+    @ConditionalOnMissingBean(OutboundServerOptionHandler.class)
+    public OutboundServerOptionHandler outboundServerOptionHandler() {
+        return new DefaultOutboundServerOptionHandlerTemplate();
     }
 
     /**
      * <p>listener.</p>
      *
-     * @return a {@link IEslEventListener} object.
+     * @return a {@link InboundEventListener} object.
      */
     @Bean
-    @ConditionalOnMissingBean(IEslEventListener.class)
-    public IEslEventListener listener() {
-        return new IEslEventListenerTemplate();
+    @ConditionalOnMissingBean(InboundEventListener.class)
+    public InboundEventListener listener(@Autowired List<InboundEventHandler> eslEventHandlers, @Autowired InboundClient inboundClient) {
+        return new InboundEventListenerTemplate(eslEventHandlers, inboundClient);
     }
 
     @Bean
@@ -99,8 +101,9 @@ public class FreeswitchEslAutoConfiguration {
     }
 
     @Bean
-    public MqListenerTemplate mqListenerTemplate() {
-        return new MqListenerTemplate();
+    public MqListenerTemplate mqListenerTemplate(@Autowired List<MqEventHandler> eventHandlers, @Autowired List<MqLoggingHandler> loggingHandlers,
+                                                 @Autowired AmqpClientProperties amqpClientProperties, @Autowired AmqpTemplate amqpTemplat) {
+        return new MqListenerTemplate(eventHandlers, loggingHandlers, amqpClientProperties, amqpTemplat);
     }
 
     /**
@@ -134,16 +137,16 @@ public class FreeswitchEslAutoConfiguration {
     /**
      * <p>inboundClient.</p>
      *
-     * @param outboundClientOptionHandler a {@link InboundClientOptionHandler} object.
-     * @return a {@link OutboundClient} object.
+     * @param outboundServerOptionHandler a {@link InboundClientOptionHandler} object.
+     * @return a {@link OutboundServer} object.
      */
     @Bean(initMethod = "start", destroyMethod = "shutdown")
-    @ConditionalOnMissingBean(OutboundClient.class)
-    public OutboundClient outboundClient(@Autowired OutboundClientOptionHandler outboundClientOptionHandler, @Autowired OutboundEventListener outboundEventListener) {
-        OutboundClientOption option = outboundClientOptionHandler.getOption();
+    @ConditionalOnMissingBean(OutboundServer.class)
+    public OutboundServer outboundServer(@Autowired OutboundServerOptionHandler outboundServerOptionHandler, @Autowired OutboundEventListener outboundEventListener) {
+        OutboundServerOption option = outboundServerOptionHandler.getOption();
         option.addListener(outboundEventListener);
-        log.info("outboundClient option : [{}]", option);
-        return OutboundClient.newInstance(option);
+        log.info("outboundServer option : [{}]", option);
+        return OutboundServer.newInstance(option);
     }
 
 }

@@ -17,22 +17,31 @@
 
 package com.atomscat.freeswitch.esl;
 
+import com.atomscat.freeswitch.esl.transport.event.EslEvent;
+
 /**
- * <p>InboundClientService interface.</p>
+ * <p>InboundEventListener interface.</p>
  *
  * @author : <a href="everyone@aliyun.com">everyone</a>
  * @version 1.0.0
  */
-public interface OutboundClientService {
+public interface InboundEventListener {
 
     /**
-     * <p>start.</p>
+     * Signal of a server initiated event.
+     *
+     * @param address address
+     * @param event   as an {@link EslEvent}
      */
-    void start();
+    void eventReceived(String address, EslEvent event);
 
     /**
-     * <p>shutdown.</p>
+     * Signal of an event containing the result of a client requested background job.  The Job-UUID will
+     * be available as an event header of that name.
+     *
+     * @param address address
+     * @param event   as an {@link EslEvent}
      */
-    void shutdown();
+    void backgroundJobResultReceived(String address, EslEvent event);
 
 }

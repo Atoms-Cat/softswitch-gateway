@@ -17,7 +17,7 @@
 
 package com.atomscat.freeswitch.esl.inbound.option;
 
-import com.atomscat.freeswitch.esl.IEslEventListener;
+import com.atomscat.freeswitch.esl.InboundEventListener;
 import com.atomscat.freeswitch.esl.ServerConnectionListener;
 import com.atomscat.freeswitch.esl.inbound.listener.EventListener;
 import com.atomscat.freeswitch.esl.inbound.listener.ServerOptionListener;
@@ -38,7 +38,7 @@ public class InboundClientOption {
 
     private final List<ServerOption> serverOptions = new ArrayList<>();
     private final ServerAddrOption serverAddrOption = new ServerAddrOption(serverOptions);
-    private final List<IEslEventListener> listeners = new ArrayList<>();
+    private final List<InboundEventListener> listeners = new ArrayList<>();
     private final List<String> events = new ArrayList<>();
     private int sndBufSize = 65535;
     private int rcvBufSize = 65535;
@@ -463,10 +463,10 @@ public class InboundClientOption {
     /**
      * <p>addListener.</p>
      *
-     * @param listener a {@link IEslEventListener} object.
+     * @param listener a {@link InboundEventListener} object.
      * @return a {@link InboundClientOption} object.
      */
-    public InboundClientOption addListener(IEslEventListener listener) {
+    public InboundClientOption addListener(InboundEventListener listener) {
         listeners.add(listener);
         return this;
     }
@@ -474,10 +474,10 @@ public class InboundClientOption {
     /**
      * <p>removeListener.</p>
      *
-     * @param listener a {@link IEslEventListener} object.
+     * @param listener a {@link InboundEventListener} object.
      * @return a {@link InboundClientOption} object.
      */
-    public InboundClientOption removeListener(IEslEventListener listener) {
+    public InboundClientOption removeListener(InboundEventListener listener) {
         listeners.remove(listener);
         return this;
     }
@@ -487,7 +487,7 @@ public class InboundClientOption {
      *
      * @return a {@link java.util.List} object.
      */
-    public List<IEslEventListener> listeners() {
+    public List<InboundEventListener> listeners() {
         return listeners;
     }
 
