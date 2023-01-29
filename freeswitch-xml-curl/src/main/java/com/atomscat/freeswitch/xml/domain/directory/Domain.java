@@ -9,10 +9,12 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 
 @Data
+@Accessors(chain = true)
 @JacksonXmlRootElement(localName = "domain")
 public class Domain implements Serializable {
     @JacksonXmlProperty(localName = "name", isAttribute = true)

@@ -17,7 +17,6 @@ import java.util.Enumeration;
 
 @Slf4j
 @RestController
-@RequestMapping("/freeswitch")
 public class XmlCurlController {
     @Autowired
     private XmlCurlService cdrService;
@@ -31,7 +30,7 @@ public class XmlCurlController {
     @Value("${com.atomscat.freeswitch.xml-curl.credentials.password:#{null}}")
     private String password;
 
-    @GetMapping(value = "/xml/curl", produces = {MediaType.TEXT_XML_VALUE})
+    @GetMapping(value = "${com.atomscat.freeswitch.xml-curl.api}", produces = {MediaType.TEXT_XML_VALUE})
     public String getCurl(HttpServletRequest request) {
         if (!authScheme(request)) {
             return null;
@@ -44,7 +43,7 @@ public class XmlCurlController {
     }
 
 
-    @PostMapping(value = "/xml/curl", produces = {MediaType.TEXT_XML_VALUE})
+    @PostMapping(value = "${com.atomscat.freeswitch.xml-curl.api}", produces = {MediaType.TEXT_XML_VALUE})
     public String postCurl(HttpServletRequest request) {
         if (!authScheme(request)) {
             return null;

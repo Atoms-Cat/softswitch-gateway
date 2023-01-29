@@ -28,7 +28,10 @@ public class XmlCurlParser {
      * @return a {@link XmlCurl} object.
      */
     public static XmlCurl decodeThenParse(final HttpServletRequest request) throws ParserException {
-        return JSONObject.parseObject(JSONObject.toJSONString(getAllRequestParam(request)), XmlCurl.class);
+        Map<String, String> metadata = getAllRequestParam(request);
+        XmlCurl xmlCurl = JSONObject.parseObject(JSONObject.toJSONString(metadata), XmlCurl.class);
+        xmlCurl.setMetadata(metadata);
+        return xmlCurl;
     }
 
     public static Map<String, String> getAllRequestParam(final HttpServletRequest request) {

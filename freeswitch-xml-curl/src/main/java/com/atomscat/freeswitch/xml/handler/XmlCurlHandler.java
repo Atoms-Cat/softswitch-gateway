@@ -2,6 +2,7 @@ package com.atomscat.freeswitch.xml.handler;
 
 
 import com.atomscat.freeswitch.xml.domain.XmlCurl;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 /**
  * <p>XmlCurlHandler interface.</p>
@@ -11,6 +12,6 @@ import com.atomscat.freeswitch.xml.domain.XmlCurl;
  */
 public interface XmlCurlHandler {
 
-    String handleXmlCurl(XmlCurl xmlCurl);
+    String handleXmlCurl(XmlCurl xmlCurl) throws JsonProcessingException;
 
 }
