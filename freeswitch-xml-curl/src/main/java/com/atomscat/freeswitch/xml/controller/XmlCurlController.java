@@ -3,23 +3,22 @@ package com.atomscat.freeswitch.xml.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.atomscat.freeswitch.xml.service.XmlCurlService;
 import com.atomscat.freeswitch.xml.utils.BasicAuthenticationUtil;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Enumeration;
+
 
 @Slf4j
 @RestController
+@RequiredArgsConstructor
 public class XmlCurlController {
-    @Autowired
-    private XmlCurlService cdrService;
+    private final XmlCurlService cdrService;
 
     @Value("${com.atomscat.freeswitch.xml-curl.auth-scheme:#{null}}")
     private String authScheme;

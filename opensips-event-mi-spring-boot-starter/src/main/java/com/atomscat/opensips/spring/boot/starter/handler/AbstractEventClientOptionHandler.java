@@ -5,7 +5,7 @@ import com.atomscat.opensips.event.option.ServerOption;
 import com.atomscat.opensips.spring.boot.starter.propeties.OpensipsEventProperties;
 import com.atomscat.opensips.spring.boot.starter.propeties.ServerProperties;
 import com.atomscat.opensips.util.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 
 /**
  * <p>Abstract AbstractInboundClientOptionHandler class.</p>
@@ -13,10 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author everyone
  * @version 1.0.0
  */
+@RequiredArgsConstructor
 public abstract class AbstractEventClientOptionHandler implements EventClientOptionHandler {
 
-    @Autowired
-    protected OpensipsEventProperties properties;
+    private final OpensipsEventProperties properties;
 
     /**
      * <p>intercept.</p>
@@ -33,9 +33,7 @@ public abstract class AbstractEventClientOptionHandler implements EventClientOpt
         EventClientOption option = newOutboundClientOption();
         ServerProperties server = properties.getServer();
         if (StringUtils.isNotBlank(server.getHost()) && server.getPort() > 1) {
-            option.addServerOption(new ServerOption(server.getHost(), server.getPort())
-                    .timeoutSeconds(server.getTimeoutSeconds())
-                    .password(server.getPassword()));
+            option.addServerOption(new ServerOption(server.getHost(), server.getPort()).timeoutSeconds(server.getTimeoutSeconds()).password(server.getPassword()));
         }
 
         properties.getEvents().forEach(event -> {

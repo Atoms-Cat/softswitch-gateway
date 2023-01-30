@@ -13,8 +13,8 @@ import com.atomscat.freeswitch.esl.spring.boot.starter.propeties.OutboundServerP
 import com.atomscat.freeswitch.esl.transport.SendMsg;
 import com.atomscat.freeswitch.esl.transport.event.EslEvent;
 import com.atomscat.freeswitch.esl.util.EslEventUtil;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 //* todo FS --> [Inbound] --> app --> [sendMsg] --> socket address
 //* todo FS <--> [Outbound] <--> app
@@ -26,16 +26,13 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @EslEventName(EventNames.CHANNEL_CREATE)
 @Component
+@RequiredArgsConstructor
 public class InboundChannelCreateSendSocketHandler implements InboundEventHandler {
 
+    private final InboundClient inboundClient;
+    private final OutboundServerProperties outboundServerProperties;
     @NacosInjected
     private NamingService namingService;
-
-    @Autowired
-    private InboundClient inboundClient;
-
-    @Autowired
-    private OutboundServerProperties outboundServerProperties;
 
     /**
      * {@inheritDoc}

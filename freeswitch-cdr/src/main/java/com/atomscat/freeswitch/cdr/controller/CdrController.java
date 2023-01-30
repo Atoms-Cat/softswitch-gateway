@@ -1,8 +1,8 @@
 package com.atomscat.freeswitch.cdr.controller;
 
 import com.atomscat.freeswitch.cdr.service.CdrService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping("/freeswitch")
+@RequiredArgsConstructor
 public class CdrController {
 
-    @Autowired
-    private CdrService cdrService;
+    private final CdrService cdrService;
 
     /**
      * <p>cdr.</p>

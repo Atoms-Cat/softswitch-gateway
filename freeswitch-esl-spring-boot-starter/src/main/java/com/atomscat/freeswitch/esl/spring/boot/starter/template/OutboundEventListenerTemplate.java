@@ -11,13 +11,12 @@ import com.atomscat.freeswitch.esl.transport.event.EslEvent;
 import com.atomscat.freeswitch.esl.util.ArrayUtils;
 import com.atomscat.freeswitch.esl.util.StringUtils;
 import com.google.common.collect.Maps;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -25,13 +24,11 @@ import java.util.Map;
  * @author th158
  */
 @Slf4j
+@RequiredArgsConstructor
 public class OutboundEventListenerTemplate implements OutboundEventListener, InitializingBean {
 
-    @Autowired
-    private final List<OutBoundConnectHandler> outBoundConnectHandlers = Collections.emptyList();
-
-    @Autowired
-    private final List<OutBoundEventHandler> outBoundEventHandlers = Collections.emptyList();
+    private final List<OutBoundConnectHandler> outBoundConnectHandlers;
+    private final List<OutBoundEventHandler> outBoundEventHandlers;
 
     private final Map<String, List<OutBoundEventHandler>> handlerTable = Maps.newHashMap();
     private final OutBoundConnectHandler defaultOutBoundConnectHandler = new DefaultOutBoundConnectHandler();

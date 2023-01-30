@@ -7,25 +7,23 @@ import com.atomscat.opensips.spring.boot.starter.handler.ClientEventHandler;
 import com.atomscat.opensips.spring.boot.starter.handler.DefaultClientConnectHandler;
 import com.atomscat.opensips.spring.boot.starter.handler.DefaultClientEventHandler;
 import io.netty.channel.socket.DatagramPacket;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
  * @author th158
  */
 @Slf4j
+@RequiredArgsConstructor
 public class ServerEventListenerTemplate implements ServerEventListener, InitializingBean {
 
-    @Autowired
-    private final List<ClientConnectHandler> clientConnectHandlers = Collections.emptyList();
+    private final List<ClientConnectHandler> clientConnectHandlers;
 
-    @Autowired
-    private final List<ClientEventHandler> clientEventHandlers = Collections.emptyList();
+    private final List<ClientEventHandler> clientEventHandlers;
 
     private final ClientConnectHandler defaultClientConnectHandler = new DefaultClientConnectHandler();
     private final ClientEventHandler defaultClientEventHandler = new DefaultClientEventHandler();

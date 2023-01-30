@@ -18,7 +18,6 @@ import com.atomscat.freeswitch.esl.util.EslEventUtil;
 import com.atomscat.spring.boot.common.aop.annotation.RedisLock;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 // * do: FS --> [Inbound] --> app --> [sendMsg] --> socket address
 // * do: FS <--> [Outbound] <--> app

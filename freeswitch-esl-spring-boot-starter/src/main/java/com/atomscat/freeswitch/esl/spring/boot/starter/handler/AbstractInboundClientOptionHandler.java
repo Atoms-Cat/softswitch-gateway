@@ -4,7 +4,7 @@ import com.atomscat.freeswitch.esl.inbound.option.InboundClientOption;
 import com.atomscat.freeswitch.esl.inbound.option.ServerOption;
 import com.atomscat.freeswitch.esl.spring.boot.starter.propeties.InboundClientProperties;
 import com.atomscat.freeswitch.esl.util.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 
 /**
  * <p>Abstract AbstractInboundClientOptionHandler class.</p>
@@ -12,10 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author everyone
  * @version 1.0.0
  */
+@RequiredArgsConstructor
 public abstract class AbstractInboundClientOptionHandler implements InboundClientOptionHandler {
 
-    @Autowired
-    protected InboundClientProperties properties;
+    private final InboundClientProperties properties;
 
     /**
      * <p>intercept.</p>

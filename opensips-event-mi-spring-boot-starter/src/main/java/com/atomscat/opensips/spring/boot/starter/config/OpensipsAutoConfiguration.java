@@ -21,18 +21,21 @@ import com.atomscat.opensips.event.EventClient;
 import com.atomscat.opensips.event.listener.ServerConnectionListener;
 import com.atomscat.opensips.event.listener.ServerEventListener;
 import com.atomscat.opensips.event.option.EventClientOption;
+import com.atomscat.opensips.spring.boot.starter.handler.ClientConnectHandler;
+import com.atomscat.opensips.spring.boot.starter.handler.ClientEventHandler;
 import com.atomscat.opensips.spring.boot.starter.handler.EventClientOptionHandler;
 import com.atomscat.opensips.spring.boot.starter.propeties.OpensipsEventProperties;
 import com.atomscat.opensips.spring.boot.starter.template.DefaultEventClientOptionHandlerTemplate;
 import com.atomscat.opensips.spring.boot.starter.template.ServerConnectionListenerTemplate;
 import com.atomscat.opensips.spring.boot.starter.template.ServerEventListenerTemplate;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.List;
 
 
 /**
@@ -49,8 +52,9 @@ public class OpensipsAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(ServerEventListener.class)
-    public ServerEventListener serverEventListener() {
-        return new ServerEventListenerTemplate();
+    public ServerEventListener serverEventListener( List<ClientConnectHandler> clientConnectHandlers,
+                                                    List<ClientEventHandler> clientEventHandlers) {
+        return new ServerEventListenerTemplate(clientConnectHandlers, clientEventHandlers);
     }
 
     /**
@@ -66,8 +70,8 @@ public class OpensipsAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(EventClientOptionHandler.class)
-    public EventClientOptionHandler eventClientOptionHandler() {
-        return new DefaultEventClientOptionHandlerTemplate();
+    public EventClientOptionHandler eventClientOptionHandler( OpensipsEventProperties opensipsEventProperties) {
+        return new DefaultEventClientOptionHandlerTemplate(opensipsEventProperties);
     }
 
     /**
@@ -78,7 +82,7 @@ public class OpensipsAutoConfiguration {
      */
     @Bean(initMethod = "start", destroyMethod = "shutdown")
     @ConditionalOnMissingBean(EventClient.class)
-    public EventClient eventClient(@Autowired EventClientOptionHandler eventClientOptionHandler, @Autowired ServerEventListener outboundEventListener) {
+    public EventClient eventClient( EventClientOptionHandler eventClientOptionHandler,  ServerEventListener outboundEventListener) {
         EventClientOption option = eventClientOptionHandler.getOption();
         option.addListener(outboundEventListener);
         log.info("outboundServer option : [{}]", option);

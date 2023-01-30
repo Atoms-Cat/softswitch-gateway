@@ -20,8 +20,7 @@ package com.atomscat.freeswitch.esl.spring.boot.starter.example.controller;
 import com.atomscat.freeswitch.esl.InboundClient;
 import com.atomscat.freeswitch.esl.inbound.option.ServerOption;
 import com.atomscat.freeswitch.esl.spring.boot.starter.handler.MqCommandsClient;
-import org.checkerframework.checker.units.qual.A;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,13 +35,12 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/demo")
+@RequiredArgsConstructor
 public class DemoController {
 
-    @Autowired
-    private InboundClient inboundClient;
+    private final InboundClient inboundClient;
 
-    @Autowired
-    private MqCommandsClient commandsClient;
+    private final MqCommandsClient commandsClient;
 
     /**
      * <p>demo.</p>
@@ -114,6 +112,7 @@ public class DemoController {
 
     /**
      * send freeswitch commands by RabbitMQ
+     *
      * @return
      */
     @GetMapping("/send/mq")

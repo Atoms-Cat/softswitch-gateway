@@ -25,8 +25,8 @@ import com.atomscat.freeswitch.esl.spring.boot.starter.handler.AbstractInboundEv
 import com.atomscat.freeswitch.esl.transport.event.EslEvent;
 import com.atomscat.freeswitch.esl.transport.message.EslMessage;
 import com.atomscat.spring.boot.common.aop.annotation.Logging;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -38,10 +38,10 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @EslEventName(EventNames.RE_SCHEDULE)
 @Component
+@RequiredArgsConstructor
 public class ReScheduleInboundEventHandler extends AbstractInboundEventHandler {
 
-    @Autowired
-    private InboundClient inboundClient;
+    private final InboundClient inboundClient;
 
     /**
      * {@inheritDoc}
