@@ -208,27 +208,17 @@ public class InboundChannelHandler extends SimpleChannelInboundHandler<EslMessag
      * @return the {@link EslMessage} attached to this command's callback
      */
     public EslMessage sendSyncMultiLineCommand(final List<String> commandLines) {
-        SyncCallback callback = new SyncCallback();
         //  Build command with double line terminator at the end
         StringBuilder sb = new StringBuilder();
         for (String line : commandLines) {
             sb.append(line);
             sb.append(LINE_TERMINATOR);
         }
-        sb.append(LINE_TERMINATOR);
         if (isTraceEnabled) {
             log.trace("sendSyncMultiLineCommand command : {}", sb.toString());
         }
-        syncLock.lock();
-        try {
-            syncCallbacks.add(callback);
-            channel.writeAndFlush(sb.toString());
-        } finally {
-            syncLock.unlock();
-        }
-
         //  Block until the response is available
-        return callback.get();
+        return this.sendSyncSingleLineCommand(sb.toString());
     }
 
     /**
