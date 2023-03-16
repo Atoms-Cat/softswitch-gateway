@@ -58,8 +58,7 @@ public class XmlCurlServiceImpl implements XmlCurlService, InitializingBean {
 
     private String handleXmlCurl(HttpServletRequest request) throws Exception {
         XmlCurl xmlCurl = XmlCurlParser.decodeThenParse(request);
-        log.debug("handle xml curl : [{}] [{}]", xmlCurl.getSection(), JSONObject.toJSONString(xmlCurl));
-        // 获取事件名称
+        log.debug("handle xml curl req: [{}] [{}]", xmlCurl.getSection(), JSONObject.toJSONString(xmlCurl));
         String section = xmlCurl.getSection();
         if (StringUtils.isBlank(section)) {
             return "";
@@ -72,7 +71,7 @@ public class XmlCurlServiceImpl implements XmlCurlService, InitializingBean {
         if (!CollectionUtils.isEmpty(handlers)) {
             handlers.forEach(xmlCurlHandler -> {
                 try {
-                    // section 为 configuration时， 判断 key_value 类型执行对应的Handler
+                    // When section is configuration, judge the corresponding handler of type key_value
                     if (hasKey(xmlCurlHandler, xmlCurl.getKeyValue())) {
                         stringBuilder.append(xmlCurlHandler.handleXmlCurl(xmlCurl));
                     }
@@ -83,6 +82,7 @@ public class XmlCurlServiceImpl implements XmlCurlService, InitializingBean {
         }
         stringBuilder.append("</section>\n" +
                 "</document>");
+        log.debug("handle xml curl resp: [{}] [{}] [{}]", xmlCurl.getSection(), JSONObject.toJSONString(xmlCurl), stringBuilder.toString());
         return stringBuilder.toString();
     }
 

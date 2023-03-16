@@ -6,6 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 public class DefaultMqEventHandler extends AbstractMqEventHandler{
     @Override
     public void handle(Channel channel, String payload, Long tag, String contentType) throws Exception {
-        log.info("fs.events : {}", payload);
+        log.debug("fs.events : {}", payload);
     }
 }

@@ -19,6 +19,7 @@ package com.atomscat.freeswitch.esl.spring.boot.starter.example;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 //@EnableFreeswitchEslAutoConfiguration
 
@@ -28,6 +29,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author everyone
  * @version 1.0.0
  */
+@EnableScheduling
 @SpringBootApplication
 public class ExampleApplication {
 

@@ -28,6 +28,7 @@ import java.util.List;
  * @version 1.0.0
  */
 public class SendEvent implements Serializable {
+    private static final String LINE_TERMINATOR = "\n";
 
     private final List<String> msgLines = new ArrayList<>();
 
@@ -66,8 +67,9 @@ public class SendEvent implements Serializable {
      *
      * @param line part of line
      */
-    public void addBody(String line) {
-        msgLines.add(line);
+    public SendEvent addBody(String line) {
+        msgLines.add(LINE_TERMINATOR + line);
+        return this;
     }
 
     /**
@@ -86,11 +88,10 @@ public class SendEvent implements Serializable {
     public String toString() {
         StringBuilder sb = new StringBuilder("SendEvent: ");
         if (msgLines.size() > 1) {
-            sb.append(msgLines.get(1));
+            sb.append(msgLines.get(0));
         } else if (msgLines.size() > 0) {
             sb.append(0);
         }
-
         return sb.toString();
     }
 
