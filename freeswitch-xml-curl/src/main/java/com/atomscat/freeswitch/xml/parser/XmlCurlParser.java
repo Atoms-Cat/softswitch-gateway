@@ -27,7 +27,7 @@ public class XmlCurlParser {
      * @param request a {@link HttpServletRequest} object.
      * @return a {@link XmlCurl} object.
      */
-    public static XmlCurl decodeThenParse(final HttpServletRequest request) throws ParserException {
+    public static XmlCurl decodeThenParse(final HttpServletRequest request) {
         Map<String, String> metadata = getAllRequestParam(request);
         XmlCurl xmlCurl = JSONObject.parseObject(JSONObject.toJSONString(metadata), XmlCurl.class);
         xmlCurl.setMetadata(metadata);

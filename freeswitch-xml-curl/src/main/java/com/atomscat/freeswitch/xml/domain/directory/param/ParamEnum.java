@@ -25,7 +25,7 @@ public enum ParamEnum {
     REVERSE_AUTH_PASS("reverse-auth-pass", ""),
 
     /**
-     * user->gateway
+     * user.gateway
      */
     USERNAME("username", ""),
 
