@@ -56,19 +56,19 @@ abstract class AbstractNettyOutboundServer extends AbstractService implements Ch
 
     final Logger log = LoggerFactory.getLogger(getClass());
 
-    private static ThreadFactory onEslThreadFactory = new ThreadFactoryBuilder()
+    private static final ThreadFactory onEslThreadFactory = new ThreadFactoryBuilder()
             .setNameFormat("outbound-onEsl-pool-%d").build();
 
     //专门接收订阅事件的单一线程池(保证顺序)
-    private static ExecutorService onEslExecutor = new ThreadPoolExecutor(1, 1,
+    private static final ExecutorService onEslExecutor = new ThreadPoolExecutor(1, 1,
             0L, TimeUnit.MILLISECONDS,
             new LinkedBlockingQueue<>(100000), onEslThreadFactory);
 
-    private static ThreadFactory onConnectThreadFactory = new ThreadFactoryBuilder()
+    private static final ThreadFactory onConnectThreadFactory = new ThreadFactoryBuilder()
             .setNameFormat("outbound-onConnect-pool-%d").build();
 
     //专用于处理新来电onConnect的多线程池
-    private static ExecutorService onConnectExecutor = new ThreadPoolExecutor(32, 512,
+    private static final ExecutorService onConnectExecutor = new ThreadPoolExecutor(32, 512,
             60L, TimeUnit.SECONDS,
             new LinkedBlockingQueue<>(2048), onConnectThreadFactory);
 

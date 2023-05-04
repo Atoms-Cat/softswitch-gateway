@@ -1,9 +1,12 @@
 package com.atomscat.opensips.mi.entitys.enums;
 
+import lombok.Getter;
+
 /**
  * @author : everyone
  * @version 1.0.0
  */
+@Getter
 public enum OpenSipsEventEnum {
 
     E_UL_CONTACT_INSERT("E_UL_CONTACT_INSERT", "当在任何现有 AOR 的联系人列表中插入新联系人时，将引发此事件。 对于每个新联系人，如果其 AOR 在内存中不存在，则 E_UL_AOR_CREATE 和 E_UL_CONTACT_INSERT 事件都将引发。"),
@@ -20,20 +23,13 @@ public enum OpenSipsEventEnum {
      */
     E_DLG_STATE_CHANGED("E_DLG_STATE_CHANGED", "当对话框状态改变时引发此事件。");
 
-    private String event;
+    private final String event;
 
-    private String desc;
+    private final String desc;
 
     OpenSipsEventEnum(String event, String desc) {
         this.event = event;
         this.desc = desc;
     }
 
-    public String getEvent() {
-        return event;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
 }

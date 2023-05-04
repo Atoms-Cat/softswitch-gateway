@@ -17,7 +17,7 @@ import java.io.Serializable;
 public class Sofia extends Configuration implements Serializable {
 
     public Sofia() {
-        setName(ConfName.SOFIA.confName);
+        setName(ConfName.SOFIA.name);
     }
 
     @JacksonXmlProperty(localName = "global_settings", isAttribute = true)

@@ -7,6 +7,6 @@ public enum LoggingLevel {
     WARN,
     ERROR;
 
-    private LoggingLevel() {
+    LoggingLevel() {
     }
 }

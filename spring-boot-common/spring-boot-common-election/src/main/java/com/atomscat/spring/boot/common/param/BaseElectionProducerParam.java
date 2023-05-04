@@ -16,5 +16,5 @@ public abstract class BaseElectionProducerParam<T> implements Serializable {
      */
     private String nodeId;
 
-    private T entity;
+    private transient T entity;
 }

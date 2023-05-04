@@ -35,7 +35,7 @@ public class CdrServiceImpl implements CdrService, ApplicationContextAware, Init
     private final ExecutorService poolExecutor = new ScheduledThreadPoolExecutor(poolSize,
             new BasicThreadFactory.Builder().namingPattern("pool-executor-%d").daemon(true).build());
     private ApplicationContext applicationContext;
-    private List<CdrHandler> cdrHandlers = new ArrayList<>(4);
+    private final List<CdrHandler> cdrHandlers = new ArrayList<>(4);
 
     /**
      * {@inheritDoc}

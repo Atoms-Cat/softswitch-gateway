@@ -122,8 +122,8 @@ public class CdrParser {
     private static final String HANGUP_TIME = "hangup_time";
     private static final String RESURRECT_TIME = "resurrect_time";
     private static final String TRANSFER_TIME = "transfer_time";
-    private static ThreadLocal<String> local = new ThreadLocal<>();
-    private static boolean isTraceEnabled = log.isTraceEnabled();
+    private static final ThreadLocal<String> local = new ThreadLocal<>();
+    private static final boolean isTraceEnabled = log.isTraceEnabled();
 
     private CdrParser() {
     }

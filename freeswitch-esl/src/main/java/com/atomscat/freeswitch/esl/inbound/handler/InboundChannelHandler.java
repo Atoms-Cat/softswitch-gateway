@@ -215,7 +215,7 @@ public class InboundChannelHandler extends SimpleChannelInboundHandler<EslMessag
             sb.append(LINE_TERMINATOR);
         }
         if (isTraceEnabled) {
-            log.trace("sendSyncMultiLineCommand command : {}", sb.toString());
+            log.trace("sendSyncMultiLineCommand command : {}", sb);
         }
         //  Block until the response is available
         return this.sendSyncSingleLineCommand(sb.toString());

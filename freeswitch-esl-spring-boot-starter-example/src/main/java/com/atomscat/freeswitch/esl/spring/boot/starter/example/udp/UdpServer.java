@@ -17,9 +17,6 @@ import java.net.InetSocketAddress;
 @Slf4j
 public class UdpServer {
 
-    //如果不设置超时，连接会一直占用本地线程，端口，连接客户端一多，会导致本地端口用尽及CPU压力
-    private final int timeout = 5;
-
 
     @Async
     public void start() {
@@ -29,6 +26,8 @@ public class UdpServer {
             //UDP相对于TCP不需要在客户端和服务端建立实际的连接，因此不需要为连接（ChannelPipeline）设置handler
             Bootstrap b = new Bootstrap();
             //设置超时时间
+            //如果不设置超时，连接会一直占用本地线程，端口，连接客户端一多，会导致本地端口用尽及CPU压力
+            int timeout = 5;
             b.option(ChannelOption.CONNECT_TIMEOUT_MILLIS, timeout);
             b.group(group)
                     .channel(NioDatagramChannel.class)

@@ -39,7 +39,7 @@ public class MiEventSubscribeServiceImpl implements MiEventSubscribeService {
             // 发起请求
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
-                    .url(urlBase + MiJsonUriEnum.EVENT_SUBSCRIBE.getUri() + params.toString())
+                    .url(urlBase + MiJsonUriEnum.EVENT_SUBSCRIBE.getUri() + params)
                     .build();
             // 响应数据
             Response response = client.newCall(request).execute();

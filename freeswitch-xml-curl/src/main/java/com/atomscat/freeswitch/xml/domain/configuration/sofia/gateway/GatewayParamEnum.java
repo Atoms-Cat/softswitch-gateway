@@ -1,9 +1,12 @@
 package com.atomscat.freeswitch.xml.domain.configuration.sofia.gateway;
 
 
+import lombok.Getter;
+
 /**
  * @author howell
  */
+@Getter
 public enum GatewayParamEnum {
     /**
      * account username (required)
@@ -93,23 +96,16 @@ public enum GatewayParamEnum {
     /**
      * 配置项值
      */
-    public String name;
+    public final String key;
 
     /**
      * 配置项说明
      */
-    public String msg;
+    public final String msg;
 
-    GatewayParamEnum(String name, String msg) {
-        this.name = name;
+    GatewayParamEnum(String key, String msg) {
+        this.key = key;
         this.msg = msg;
     }
 
-    public String getMsg() {
-        return msg;
-    }
-
-    public String getName() {
-        return name;
-    }
 }

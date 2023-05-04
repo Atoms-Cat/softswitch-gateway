@@ -1,11 +1,14 @@
 package com.atomscat.freeswitch.xml.domain.dialplan;
 
+import lombok.Getter;
+
 /**
  * 参考： https://freeswitch.org/confluence/display/FREESWITCH/mod_dptools
  * Dialplan tools provide the apps (commands) to process call sessions in XML dialplans.
  *
  * @author th158
  */
+@Getter
 public enum AppEnum {
 
     ANSWER("answer", "Answer the call for a channel."),
@@ -160,17 +163,10 @@ public enum AppEnum {
     WAIT_FOR_ANSWER("wait_for_answer", "Pause processing while waiting for the call to be answered."),
     ;
 
-    private String application;
-
-    private String describe;
+    private final String application;
 
     AppEnum(String application, String describe) {
         this.application = application;
-        this.describe = describe;
-    }
-
-    public String getApplication() {
-        return application;
     }
 
     public static AppEnum instance(String application) {

@@ -9,15 +9,15 @@ public enum ConfName {
     IVR("ivr.conf"),
     SOFIA("sofia.conf");
 
-    public String confName;
+    public final String name;
 
-    public String getConfName() {
-        return confName;
+    public String getName() {
+        return name;
     }
 
 
-    ConfName(String confName) {
-        this.confName = confName;
+    ConfName(String name) {
+        this.name = name;
     }
 
 }

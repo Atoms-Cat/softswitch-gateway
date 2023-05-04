@@ -82,7 +82,7 @@ public class XmlCurlServiceImpl implements XmlCurlService, InitializingBean {
         }
         stringBuilder.append("</section>\n" +
                 "</document>");
-        log.debug("handle xml curl resp: [{}] [{}] [{}]", xmlCurl.getSection(), JSONObject.toJSONString(xmlCurl), stringBuilder.toString());
+        log.debug("handle xml curl resp: [{}] [{}] [{}]", xmlCurl.getSection(), JSONObject.toJSONString(xmlCurl), stringBuilder);
         return stringBuilder.toString();
     }
 

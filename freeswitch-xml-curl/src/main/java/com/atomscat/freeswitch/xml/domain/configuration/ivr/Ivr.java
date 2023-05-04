@@ -17,7 +17,7 @@ import java.util.List;
 public class Ivr extends Configuration implements Serializable {
 
     public Ivr() {
-        setName(ConfName.IVR.confName);
+        setName(ConfName.IVR.name);
     }
 
     @JacksonXmlElementWrapper(localName = "menus", useWrapping = false)

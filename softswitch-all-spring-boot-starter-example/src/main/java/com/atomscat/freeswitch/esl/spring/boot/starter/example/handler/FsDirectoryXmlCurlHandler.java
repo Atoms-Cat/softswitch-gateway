@@ -6,7 +6,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.atomscat.freeswitch.esl.InboundClient;
 import com.atomscat.freeswitch.esl.constant.EventNames;
 import com.atomscat.freeswitch.esl.transport.SendEvent;
-import com.atomscat.freeswitch.esl.transport.SendMsg;
 import com.atomscat.freeswitch.xml.annotation.XmlCurlSectionName;
 import com.atomscat.freeswitch.xml.constant.SectionNames;
 import com.atomscat.freeswitch.xml.domain.XmlCurl;
@@ -56,18 +55,18 @@ public class FsDirectoryXmlCurlHandler implements XmlCurlHandler {
         Domain domain = new Domain();
         domain.setName("$${domain}")
         .setParams(new Params().setParam(Arrays.asList(
-                new Param(ParamEnum.DIAL_STRING.name,"{^^:sip_invite_domain=${dialed_domain}:presence_id=${dialed_user}@${dialed_domain}}${sofia_contact(*/${dialed_user}@${dialed_domain})},${verto_contact(${dialed_user}@${dialed_domain})}"),
-                new Param(ParamEnum.JSONRPC_ALLOWED_METHODS.name, "verto")
+                new Param(ParamEnum.DIAL_STRING.key,"{^^:sip_invite_domain=${dialed_domain}:presence_id=${dialed_user}@${dialed_domain}}${sofia_contact(*/${dialed_user}@${dialed_domain})},${verto_contact(${dialed_user}@${dialed_domain})}"),
+                new Param(ParamEnum.JSONRPC_ALLOWED_METHODS.key, "verto")
         ))).setVariables(new Variables(Arrays.asList(
-                new Variable(VariableEnum.RECORD_STEREO.name, "true"),
-                new Variable(VariableEnum.DEFAULT_GATEWAY.name, "$${default_provider}"),
-                new Variable(VariableEnum.DEFAULT_AREACODE.name, "$${default_areacode}"),
-                new Variable(VariableEnum.TRANSFER_FALLBACK_EXTENSION.name, "operator")
+                new Variable(VariableEnum.RECORD_STEREO.key, "true"),
+                new Variable(VariableEnum.DEFAULT_GATEWAY.key, "$${default_provider}"),
+                new Variable(VariableEnum.DEFAULT_AREACODE.key, "$${default_areacode}"),
+                new Variable(VariableEnum.TRANSFER_FALLBACK_EXTENSION.key, "operator")
         ))).setGroups(new Groups(Arrays.asList(new Group(
                 new Users(Arrays.asList(
                         new User("1090",null,
-                                new Params(Arrays.asList(new Param(ParamEnum.PASSWORD.name, "123456789"))),
-                                new Variables(Arrays.asList(new Variable(VariableEnum.USER_CONTEXT.name, "default"), new Variable(VariableEnum.EFFECTIVE_CALLER_ID_NUMBER.name, "1090"))),
+                                new Params(Arrays.asList(new Param(ParamEnum.PASSWORD.key, "123456789"))),
+                                new Variables(Arrays.asList(new Variable(VariableEnum.USER_CONTEXT.key, "default"), new Variable(VariableEnum.EFFECTIVE_CALLER_ID_NUMBER.key, "1090"))),
                                 null)))
                 )
                 )

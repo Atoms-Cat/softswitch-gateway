@@ -1,5 +1,8 @@
 package com.atomscat.freeswitch.xml.domain.directory.param;
 
+import lombok.Getter;
+
+@Getter
 public enum ParamEnum {
     /**
      * domain
@@ -36,23 +39,16 @@ public enum ParamEnum {
     /**
      * 配置项值
      */
-    public String name;
+    public final String key;
 
     /**
      * 配置项说明
      */
-    public String msg;
+    public final String msg;
 
-    ParamEnum(String name, String msg) {
-        this.name = name;
+    ParamEnum(String key, String msg) {
+        this.key = key;
         this.msg = msg;
     }
 
-    public String getMsg() {
-        return msg;
-    }
-
-    public String getName() {
-        return name;
-    }
 }

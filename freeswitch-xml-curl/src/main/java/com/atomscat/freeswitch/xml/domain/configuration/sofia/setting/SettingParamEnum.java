@@ -1,11 +1,14 @@
 package com.atomscat.freeswitch.xml.domain.configuration.sofia.setting;
 
+import lombok.Getter;
+
 /**
  * 参考 https://freeswitch.org/confluence/display/FREESWITCH/Sofia+Configuration+Files
  * https://github.com/signalwire/freeswitch/blob/master/src/mod/endpoints/mod_sofia/conf/sofia.conf.xml
  *
  * @author howell
  */
+@Getter
 public enum SettingParamEnum {
     /*
      * <settings>
@@ -272,7 +275,7 @@ public enum SettingParamEnum {
      * rtp inactivity timeout
      * <param name="rtp-timeout-sec" value="300"/>
      * <param name="rtp-hold-timeout-sec" value="1800"/>
-     * VAD choose one (out is a good choice);
+     * <p> VAD choose one (out is a good choice); </p>
      * <param name="vad" value="in"/>
      * <param name="vad" value="out"/>
      * <param name="vad" value="both"/>
@@ -569,23 +572,16 @@ public enum SettingParamEnum {
     /**
      * 配置项值
      */
-    public String name;
+    public final String key;
 
     /**
      * 配置项说明
      */
-    public String msg;
+    public final String msg;
 
-    SettingParamEnum(String name, String msg) {
-        this.name = name;
+    SettingParamEnum(String key, String msg) {
+        this.key = key;
         this.msg = msg;
     }
 
-    public String getMsg() {
-        return msg;
-    }
-
-    public String getName() {
-        return name;
-    }
 }

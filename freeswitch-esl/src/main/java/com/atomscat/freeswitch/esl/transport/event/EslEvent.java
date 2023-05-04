@@ -55,7 +55,6 @@ public class EslEvent implements Serializable {
     private final Map<EslHeaders.Name, String> messageHeaders;
     private final Map<String, String> eventHeaders;
     private final List<String> eventBody;
-    private final boolean decodeEventHeaders = true;
 
     /**
      * <p>Constructor for EslEvent.</p>
@@ -171,6 +170,7 @@ public class EslEvent implements Serializable {
             if (!isEventBody) {
                 // split the line
                 String[] headerParts = HeaderParser.splitHeader(rawLine);
+                boolean decodeEventHeaders = true;
                 if (decodeEventHeaders) {
                     try {
                         String decodedValue = URLDecoder.decode(headerParts[1], "UTF-8");

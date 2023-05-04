@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 /**
@@ -17,13 +18,7 @@ public class BasicAuthenticationUtil {
         if (StringUtils.isBlank(str)) {
             return null;
         }
-        String s = null;
-        try {
-            byte[] base64decodedBytes = Base64.getDecoder().decode(str);
-            s = new String(base64decodedBytes, "utf-8");
-        }  catch (IOException e) {
-            log.error("base64Decode error", e);
-        }
-        return s;
+        byte[] base64decodedBytes = Base64.getDecoder().decode(str);
+        return new String(base64decodedBytes, StandardCharsets.UTF_8);
     }
 }
