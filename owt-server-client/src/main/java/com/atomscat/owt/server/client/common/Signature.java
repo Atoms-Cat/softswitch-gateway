@@ -1,12 +1,10 @@
 package com.atomscat.owt.server.client.common;
 
-import cn.hutool.core.util.RandomUtil;
-
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
-
+import java.util.random.RandomGenerator;
 
 /**
  * @author howell
@@ -17,7 +15,7 @@ public class Signature {
      */
     public static String getAuthenticate(String username, String role, String serviceid, String servicekey) throws Exception {
         String timestamp = String.valueOf(System.currentTimeMillis());
-        String cnonce = String.valueOf(RandomUtil.randomInt(0, 99999));
+        String cnonce = String.valueOf(RandomGenerator.of("cnonce").nextInt(0, 99999));
         String toSign = timestamp + ',' + cnonce;
         if (username != null && role != null) {
             toSign += ',' + username + ',' + role;

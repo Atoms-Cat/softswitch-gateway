@@ -53,8 +53,8 @@
     </modules>
 
     <properties>
-        <netty.version>4.1.68.Final</netty.version>
-        <spring-boot.version>3.1.0</spring-boot.version>
+        <netty.version>4.1.116.Final</netty.version>
+        <spring-boot.version>3.2.12</spring-boot.version>
         <redisson.version>3.13.6</redisson.version>
         <orika.version>1.5.4</orika.version>
         <java.version>17</java.version>
@@ -172,13 +172,7 @@
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>30.0-jre</version>
-            </dependency>
-            <dependency>
-                <groupId>cn.hutool</groupId>
-                <artifactId>hutool-all</artifactId>
-                <version>5.8.11</version>
-                <scope>compile</scope>
+                <version>33.4.0-jre</version>
             </dependency>
             <!--  xml 格式处理 -->
             <dependency>
@@ -191,22 +185,6 @@
                 <artifactId>dom4j</artifactId>
                 <version>2.1.3</version>
             </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>1.7.30</version>
-            </dependency>
-            <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-core</artifactId>
-                <version>1.2.9</version>
-            </dependency>
-            <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-classic</artifactId>
-                <version>1.2.9</version>
-            </dependency>
-
             <!-- https://mvnrepository.com/artifact/io.netty/netty-all -->
             <dependency>
                 <groupId>io.netty</groupId>

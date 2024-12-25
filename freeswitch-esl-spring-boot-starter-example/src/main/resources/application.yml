@@ -7,42 +7,43 @@ com:
           performance: false
           performanceCostTime: 200
           servers:
-            - host: 192.168.10.112
-              port: 8021
-              timeoutSeconds: 5
-            - host: 192.168.10.114
+            - host: 192.168.62.130
               port: 8021
               timeoutSeconds: 5
           events:
             - all
         outbound:
           server:
-            host: 192.168.10.116
+            host: 0.0.0.0
             port: 8082
-    opensips:
-      event:
-        server:
-          host: 192.168.10.116
-          port: 8081
+#    opensips:
+#      event:
+#        server:
+#          host: 192.168.10.116
+#          port: 8081
 
 logging:
   level:
     link: INFO
 
-
-nacos:
-  discovery:
-    server-addr: 192.168.10.112:8848
-    auto-register: true
-    register:
-      ip: 192.168.10.116
-  config:
-    server-addr: 192.168.10.112:8848
-    bootstrap:
-      enable: true
-    data-id: example
-    type: yaml
+#nacos:
+#  discovery:
+#    server-addr: 192.168.10.112:8848
+#    auto-register: true
+#    register:
+#      ip: 192.168.10.116
+#  config:
+#    server-addr: 192.168.10.112:8848
+#    bootstrap:
+#      enable: true
+#    data-id: example
+#    type: yaml
 
 spring:
   application:
     name: fs-esl
+
+management:
+  health:
+    rabbit:
+      enabled: false

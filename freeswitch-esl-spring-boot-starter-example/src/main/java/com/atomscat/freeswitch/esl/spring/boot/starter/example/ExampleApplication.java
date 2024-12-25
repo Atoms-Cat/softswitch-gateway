@@ -17,10 +17,11 @@
 
 package com.atomscat.freeswitch.esl.spring.boot.starter.example;
 
+import com.atomscat.freeswitch.esl.spring.boot.starter.EnableFreeswitchEslAutoConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-//@EnableFreeswitchEslAutoConfiguration
+
 
 /**
  * <p>FreeswitchEslSpringBootStarterExampleApplication class.</p>
@@ -29,6 +30,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @version 1.0.0
  */
 @SpringBootApplication
+@EnableFreeswitchEslAutoConfiguration
 public class ExampleApplication {
 
     /**

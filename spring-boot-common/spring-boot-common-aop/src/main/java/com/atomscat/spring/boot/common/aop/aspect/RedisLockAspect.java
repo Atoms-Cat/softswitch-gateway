@@ -1,8 +1,8 @@
 package com.atomscat.spring.boot.common.aop.aspect;
 
-import cn.hutool.core.util.StrUtil;
+//import cn.hutool.core.util.StrUtil;
 import com.atomscat.spring.boot.common.aop.annotation.RedisLock;
-import com.atomscat.spring.boot.common.util.SpelUtil;
+//import com.atomscat.spring.boot.common.util.SpelUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -68,6 +68,8 @@ public class RedisLockAspect {
         Method targetMethod = methodSignature.getMethod();
         Object target = joinPoint.getTarget();
         Object[] arguments = joinPoint.getArgs();
-        return REDISSON_LOCK_PREFIX + lockName + StrUtil.COLON + SpelUtil.parse(target, spel, targetMethod, arguments);
+//        todo
+        return "";
+//        return REDISSON_LOCK_PREFIX + lockName + StrUtil.COLON + SpelUtil.parse(target, spel, targetMethod, arguments);
     }
 }

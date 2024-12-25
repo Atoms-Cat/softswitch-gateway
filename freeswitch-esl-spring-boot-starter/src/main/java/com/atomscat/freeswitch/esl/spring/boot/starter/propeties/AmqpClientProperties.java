@@ -15,6 +15,8 @@ public class AmqpClientProperties {
 
     private String loggingQueues;
 
+    private String enabled;
+
     public String getCommandsQueues() {
         return commandsQueues;
     }
@@ -25,5 +27,9 @@ public class AmqpClientProperties {
 
     public String getLoggingQueues() {
         return loggingQueues;
+    }
+
+    public String getEnabled() {
+        return enabled;
     }
 }

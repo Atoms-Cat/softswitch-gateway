@@ -1,11 +1,11 @@
 package com.atomscat.spring.boot.common.util;
 
-import cn.hutool.core.thread.NamedThreadFactory;
+import org.springframework.scheduling.concurrent.CustomizableThreadFactory;
 
 import java.util.concurrent.*;
 
 public class ExecutorHelper {
-    private static final ScheduledExecutorService EXECUTOR_SERVICE = new ScheduledThreadPoolExecutor(Runtime.getRuntime().availableProcessors() * 2, new NamedThreadFactory("pool-helper-exec-", true));
+    private static final ScheduledExecutorService EXECUTOR_SERVICE = new ScheduledThreadPoolExecutor(Runtime.getRuntime().availableProcessors() * 2, new CustomizableThreadFactory("pool-helper-exec-"));
 
     private ExecutorHelper() {
     }

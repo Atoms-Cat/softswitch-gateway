@@ -1,9 +1,5 @@
 package com.atomscat.freeswitch.esl.spring.boot.starter.example.handler;
 
-import com.alibaba.nacos.api.annotation.NacosInjected;
-import com.alibaba.nacos.api.exception.NacosException;
-import com.alibaba.nacos.api.naming.NamingService;
-import com.alibaba.nacos.api.naming.pojo.Instance;
 import com.atomscat.freeswitch.esl.InboundClient;
 import com.atomscat.freeswitch.esl.constant.EventNames;
 import com.atomscat.freeswitch.esl.helper.EslHelper;
@@ -13,26 +9,24 @@ import com.atomscat.freeswitch.esl.spring.boot.starter.propeties.OutboundServerP
 import com.atomscat.freeswitch.esl.transport.SendMsg;
 import com.atomscat.freeswitch.esl.transport.event.EslEvent;
 import com.atomscat.freeswitch.esl.util.EslEventUtil;
+import com.hazelcast.core.HazelcastInstance;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+
+import java.util.concurrent.atomic.AtomicReference;
 //* todo FS --> [Inbound] --> app --> [sendMsg] --> socket address
 //* todo FS <--> [Outbound] <--> app
 //* todo 分布式锁
-
-/**
- * @author th158
- */
 @Slf4j
 @EslEventName(EventNames.CHANNEL_CREATE)
 @Component
 @RequiredArgsConstructor
-public class InboundChannelCreateSendSocketHandler implements InboundEventHandler {
+public class InboundChannelCreateSendSocketForHazelcastHandler implements InboundEventHandler {
 
     private final InboundClient inboundClient;
     private final OutboundServerProperties outboundServerProperties;
-    @NacosInjected
-    private NamingService namingService;
+    private final HazelcastInstance hazelcastInstance;
 
     /**
      * {@inheritDoc}
@@ -45,24 +39,29 @@ public class InboundChannelCreateSendSocketHandler implements InboundEventHandle
             // 判断 是否 是 inbound 处理
             if ("inbound".equals(EslEventUtil.getCallerDirection(event))) {
                 // 根据服务名从注册中心获取一个健康的服务实例
-                Instance instance = namingService.selectOneHealthyInstance("fs-esl");
+                AtomicReference<String> ip = new AtomicReference<>("");
+                hazelcastInstance.getCluster().getMembers().forEach(member -> {
+                    log.info("member: [{}]", member);
+                    if (!member.isLiteMember()) {
+                        ip.set(member.getSocketAddress().getAddress().getHostAddress());
+                    }
+                });
                 // 向fs 发送 socket 信息
                 sendMsg.addCallCommand("execute");
                 sendMsg.addExecuteAppName("socket");
                 // 组装  <action application="socket" data=" IP : yaml配置的端口 async full" />
-                String arg = instance.getIp() + ":" + outboundServerProperties.getServer().getPort() + " async full";
+                String arg = ip + ":" + outboundServerProperties.getServer().getPort() + " async full";
 
-                log.info("instance socket: ip [{}] port [{}], arg: [{}]", instance.getIp(), outboundServerProperties.getServer().getPort(), arg);
+                log.info("instance socket: ip [{}] port [{}], arg: [{}]", ip, outboundServerProperties.getServer().getPort(), arg);
                 sendMsg.addExecuteAppArg(arg);
 
                 inboundClient.sendMessage(address, sendMsg);
             }
 
-        } catch (NacosException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            log.error("error", e);
         }
         log.debug("address[{}] EslEvent[{}]", address, EslHelper.formatEslEvent(event));
     }
-
 
 }

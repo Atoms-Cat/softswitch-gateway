@@ -5,6 +5,7 @@ com:
         commandsQueues: TAP.Commands
         eventsQueues: FS.Events
         loggingQueues: FS.Logging
+        enabled: true
       xml-curl:
 #        api: /freeswitch/xml/curl
 #        auth-scheme: basic  # you need delete security dependency setting on pom.xml
@@ -71,13 +72,12 @@ spring:
         acknowledge-mode: manual
       simple:
         acknowledge-mode: manual
-  redis:
-    database: 1
-    host: 127.0.0.1
-    port: 6379
-    password: Aa123456
-    #redisson:
-    #  file: classpath:redisson/redisson-dev.yaml
+  data:
+    redis:
+      database: 1
+      host: 127.0.0.1
+      port: 6379
+      password: Aa123456
 
 server:
   max-http-header-size: 102400

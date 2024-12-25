@@ -5,6 +5,7 @@
 #        commandsQueues: TAP.Commands
 #        eventsQueues: FS.Events
 #        loggingQueues: FS.Logging
+#        enabled: true
 #      esl:
 #        inbound:
 #          defaultPassword: ClueCon
@@ -35,13 +36,6 @@ spring:
     name: softswitch-gateway
   profiles:
     active: dev
-  redis:
-    database: 1
-    host: 192.168.181.128
-    port: 6379
-    password: Aa123456
-    #redisson:
-    #  file: classpath:redisson/redisson-dev.yaml
   rabbitmq:
     host: 192.168.181.130
     port: 5672
@@ -53,6 +47,12 @@ spring:
         acknowledge-mode: manual
       simple:
         acknowledge-mode: manual
+  data:
+    redis:
+      database: 1
+      host: 192.168.181.128
+      port: 6379
+      password: Aa123456
 
 server:
   max-http-header-size: 102400

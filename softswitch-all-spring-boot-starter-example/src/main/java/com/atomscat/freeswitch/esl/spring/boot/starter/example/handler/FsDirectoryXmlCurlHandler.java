@@ -1,6 +1,6 @@
 package com.atomscat.freeswitch.esl.spring.boot.starter.example.handler;
 
-import cn.hutool.core.util.RandomUtil;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.atomscat.freeswitch.esl.InboundClient;
@@ -29,6 +29,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.UUID;
+import java.util.random.RandomGenerator;
 
 @Slf4j
 @Service
@@ -88,7 +89,7 @@ public class FsDirectoryXmlCurlHandler implements XmlCurlHandler {
 
     @Scheduled(cron = "0/5 * * * * ?")
     private void sendEvent() {
-        String passwd = "event: " + RandomUtil.randomString(16);
+        String passwd = "event: " + RandomGenerator.of("event").nextInt(16);
         log.info("sendEvent Scheduled : [{}]", passwd);
         SendEvent sendEvent = new SendEvent(EventNames.SEND_MESSAGE);
         sendEvent
