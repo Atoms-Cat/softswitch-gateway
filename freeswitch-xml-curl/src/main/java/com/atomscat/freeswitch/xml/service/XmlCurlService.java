@@ -1,6 +1,6 @@
 package com.atomscat.freeswitch.xml.service;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * <p>XmlCurlService interface.</p>

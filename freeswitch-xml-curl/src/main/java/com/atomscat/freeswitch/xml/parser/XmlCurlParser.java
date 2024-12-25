@@ -2,10 +2,8 @@ package com.atomscat.freeswitch.xml.parser;
 
 import com.alibaba.fastjson.JSONObject;
 import com.atomscat.freeswitch.xml.domain.XmlCurl;
-import com.atomscat.freeswitch.xml.exception.ParserException;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
-
-import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

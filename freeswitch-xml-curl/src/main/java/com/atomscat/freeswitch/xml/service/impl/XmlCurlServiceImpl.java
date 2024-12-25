@@ -6,6 +6,7 @@ import com.atomscat.freeswitch.xml.domain.XmlCurl;
 import com.atomscat.freeswitch.xml.handler.XmlCurlHandler;
 import com.atomscat.freeswitch.xml.parser.XmlCurlParser;
 import com.atomscat.freeswitch.xml.service.XmlCurlService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ArrayUtils;
@@ -14,7 +15,6 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
