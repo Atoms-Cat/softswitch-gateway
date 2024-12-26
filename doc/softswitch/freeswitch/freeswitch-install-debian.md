@@ -15,7 +15,7 @@ Debian 10.10
 # 参考：https://freeswitch.org/confluence/display/FREESWITCH/HOWTO+Create+a+SignalWire+Personal+Access+Token
 
 apt-get update -y 
-apt-get install -y sngrep vim gnupg2 wget lsb-release
+apt-get install -y sngrep vim gnupg2 wget lsb-release sngrep
 
 # pat_1X8EQXH6EvgajWaBVWSJCG51   是在Signalwire网站上注册账号配置的TOKEN
 wget --http-user=signalwire --http-password=pat_1X8EQXH6EvgajWaBVWSJCG51 -O /usr/share/keyrings/signalwire-freeswitch-repo.gpg https://freeswitch.signalwire.com/repo/deb/debian-release/signalwire-freeswitch-repo.gpg

@@ -16,7 +16,7 @@ Debian 12
 
 TOKEN=pat_1X8EQXH6EvgajWaBVWSJCG51
 
-apt-get update && apt-get install -yq gnupg2 wget lsb-release
+apt-get update && apt-get install -yq gnupg2 wget lsb-release sngrep
 wget --http-user=signalwire --http-password=$TOKEN -O /usr/share/keyrings/signalwire-freeswitch-repo.gpg https://freeswitch.signalwire.com/repo/deb/debian-release/signalwire-freeswitch-repo.gpg
 
 echo "machine freeswitch.signalwire.com login signalwire password $TOKEN" > /etc/apt/auth.conf
@@ -39,6 +39,9 @@ tar -zxvf  v1.10.5.tar.gz
 
 cd freeswitch-1.10.5/
 
+./bootstrap.sh -j
+
+
 # 启动需要的模块，修改源码根目录：modules.conf 文件
 # 例如：将呼叫详细记录 (CDR) 直接记录到 PostgreSQL 数据库，参考：https://freeswitch.org/confluence/display/FREESWITCH/mod_cdr_pg_csv
 event_handlers/mod_cdr_pg_csv
@@ -49,8 +52,6 @@ applications/mod_hiredis
 # 动态configuration(ivr、external-gateway)、directory、dialplan、phrases
 xml_int/mod_xml_curl
 
-
-./bootstrap.sh -j
 ./configure
 make
 make install

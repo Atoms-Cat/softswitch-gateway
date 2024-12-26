@@ -55,7 +55,7 @@ public class InboundChannelCreateSendSocketForHazelcastHandler implements Inboun
                 log.info("instance socket: ip [{}] port [{}], arg: [{}]", ip, outboundServerProperties.getServer().getPort(), arg);
                 sendMsg.addExecuteAppArg(arg);
 
-                inboundClient.sendMessage(address, sendMsg);
+//                inboundClient.sendMessage(address, sendMsg);
             }
 
         } catch (Exception e) {
