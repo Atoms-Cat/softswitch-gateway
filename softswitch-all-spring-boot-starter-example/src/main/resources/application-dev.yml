@@ -80,5 +80,5 @@ spring:
       password: Aa123456
 
 server:
-  max-http-header-size: 102400
   port: 8080
+  max-http-request-header-size: 102400
